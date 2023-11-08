@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import '@mantine/core/styles.css';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
-import { theme } from '@/theme';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -20,7 +19,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider defaultColorScheme='light' theme={theme}>
+        <MantineProvider defaultColorScheme='dark' >
           {children}
         </MantineProvider>
       </body>
