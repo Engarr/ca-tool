@@ -1,6 +1,16 @@
 'use client';
 import React from 'react';
-import { Container, Button, Group, Grid, TextInput } from '@mantine/core';
+import {
+	Container,
+	Button,
+	Group,
+	Grid,
+	TextInput,
+	InputBase,
+} from '@mantine/core';
+import { DatePickerInput } from '@mantine/dates';
+import { NativeSelect } from '@mantine/core';
+import { IMaskInput } from 'react-imask';
 import { useForm } from '@mantine/form';
 
 function UserSurvey() {
@@ -16,14 +26,14 @@ function UserSurvey() {
 		},
 	});
 	return (
-		<Container  py={20}>
+		<Container py={20}>
 			<form onSubmit={form.onSubmit((values) => console.log(values))}>
 				<Grid>
 					<Grid.Col span={6}>
 						<TextInput
 							withAsterisk
-							label='Email'
-							placeholder='your@email.com'
+							label='Imię i Nazwisko'
+							placeholder='Wprowadz dane'
 							{...form.getInputProps('email')}
 						/>
 					</Grid.Col>
@@ -31,8 +41,66 @@ function UserSurvey() {
 						<TextInput
 							withAsterisk
 							label='Email'
-							placeholder='your@email.com'
+							placeholder='Wprowadz email'
 							{...form.getInputProps('email')}
+						/>
+					</Grid.Col>
+					<Grid.Col span={6}>
+						<InputBase
+							withAsterisk
+							label='Numer telefonu'
+							component={IMaskInput}
+							mask='(+00) 000-000-000'
+							placeholder='+48 000-000-000'
+						/>
+					</Grid.Col>
+					<Grid.Col span={6}>
+						<DatePickerInput
+							clearable
+							withAsterisk
+							valueFormat='MMM DD, YYYY'
+							label='Data urodzenia'
+							placeholder='Wybierz date'
+						/>
+					</Grid.Col>
+					<Grid.Col span={6}>
+						<NativeSelect
+							size='md'
+							label='Specjalizacja'
+							withAsterisk
+							data={[
+								{ label: '-', value: '' },
+								{
+									group: 'Frontend',
+									items: [
+										{
+											label: 'React/Next.js',
+											value: 'react',
+										},
+										{
+											label: 'Mobile(React Native)',
+											value: 'react native',
+										},
+									],
+								},
+								{
+									group: 'Backend',
+									items: [
+										{ label: '.Net', value: '.net' },
+										{ label: 'Node.js', value: 'node.js' },
+									],
+								},
+								{
+									group: 'Others',
+									items: [
+										{ label: 'UI/UX', value: 'ui/ux' },
+										{ label: 'Grafika', value: 'grafika' },
+										{ label: 'Social Media/Marketing', value: 'marketing' },
+										{ label: 'PM', value: 'pm' },
+										{ label: 'Copywriting', value: 'copywriting' },
+									],
+								},
+							]}
 						/>
 					</Grid.Col>
 				</Grid>
