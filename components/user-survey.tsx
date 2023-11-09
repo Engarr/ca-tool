@@ -269,7 +269,7 @@ function UserSurvey() {
         </Grid>
 
         <Group justify='center' mt='lg'>
-          <Button variant='filled' color='violet' fullWidth type='submit'>
+          <Button variant='filled' color='blue' fullWidth type='submit'>
             Submit
           </Button>
         </Group>

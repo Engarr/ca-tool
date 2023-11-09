@@ -11,11 +11,11 @@ const WelcomeText = () => {
         fw={900}
         variant='gradient'
         style={{ fontSize: '2.5rem' }}
-        gradient={{ from: 'grape', to: 'violet', deg: 90 }}>
+        gradient={{ from: 'indigo', to: 'blue', deg: 90 }}>
         CetusAcademy
       </Text>
-      <Container mt={50}>
-        <Text fw={500} mb={5}>
+      <Container mt={60}>
+        <Text fw={500} mb={5} size='xl'>
           Cześć,
         </Text>
         <Text mb={5}>miło że do nas trafiłeś🥰 </Text>
