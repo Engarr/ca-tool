@@ -9,8 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@mantine/core": "^7.2.1",
-    "@mantine/form": "^7.2.1",
+    "@mantine/form": "^5.10.5",
     "@mantine/hooks": "^7.2.1",
     "next": "14.0.1",
     "react": "^18",
