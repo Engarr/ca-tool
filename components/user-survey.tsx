@@ -8,9 +8,7 @@ import {
   TextInput,
   InputBase,
   Textarea,
-  NativeSelect,
   Text,
-  Center,
   Select,
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
@@ -35,6 +33,14 @@ function UserSurvey() {
       birth: null,
       specialization: '',
       occupation: '',
+      languagelevel: '',
+      programingLanguages: '',
+      graphicInspiration: '',
+      proficientGraphicTools: '',
+      experience: '',
+      learningGoals: '',
+      practicesStart: '',
+      practicesEnd: '',
     },
 
     validate: {
@@ -48,8 +54,10 @@ function UserSurvey() {
       birth: (value) => (value !== null ? null : 'Pole wymagane'),
       specialization: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
       occupation: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
+      languagelevel: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
     },
   });
+  console.log(form.values);
   return (
     <Container py={20}>
       <form onSubmit={form.onSubmit((values) => console.log(values))}>
@@ -156,24 +164,29 @@ function UserSurvey() {
               autosize
               minRows={2}
               maxRows={4}
+              {...form.getInputProps('programingLanguages')}
             />
           </Grid.Col>
           <Grid.Col>
             <Textarea
-              label='Gdzie szukasz inspiracji do grafik (Pytanie dla ścieżki UX i Graficznej)?'
+              label='Gdzie szukasz inspiracji do grafik ?'
+              description='(Pytanie dla ścieżki UX i Graficznej)'
               placeholder='Wprowadz dane'
               autosize
               minRows={2}
               maxRows={4}
+              {...form.getInputProps('graphicInspiration')}
             />
           </Grid.Col>
           <Grid.Col>
             <Textarea
-              label='Jakie programy graficzne opanowałeś? (Pytanie dla ścieżki UX i Graficznej)?'
+              label='Jakie programy graficzne opanowałeś?'
+              description='(Pytanie dla ścieżki UX i Graficznej)'
               placeholder='Wprowadz dane'
               autosize
               minRows={2}
               maxRows={4}
+              {...form.getInputProps('proficientGraphicTools')}
             />
           </Grid.Col>
           <Grid.Col>
@@ -183,6 +196,7 @@ function UserSurvey() {
               autosize
               minRows={2}
               maxRows={4}
+              {...form.getInputProps('experience')}
             />
           </Grid.Col>
           <Grid.Col>
@@ -206,7 +220,7 @@ function UserSurvey() {
                 { label: 'C1', value: 'c1' },
                 { label: 'C2', value: 'c2' },
               ]}
-              {...form.getInputProps('specialization')}
+              {...form.getInputProps('languagelevel')}
             />
           </Grid.Col>
           <Grid.Col>
@@ -217,16 +231,7 @@ function UserSurvey() {
               autosize
               minRows={2}
               maxRows={4}
-            />
-          </Grid.Col>
-          <Grid.Col>
-            <Textarea
-              label='Czego chciałbyś się nauczyć podczas udziału w akademii?'
-              withAsterisk
-              placeholder='Wprowadz dane'
-              autosize
-              minRows={2}
-              maxRows={4}
+              {...form.getInputProps('learningGoals')}
             />
           </Grid.Col>
 
@@ -242,7 +247,7 @@ function UserSurvey() {
               leftSection={icon}
               label='Data rozpoczęcia'
               placeholder='Wybierz date'
-              {...form.getInputProps('')}
+              {...form.getInputProps('practicesStart')}
             />
           </Grid.Col>
           <Grid.Col span={{ base: 12, sm: 6 }}>
@@ -253,7 +258,7 @@ function UserSurvey() {
               leftSection={icon}
               label='Data zakończenia'
               placeholder='Wybierz date'
-              {...form.getInputProps('')}
+              {...form.getInputProps('practicesEnd')}
             />
           </Grid.Col>
           <Grid.Col>

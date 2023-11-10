@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Text, UnstyledButton } from '@mantine/core';
+import { Container, Text } from '@mantine/core';
 
 const WelcomeText = () => {
   return (
@@ -27,12 +27,9 @@ const WelcomeText = () => {
           Wypełnij proszę ankietę która pozwoli nam dobrać dla Ciebie odpowiedni
           program a następnie dołącz do naszego discorda:
         </Text>
-        <UnstyledButton
-          component='a'
-          href='https://discord.gg/ZyXpCwwDKZ'
-          c={'blue'}>
+        <Text component='a' href='https://discord.gg/ZyXpCwwDKZ' c={'blue'}>
           https://discord.gg/ZyXpCwwDKZ
-        </UnstyledButton>
+        </Text>
       </Container>
     </>
   );
