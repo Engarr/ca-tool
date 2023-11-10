@@ -1,15 +1,15 @@
 'use client';
 import React, { useState } from 'react';
 import {
-  Container,
-  Button,
-  Group,
-  Grid,
-  TextInput,
-  InputBase,
-  Textarea,
-  Text,
-  Select,
+	Container,
+	Button,
+	Group,
+	Grid,
+	TextInput,
+	InputBase,
+	Textarea,
+	Text,
+	Select,
 } from '@mantine/core';
 import { DatePickerInput } from '@mantine/dates';
 import { IMaskInput } from 'react-imask';
@@ -18,296 +18,356 @@ import { IconCalendar } from '@tabler/icons-react';
 import { rem } from '@mantine/core';
 
 function UserSurvey() {
-  const [specialization, setSpecialization] = useState(false);
-  const icon = (
-    <IconCalendar
-      style={{ width: rem(18), height: rem(18), color: '#44639F' }}
-      stroke={1.5}
-    />
-  );
+	const [specialization, setSpecialization] = useState(false);
+	const [showPracticesDataPicker, setShowPracticesDataPicker] =
+		useState(false);
+	const icon = (
+		<IconCalendar
+			style={{ width: rem(18), height: rem(18), color: '#44639F' }}
+			stroke={1.5}
+		/>
+	);
 
-  const form = useForm({
-    initialValues: {
-      name: '',
-      email: '',
-      phone: '',
-      birth: null,
-      specialization: '',
-      occupation: '',
-      languagelevel: '',
-      programingLanguages: '',
-      graphicInspiration: '',
-      proficientGraphicTools: '',
-      experience: '',
-      learningGoals: '',
-      practicesStart: null,
-      practicesEnd: null,
-    },
+	const form = useForm({
+		initialValues: {
+			name: '',
+			email: '',
+			phone: '',
+			birth: null,
+			specialization: '',
+			occupation: '',
+			languagelevel: '',
+			programingLanguages: '',
+			graphicInspiration: '',
+			proficientGraphicTools: '',
+			experience: '',
+			learningGoals: '',
+			goal: '',
+			practicesStart: null,
+			practicesEnd: null,
+		},
 
-    validate: {
-      name: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
-      email: (value) =>
-        /^\S+@\S+$/.test(value) ? null : 'Niepoprawny format adresu email',
-      phone: (value) =>
-        /^\(\+\d{2}\) \d{3}-\d{3}-\d{3}$/.test(value)
-          ? null
-          : 'Nieprawidłowy format numeru telefonu',
-      birth: (value) => (value !== null ? null : 'Pole wymagane'),
-      specialization: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
-      occupation: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
-      languagelevel: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
-      practicesStart: (value, allValues) =>
-        value !== null &&
-        allValues.practicesEnd !== null &&
-        value < allValues.practicesEnd
-          ? null
-          : 'Data rozpoczęcia praktyk nie może być późniejsza niż data zakończenia',
-      practicesEnd: (value, allValues) =>
-        value !== null &&
-        allValues.practicesStart !== null &&
-        value > allValues.practicesStart
-          ? null
-          : 'Data zakończenia praktyk nie może być wcześneijsza niż data zakończenia',
-    },
-  });
+		validate: {
+			name: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
+			email: (value) =>
+				/^\S+@\S+$/.test(value)
+					? null
+					: 'Niepoprawny format adresu email',
+			phone: (value) =>
+				/^\(\+\d{2}\) \d{3}-\d{3}-\d{3}$/.test(value)
+					? null
+					: 'Nieprawidłowy format numeru telefonu',
+			birth: (value) => (value !== null ? null : 'Pole wymagane'),
+			specialization: (value) =>
+				value.trim() !== '' ? null : 'Pole wymagane',
+			occupation: (value) =>
+				value.trim() !== '' ? null : 'Pole wymagane',
+			languagelevel: (value) =>
+				value.trim() !== '' ? null : 'Pole wymagane',
+			learningGoals: (value) =>
+				value.trim() !== '' ? null : 'Pole wymagane',
+			goal: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
+			practicesStart: (value, allValues) =>
+				allValues.goal !== 'praktyki'
+					? null
+					: value !== null &&
+					  allValues.practicesEnd !== null &&
+					  value < allValues.practicesEnd
+					? null
+					: 'Data rozpoczęcia praktyk nie może być późniejsza niż data zakończenia',
+			practicesEnd: (value, allValues) =>
+				allValues.goal !== 'praktyki'
+					? null
+					: value !== null &&
+					  allValues.practicesStart !== null &&
+					  value > allValues.practicesStart
+					? null
+					: 'Data zakończenia praktyk nie może być wcześneijsza niż data zakończenia',
+		},
+	});
 
-  const checkSpecialization = (value: string) => {
-    if (value === 'grafika') {
-      setSpecialization(true);
-    } else {
-      setSpecialization(false);
-    }
-  };
-  return (
-    <Container py={20}>
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
-        <Grid>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <TextInput
-              withAsterisk
-              label='Imię i Nazwisko'
-              placeholder='Wprowadz dane'
-              {...form.getInputProps('name')}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <TextInput
-              withAsterisk
-              label='Email'
-              placeholder='Wprowadz email'
-              {...form.getInputProps('email')}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <InputBase
-              withAsterisk
-              label='Numer telefonu'
-              component={IMaskInput}
-              mask='(+00) 000-000-000'
-              placeholder='+48 000-000-000'
-              {...form.getInputProps('phone')}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <DatePickerInput
-              clearable
-              withAsterisk
-              valueFormat='MMM DD, YYYY'
-              leftSection={icon}
-              label='Data urodzenia'
-              placeholder='Wybierz date'
-              {...form.getInputProps('birth')}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <Select
-              label='Specjalizacja'
-              checkIconPosition='right'
-              placeholder='Wybierz swoją specializację'
-              withAsterisk
-              onOptionSubmit={(value) => {
-                checkSpecialization(value);
-              }}
-              data={[
-                {
-                  group: 'Frontend',
-                  items: [
-                    {
-                      label: 'React/Next.js',
-                      value: 'react',
-                    },
-                    {
-                      label: 'Mobile(React Native)',
-                      value: 'react native',
-                    },
-                  ],
-                },
-                {
-                  group: 'Backend',
-                  items: [
-                    { label: '.Net', value: '.net' },
-                    { label: 'Node.js', value: 'node.js' },
-                  ],
-                },
-                {
-                  group: 'Others',
-                  items: [
-                    { label: 'UI/UX', value: 'ui/ux' },
-                    { label: 'Grafika', value: 'grafika' },
-                    {
-                      label: 'Social Media/Marketing',
-                      value: 'marketing',
-                    },
-                    { label: 'PM', value: 'pm' },
-                    {
-                      label: 'Copywriting',
-                      value: 'copywriting',
-                    },
-                  ],
-                },
-              ]}
-              {...form.getInputProps('specialization')}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <TextInput
-              withAsterisk
-              label='Szkoła / Uczelnia / Aktualny zawód'
-              placeholder='Wprowadz dane'
-              {...form.getInputProps('occupation')}
-            />
-          </Grid.Col>
-          <Grid.Col>
-            <TextInput label='Konto na github' placeholder='Wprowadz dane' />
-          </Grid.Col>
-          <Grid.Col>
-            <Textarea
-              label='Jakie znasz języki programowania?'
-              placeholder='Wprowadz dane'
-              autosize
-              minRows={2}
-              maxRows={4}
-              {...form.getInputProps('programingLanguages')}
-            />
-          </Grid.Col>
-          {specialization && (
-            <>
-              <Grid.Col>
-                <Textarea
-                  label='Gdzie szukasz inspiracji do grafik ?'
-                  description='(Pytanie dla ścieżki UX i Graficznej)'
-                  placeholder='Wprowadz dane'
-                  autosize
-                  minRows={2}
-                  maxRows={4}
-                  {...form.getInputProps('graphicInspiration')}
-                />
-              </Grid.Col>
-              <Grid.Col>
-                <Textarea
-                  label='Jakie programy graficzne opanowałeś?'
-                  description='(Pytanie dla ścieżki UX i Graficznej)'
-                  placeholder='Wprowadz dane'
-                  autosize
-                  minRows={2}
-                  maxRows={4}
-                  {...form.getInputProps('proficientGraphicTools')}
-                />
-              </Grid.Col>
-            </>
-          )}
-          <Grid.Col>
-            <Textarea
-              label='Umiejętności i doświadczenie'
-              placeholder='Wprowadz dane'
-              autosize
-              minRows={2}
-              maxRows={4}
-              {...form.getInputProps('experience')}
-            />
-          </Grid.Col>
-          <Grid.Col>
-            <Textarea
-              label='Jakie projekty udało Ci się zrealizować?'
-              placeholder='Wprowadz dane'
-              autosize
-              minRows={2}
-              maxRows={4}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <Select
-              label='Poziom języka angielskiego'
-              withAsterisk
-              checkIconPosition='right'
-              placeholder='Wybierz poziom języka'
-              data={[
-                { label: 'B1', value: 'b1' },
-                { label: 'B2', value: 'b2' },
-                { label: 'C1', value: 'c1' },
-                { label: 'C2', value: 'c2' },
-              ]}
-              {...form.getInputProps('languagelevel')}
-            />
-          </Grid.Col>
-          <Grid.Col>
-            <Textarea
-              label='Czego chciałbyś się nauczyć podczas udziału w akademii?'
-              withAsterisk
-              placeholder='Wprowadz dane'
-              autosize
-              minRows={2}
-              maxRows={4}
-              {...form.getInputProps('learningGoals')}
-            />
-          </Grid.Col>
+	const checkSpecialization = (value: string) => {
+		if (value === 'grafika' || value === 'ui/ux') {
+			setSpecialization(true);
+		} else {
+			setSpecialization(false);
+		}
+	};
+	const checkGoal = (value: string) => {
+		if (value === 'praktyki') {
+			setShowPracticesDataPicker(true);
+		} else {
+			setShowPracticesDataPicker(false);
+		}
+	};
 
-          <Text pl={7} my={10}>
-            Data odbywania praktyki (od - do ) jeśli realizujesz praktyki ze
-            szkoły / uczelni
-          </Text>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <DatePickerInput
-              clearable
-              withAsterisk
-              valueFormat='MMM DD, YYYY'
-              leftSection={icon}
-              label='Data rozpoczęcia'
-              placeholder='Wybierz date'
-              {...form.getInputProps('practicesStart')}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-            <DatePickerInput
-              clearable
-              withAsterisk
-              valueFormat='MMM DD, YYYY'
-              leftSection={icon}
-              label='Data zakończenia'
-              placeholder='Wybierz date'
-              {...form.getInputProps('practicesEnd')}
-            />
-          </Grid.Col>
-          <Grid.Col>
-            <Textarea
-              label='Co powinniśmy jeszcze wiedzieć? '
-              description='(Hobby, umiejętności i wszystko chciałbyś nam przekazać)'
-              placeholder='Wprowadz dane'
-              autosize
-              minRows={2}
-              maxRows={4}
-            />
-          </Grid.Col>
-        </Grid>
+	return (
+		<Container py={20}>
+			<form onSubmit={form.onSubmit((values) => console.log(values))}>
+				<Grid>
+					<Grid.Col span={{ base: 12, sm: 6 }}>
+						<TextInput
+							withAsterisk
+							label='Imię i Nazwisko'
+							placeholder='Wprowadz dane'
+							{...form.getInputProps('name')}
+						/>
+					</Grid.Col>
+					<Grid.Col span={{ base: 12, sm: 6 }}>
+						<TextInput
+							withAsterisk
+							label='Email'
+							placeholder='Wprowadz email'
+							{...form.getInputProps('email')}
+						/>
+					</Grid.Col>
+					<Grid.Col span={{ base: 12, sm: 6 }}>
+						<InputBase
+							withAsterisk
+							label='Numer telefonu'
+							component={IMaskInput}
+							mask='(+00) 000-000-000'
+							placeholder='+48 000-000-000'
+							{...form.getInputProps('phone')}
+						/>
+					</Grid.Col>
+					<Grid.Col span={{ base: 12, sm: 6 }}>
+						<DatePickerInput
+							clearable
+							withAsterisk
+							valueFormat='MMM DD, YYYY'
+							leftSection={icon}
+							label='Data urodzenia'
+							placeholder='Wybierz date'
+							{...form.getInputProps('birth')}
+						/>
+					</Grid.Col>
+					<Grid.Col span={{ base: 12, sm: 6 }}>
+						<Select
+							label='Specjalizacja'
+							checkIconPosition='right'
+							placeholder='Wybierz swoją specializację'
+							withAsterisk
+							onOptionSubmit={(value) => {
+								checkSpecialization(value);
+							}}
+							data={[
+								{
+									group: 'Frontend',
+									items: [
+										{
+											label: 'React/Next.js',
+											value: 'react',
+										},
+										{
+											label: 'Mobile(React Native)',
+											value: 'react native',
+										},
+									],
+								},
+								{
+									group: 'Backend',
+									items: [
+										{ label: '.Net', value: '.net' },
+										{ label: 'Node.js', value: 'node.js' },
+									],
+								},
+								{
+									group: 'Others',
+									items: [
+										{ label: 'UI/UX', value: 'ui/ux' },
+										{ label: 'Grafika', value: 'grafika' },
+										{
+											label: 'Social Media/Marketing',
+											value: 'marketing',
+										},
+										{ label: 'PM', value: 'pm' },
+										{
+											label: 'Copywriting',
+											value: 'copywriting',
+										},
+									],
+								},
+							]}
+							{...form.getInputProps('specialization')}
+						/>
+					</Grid.Col>
+					<Grid.Col span={{ base: 12, sm: 6 }}>
+						<TextInput
+							withAsterisk
+							label='Szkoła / Uczelnia / Aktualny zawód'
+							placeholder='Wprowadz dane'
+							{...form.getInputProps('occupation')}
+						/>
+					</Grid.Col>
+					<Grid.Col>
+						<TextInput
+							label='Konto na github'
+							placeholder='Wprowadz dane'
+						/>
+					</Grid.Col>
+					<Grid.Col>
+						<Textarea
+							label='Jakie znasz języki programowania?'
+							placeholder='Wprowadz dane'
+							autosize
+							minRows={2}
+							maxRows={4}
+							{...form.getInputProps('programingLanguages')}
+						/>
+					</Grid.Col>
+					{specialization && (
+						<>
+							<Grid.Col>
+								<Textarea
+									label='Gdzie szukasz inspiracji do grafik ?'
+									description='(Pytanie dla ścieżki UX i Graficznej)'
+									placeholder='Wprowadz dane'
+									autosize
+									minRows={2}
+									maxRows={4}
+									{...form.getInputProps(
+										'graphicInspiration'
+									)}
+								/>
+							</Grid.Col>
+							<Grid.Col>
+								<Textarea
+									label='Jakie programy graficzne opanowałeś?'
+									description='(Pytanie dla ścieżki UX i Graficznej)'
+									placeholder='Wprowadz dane'
+									autosize
+									minRows={2}
+									maxRows={4}
+									{...form.getInputProps(
+										'proficientGraphicTools'
+									)}
+								/>
+							</Grid.Col>
+						</>
+					)}
+					<Grid.Col>
+						<Textarea
+							label='Umiejętności i doświadczenie'
+							placeholder='Wprowadz dane'
+							autosize
+							minRows={2}
+							maxRows={4}
+							{...form.getInputProps('experience')}
+						/>
+					</Grid.Col>
+					<Grid.Col>
+						<Textarea
+							label='Jakie projekty udało Ci się zrealizować?'
+							placeholder='Wprowadz dane'
+							autosize
+							minRows={2}
+							maxRows={4}
+						/>
+					</Grid.Col>
+					<Grid.Col span={{ base: 12, sm: 6 }}>
+						<Select
+							label='Poziom języka angielskiego'
+							withAsterisk
+							checkIconPosition='right'
+							placeholder='Wybierz poziom języka'
+							data={[
+								{ label: 'B1', value: 'b1' },
+								{ label: 'B2', value: 'b2' },
+								{ label: 'C1', value: 'c1' },
+								{ label: 'C2', value: 'c2' },
+							]}
+							{...form.getInputProps('languagelevel')}
+						/>
+					</Grid.Col>
+					<Grid.Col>
+						<Textarea
+							label='Czego chciałbyś się nauczyć podczas udziału w akademii?'
+							withAsterisk
+							placeholder='Wprowadz dane'
+							autosize
+							minRows={2}
+							maxRows={4}
+							{...form.getInputProps('learningGoals')}
+						/>
+					</Grid.Col>
+					<Grid.Col span={{ base: 12, sm: 6 }}>
+						<Select
+							label='Cel udziału w akademii'
+							withAsterisk
+							checkIconPosition='right'
+							placeholder='Wybierz cel'
+							onOptionSubmit={(value) => {
+								checkGoal(value);
+							}}
+							data={[
+								{
+									label: 'Praktyki zawodowe',
+									value: 'praktyki',
+								},
+								{
+									label: 'Udział w akademii nie związany z praktykami',
+									value: 'rozwój',
+								},
+							]}
+							{...form.getInputProps('goal')}
+						/>
+					</Grid.Col>
+					{showPracticesDataPicker && (
+						<>
+							<Text pl={7} my={10}>
+								Data odbywania praktyki (od - do ) jeśli
+								realizujesz praktyki ze szkoły / uczelni
+							</Text>
+							<Grid.Col span={{ base: 12, sm: 6 }}>
+								<DatePickerInput
+									clearable
+									withAsterisk
+									valueFormat='MMM DD, YYYY'
+									leftSection={icon}
+									label='Data rozpoczęcia'
+									placeholder='Wybierz date'
+									{...form.getInputProps('practicesStart')}
+								/>
+							</Grid.Col>
+							<Grid.Col span={{ base: 12, sm: 6 }}>
+								<DatePickerInput
+									clearable
+									withAsterisk
+									valueFormat='MMM DD, YYYY'
+									leftSection={icon}
+									label='Data zakończenia'
+									placeholder='Wybierz date'
+									{...form.getInputProps('practicesEnd')}
+								/>
+							</Grid.Col>
+						</>
+					)}
+					<Grid.Col>
+						<Textarea
+							label='Co powinniśmy jeszcze wiedzieć? '
+							description='(Hobby, umiejętności i wszystko chciałbyś nam przekazać)'
+							placeholder='Wprowadz dane'
+							autosize
+							minRows={2}
+							maxRows={4}
+						/>
+					</Grid.Col>
+				</Grid>
 
-        <Group justify='center' mt='lg'>
-          <Button variant='filled' color='blue' fullWidth type='submit'>
-            Submit
-          </Button>
-        </Group>
-      </form>
-    </Container>
-  );
+				<Group justify='center' mt='lg'>
+					<Button
+						variant='filled'
+						color='blue'
+						fullWidth
+						type='submit'
+					>
+						Submit
+					</Button>
+				</Group>
+			</form>
+		</Container>
+	);
 }
 
 export default UserSurvey;

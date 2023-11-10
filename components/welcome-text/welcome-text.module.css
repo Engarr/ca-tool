@@ -1,0 +1,7 @@
+.discord-link {
+	color: #2D4B81;
+	transition: color 0.3s;
+}
+.discord-link:hover {
+	color: #5474b4;
+}
