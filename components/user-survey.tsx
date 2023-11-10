@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Button,
@@ -18,6 +18,7 @@ import { IconCalendar } from '@tabler/icons-react';
 import { rem } from '@mantine/core';
 
 function UserSurvey() {
+  const [specialization, setSpecialization] = useState(false);
   const icon = (
     <IconCalendar
       style={{ width: rem(18), height: rem(18), color: '#44639F' }}
@@ -70,6 +71,13 @@ function UserSurvey() {
     },
   });
 
+  const checkSpecialization = (value: string) => {
+    if (value === 'grafika') {
+      setSpecialization(true);
+    } else {
+      setSpecialization(false);
+    }
+  };
   return (
     <Container py={20}>
       <form onSubmit={form.onSubmit((values) => console.log(values))}>
@@ -117,6 +125,9 @@ function UserSurvey() {
               checkIconPosition='right'
               placeholder='Wybierz swoją specializację'
               withAsterisk
+              onOptionSubmit={(value) => {
+                checkSpecialization(value);
+              }}
               data={[
                 {
                   group: 'Frontend',
@@ -179,28 +190,32 @@ function UserSurvey() {
               {...form.getInputProps('programingLanguages')}
             />
           </Grid.Col>
-          <Grid.Col>
-            <Textarea
-              label='Gdzie szukasz inspiracji do grafik ?'
-              description='(Pytanie dla ścieżki UX i Graficznej)'
-              placeholder='Wprowadz dane'
-              autosize
-              minRows={2}
-              maxRows={4}
-              {...form.getInputProps('graphicInspiration')}
-            />
-          </Grid.Col>
-          <Grid.Col>
-            <Textarea
-              label='Jakie programy graficzne opanowałeś?'
-              description='(Pytanie dla ścieżki UX i Graficznej)'
-              placeholder='Wprowadz dane'
-              autosize
-              minRows={2}
-              maxRows={4}
-              {...form.getInputProps('proficientGraphicTools')}
-            />
-          </Grid.Col>
+          {specialization && (
+            <>
+              <Grid.Col>
+                <Textarea
+                  label='Gdzie szukasz inspiracji do grafik ?'
+                  description='(Pytanie dla ścieżki UX i Graficznej)'
+                  placeholder='Wprowadz dane'
+                  autosize
+                  minRows={2}
+                  maxRows={4}
+                  {...form.getInputProps('graphicInspiration')}
+                />
+              </Grid.Col>
+              <Grid.Col>
+                <Textarea
+                  label='Jakie programy graficzne opanowałeś?'
+                  description='(Pytanie dla ścieżki UX i Graficznej)'
+                  placeholder='Wprowadz dane'
+                  autosize
+                  minRows={2}
+                  maxRows={4}
+                  {...form.getInputProps('proficientGraphicTools')}
+                />
+              </Grid.Col>
+            </>
+          )}
           <Grid.Col>
             <Textarea
               label='Umiejętności i doświadczenie'
