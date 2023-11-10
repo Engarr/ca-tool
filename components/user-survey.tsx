@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Container,
   Button,
@@ -39,8 +39,8 @@ function UserSurvey() {
       proficientGraphicTools: '',
       experience: '',
       learningGoals: '',
-      practicesStart: '',
-      practicesEnd: '',
+      practicesStart: null,
+      practicesEnd: null,
     },
 
     validate: {
@@ -55,9 +55,21 @@ function UserSurvey() {
       specialization: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
       occupation: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
       languagelevel: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
+      practicesStart: (value, allValues) =>
+        value !== null &&
+        allValues.practicesEnd !== null &&
+        value < allValues.practicesEnd
+          ? null
+          : 'Data rozpoczęcia praktyk nie może być późniejsza niż data zakończenia',
+      practicesEnd: (value, allValues) =>
+        value !== null &&
+        allValues.practicesStart !== null &&
+        value > allValues.practicesStart
+          ? null
+          : 'Data zakończenia praktyk nie może być wcześneijsza niż data zakończenia',
     },
   });
-  console.log(form.values);
+
   return (
     <Container py={20}>
       <form onSubmit={form.onSubmit((values) => console.log(values))}>
