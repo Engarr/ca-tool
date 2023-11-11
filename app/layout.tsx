@@ -3,7 +3,7 @@ import '@mantine/core/styles.css';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import '@mantine/dates/styles.css';
 import '@mantine/dropzone/styles.css';
-import './globals.css';
+
 
 export const metadata: Metadata = {
   title: 'Ca-tool',

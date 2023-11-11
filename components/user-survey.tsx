@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
 	Container,
 	Button,
@@ -11,14 +11,20 @@ import {
 	Text,
 	Select,
 } from '@mantine/core';
+import { Dropzone, FileWithPath } from '@mantine/dropzone';
 import { DatePickerInput } from '@mantine/dates';
 import { IMaskInput } from 'react-imask';
 import { useForm } from '@mantine/form';
 import { IconCalendar } from '@tabler/icons-react';
 import { rem } from '@mantine/core';
+import DropzoneChildren from './dropzone/dropzone-children';
+import { SurveyValuesType } from '@/types/survey-value-type';
+import { surveyValidation } from '@/lib/survey-validation';
 
 function UserSurvey() {
+	const openRef = useRef<() => void>(null);
 	const [specialization, setSpecialization] = useState(false);
+	const [isAddingFile, setIsAddingFile] = useState(false);
 	const [showPracticesDataPicker, setShowPracticesDataPicker] =
 		useState(false);
 	const icon = (
@@ -27,63 +33,28 @@ function UserSurvey() {
 			stroke={1.5}
 		/>
 	);
+	const initialValues: SurveyValuesType = {
+		name: '',
+		email: '',
+		phone: '',
+		birth: null,
+		specialization: '',
+		occupation: '',
+		languagelevel: '',
+		programingLanguages: '',
+		graphicInspiration: '',
+		proficientGraphicTools: '',
+		experience: '',
+		learningGoals: '',
+		goal: '',
+		practicesStart: null,
+		practicesEnd: null,
+		files: [],
+	};
 
 	const form = useForm({
-		initialValues: {
-			name: '',
-			email: '',
-			phone: '',
-			birth: null,
-			specialization: '',
-			occupation: '',
-			languagelevel: '',
-			programingLanguages: '',
-			graphicInspiration: '',
-			proficientGraphicTools: '',
-			experience: '',
-			learningGoals: '',
-			goal: '',
-			practicesStart: null,
-			practicesEnd: null,
-		},
-
-		validate: {
-			name: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
-			email: (value) =>
-				/^\S+@\S+$/.test(value)
-					? null
-					: 'Niepoprawny format adresu email',
-			phone: (value) =>
-				/^\(\+\d{2}\) \d{3}-\d{3}-\d{3}$/.test(value)
-					? null
-					: 'Nieprawidłowy format numeru telefonu',
-			birth: (value) => (value !== null ? null : 'Pole wymagane'),
-			specialization: (value) =>
-				value.trim() !== '' ? null : 'Pole wymagane',
-			occupation: (value) =>
-				value.trim() !== '' ? null : 'Pole wymagane',
-			languagelevel: (value) =>
-				value.trim() !== '' ? null : 'Pole wymagane',
-			learningGoals: (value) =>
-				value.trim() !== '' ? null : 'Pole wymagane',
-			goal: (value) => (value.trim() !== '' ? null : 'Pole wymagane'),
-			practicesStart: (value, allValues) =>
-				allValues.goal !== 'praktyki'
-					? null
-					: value !== null &&
-					  allValues.practicesEnd !== null &&
-					  value < allValues.practicesEnd
-					? null
-					: 'Data rozpoczęcia praktyk nie może być późniejsza niż data zakończenia',
-			practicesEnd: (value, allValues) =>
-				allValues.goal !== 'praktyki'
-					? null
-					: value !== null &&
-					  allValues.practicesStart !== null &&
-					  value > allValues.practicesStart
-					? null
-					: 'Data zakończenia praktyk nie może być wcześneijsza niż data zakończenia',
-		},
+		initialValues,
+		validate: surveyValidation,
 	});
 
 	const checkSpecialization = (value: string) => {
@@ -100,6 +71,9 @@ function UserSurvey() {
 			setShowPracticesDataPicker(false);
 		}
 	};
+	const dropzoneText = form.values.files.length
+		? form.values.files[0]?.name
+		: 'Wybierz plik bądź przeciągnij go tutaj';
 
 	return (
 		<Container py={20}>
@@ -353,11 +327,29 @@ function UserSurvey() {
 							maxRows={4}
 						/>
 					</Grid.Col>
+					<Grid.Col span={12}>
+						<Text mb={10}>Dodaj swoje CV</Text>
+						<Dropzone
+							h={100}
+							openRef={openRef}
+							onDrop={(files: FileWithPath[]) => {
+								setIsAddingFile(true);
+								form.setFieldValue('files', files);
+								setIsAddingFile(false);
+							}}
+							loading={isAddingFile}
+						>
+							<DropzoneChildren
+								openRef={openRef}
+								fileName={dropzoneText}
+							/>
+						</Dropzone>
+					</Grid.Col>
 				</Grid>
-
-				<Group justify='center' mt='lg'>
+				<Group justify='center' mt={40}>
 					<Button
 						variant='filled'
+						size='md'
 						color='blue'
 						fullWidth
 						type='submit'
