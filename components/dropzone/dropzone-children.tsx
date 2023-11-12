@@ -1,31 +1,34 @@
 import React from 'react';
-import { Group, Button } from '@mantine/core';
+import { Button, Flex } from '@mantine/core';
 import classes from './dropzone-children.module.css';
 
 type DropzoneChildrenProps = {
-	openRef: React.RefObject<() => void>;
-	fileName: string;
+  openRef: React.RefObject<() => void>;
+  fileName: string;
 };
 
 function DropzoneChildren({ openRef, fileName }: DropzoneChildrenProps) {
-	const handleClick = () => {
-		if (openRef.current) {
-			openRef.current();
-		}
-	};
-	return (
-		<Group justify='center' mt='md'>
-			<p>{fileName}</p>
-			<Button
-				className={classes.control}
-				size='sm'
-				radius='md'
-				onClick={handleClick}
-			>
-				Wybierz plik
-			</Button>
-		</Group>
-	);
+  const handleClick = () => {
+    if (openRef.current) {
+      openRef.current();
+    }
+  };
+  return (
+    <Flex
+      justify='center'
+      mt='md'
+      direction={{ base: 'column', sm: 'row' }}
+      align={'center'}>
+      <p className={classes.text}>{fileName}</p>
+      <Button
+        className={classes.control}
+        size='sm'
+        radius='md'
+        onClick={handleClick}>
+        Wybierz plik
+      </Button>
+    </Flex>
+  );
 }
 
 export default DropzoneChildren;

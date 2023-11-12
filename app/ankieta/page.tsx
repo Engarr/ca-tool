@@ -6,7 +6,7 @@ import Logo from '@/components/logo/logo';
 
 export default function FormPage() {
   return (
-    <Container size='md' py={100}>
+    <Container size='md' py={{ base: 80, sm: 100 }}>
       <Paper
         shadow='xl'
         bg='#FDFAFA'
