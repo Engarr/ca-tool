@@ -20,6 +20,11 @@ import { rem } from '@mantine/core';
 import DropzoneChildren from './dropzone/dropzone-children';
 import { SurveyValuesType } from '@/types/survey-value-type';
 import { surveyValidation } from '@/lib/survey-validation';
+import {
+  goalDataSelect,
+  languagelevelDataSelect,
+  specializationsDataSelect,
+} from '@/lib/select-data';
 
 function UserSurvey() {
   const openRef = useRef<() => void>(null);
@@ -70,6 +75,7 @@ function UserSurvey() {
       setShowPracticesDataPicker(false);
     }
   };
+
   const dropzoneText = form.values.files.length
     ? form.values.files[0]?.name
     : 'Wybierz plik bądź przeciągnij go tutaj';
@@ -124,44 +130,7 @@ function UserSurvey() {
               onOptionSubmit={(value) => {
                 checkSpecialization(value);
               }}
-              data={[
-                {
-                  group: 'Frontend',
-                  items: [
-                    {
-                      label: 'React/Next.js',
-                      value: 'react',
-                    },
-                    {
-                      label: 'Mobile(React Native)',
-                      value: 'react native',
-                    },
-                  ],
-                },
-                {
-                  group: 'Backend',
-                  items: [
-                    { label: '.Net', value: '.net' },
-                    { label: 'Node.js', value: 'node.js' },
-                  ],
-                },
-                {
-                  group: 'Others',
-                  items: [
-                    { label: 'UI/UX', value: 'ui/ux' },
-                    { label: 'Grafika', value: 'grafika' },
-                    {
-                      label: 'Social Media/Marketing',
-                      value: 'marketing',
-                    },
-                    { label: 'PM', value: 'pm' },
-                    {
-                      label: 'Copywriting',
-                      value: 'copywriting',
-                    },
-                  ],
-                },
-              ]}
+              data={specializationsDataSelect}
               {...form.getInputProps('specialization')}
             />
           </Grid.Col>
@@ -237,12 +206,7 @@ function UserSurvey() {
               withAsterisk
               checkIconPosition='right'
               placeholder='Wybierz poziom języka'
-              data={[
-                { label: 'B1', value: 'b1' },
-                { label: 'B2', value: 'b2' },
-                { label: 'C1', value: 'c1' },
-                { label: 'C2', value: 'c2' },
-              ]}
+              data={languagelevelDataSelect}
               {...form.getInputProps('languagelevel')}
             />
           </Grid.Col>
@@ -266,16 +230,7 @@ function UserSurvey() {
               onOptionSubmit={(value) => {
                 checkGoal(value);
               }}
-              data={[
-                {
-                  label: 'Praktyki zawodowe',
-                  value: 'praktyki',
-                },
-                {
-                  label: 'Udział w akademii nie związany z praktykami',
-                  value: 'rozwój',
-                },
-              ]}
+              data={goalDataSelect}
               {...form.getInputProps('goal')}
             />
           </Grid.Col>
@@ -343,7 +298,7 @@ function UserSurvey() {
             color='blue'
             fullWidth
             type='submit'>
-            Submit
+            Wyślij
           </Button>
         </Group>
       </form>
