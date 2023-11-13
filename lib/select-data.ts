@@ -45,11 +45,11 @@ export const languagelevelDataSelect = [
 ];
 export const goalDataSelect = [
   {
-    label: 'Praktyki zawodowe',
+    label: 'Praktyki zawodowe.',
     value: 'praktyki',
   },
   {
-    label: 'Udział w akademii nie związany z praktykami',
+    label: 'Udział w akademii niezwiązany z praktykami.',
     value: 'rozwój',
   },
 ];
