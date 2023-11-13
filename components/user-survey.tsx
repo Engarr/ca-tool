@@ -159,7 +159,7 @@ function UserSurvey() {
             <>
               <Grid.Col>
                 <Textarea
-                  label='Gdzie szukasz inspiracji do grafik ?'
+                  label='Gdzie szukasz inspiracji do grafik?'
                   description='(Pytanie dla ścieżki UX i Graficznej)'
                   placeholder='Wprowadz dane'
                   autosize
@@ -183,7 +183,7 @@ function UserSurvey() {
           )}
           <Grid.Col>
             <Textarea
-              label='Umiejętności i doświadczenie'
+              label='Umiejętności i doświadczenie.'
               placeholder='Wprowadz dane'
               autosize
               minRows={2}
@@ -202,7 +202,7 @@ function UserSurvey() {
           </Grid.Col>
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <Select
-              label='Poziom języka angielskiego'
+              label='Poziom języka angielskiego.'
               withAsterisk
               checkIconPosition='right'
               placeholder='Wybierz poziom języka'
@@ -223,7 +223,7 @@ function UserSurvey() {
           </Grid.Col>
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <Select
-              label='Cel udziału w akademii'
+              label='Cel udziału w akademii.'
               withAsterisk
               checkIconPosition='right'
               placeholder='Wybierz cel'
@@ -266,8 +266,8 @@ function UserSurvey() {
           )}
           <Grid.Col>
             <Textarea
-              label='Co powinniśmy jeszcze wiedzieć? '
-              description='(Hobby, umiejętności i wszystko chciałbyś nam przekazać)'
+              label='Co powinniśmy jeszcze wiedzieć?'
+              description='(Hobby, umiejętności i wszystko chciałbyś nam przekazać).'
               placeholder='Wprowadz dane'
               autosize
               minRows={2}
