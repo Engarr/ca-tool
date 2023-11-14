@@ -1,4 +1,4 @@
-import { SurveyValuesType } from '@/types/survey-value-type';
+import { SurveyValuesType } from '@/components/features/survey/types/survey-value-type';
 
 export const surveyValidation = {
 	name: (value: string) => (value.trim() !== '' ? null : 'Pole wymagane'),
