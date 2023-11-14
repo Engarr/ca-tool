@@ -14,12 +14,12 @@ import {
 import { Dropzone, FileWithPath } from '@mantine/dropzone';
 import { DatePickerInput } from '@mantine/dates';
 import { IMaskInput } from 'react-imask';
-import { useForm } from '@mantine/form';
+import { useForm, zodResolver } from '@mantine/form';
 import { IconCalendar } from '@tabler/icons-react';
 import { rem } from '@mantine/core';
 import DropzoneChildren from '../dropzone/dropzone-children';
 import { SurveyValuesType } from '@/components/features/survey/types/survey-value-type';
-import { surveyValidation } from '@/components/features/survey/lib/survey-validation';
+import { surveyValidationSchema } from '@/components/features/survey/lib/survey-validation';
 import {
 	goalDataSelect,
 	languagelevelDataSelect,
@@ -55,7 +55,7 @@ function UserSurvey() {
 
 	const form = useForm({
 		initialValues,
-		validate: surveyValidation,
+		validate: zodResolver(surveyValidationSchema),
 	});
 	const { specialization, goal } = form.values;
 
