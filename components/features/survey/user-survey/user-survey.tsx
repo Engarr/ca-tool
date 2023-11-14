@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import {
 	Container,
 	Button,
@@ -28,11 +28,7 @@ import {
 
 function UserSurvey() {
 	const openRef = useRef<() => void>(null);
-	const [specialization, setSpecialization] = useState(false);
-	const [isAddingFile, setIsAddingFile] = useState(false);
-	const [showPracticesDataPicker, setShowPracticesDataPicker] =
-		useState(false);
-	const icon = (
+	const calendarIcon = (
 		<IconCalendar
 			style={{ width: rem(18), height: rem(18), color: '#44639F' }}
 			stroke={1.5}
@@ -61,21 +57,11 @@ function UserSurvey() {
 		initialValues,
 		validate: surveyValidation,
 	});
+	const { specialization, goal } = form.values;
 
-	const checkSpecialization = (value: string) => {
-		if (value === 'grafika' || value === 'ui/ux') {
-			setSpecialization(true);
-		} else {
-			setSpecialization(false);
-		}
-	};
-	const checkGoal = (value: string) => {
-		if (value === 'praktyki') {
-			setShowPracticesDataPicker(true);
-		} else {
-			setShowPracticesDataPicker(false);
-		}
-	};
+	const hasPickedSpecialization =
+		specialization === 'grafika' || specialization === 'ui/ux';
+	const shouldShowPracticesDataPicker = goal === 'praktyki';
 
 	const dropzoneText = form.values.files.length
 		? form.values.files[0]?.name
@@ -116,7 +102,7 @@ function UserSurvey() {
 							clearable
 							withAsterisk
 							valueFormat='MMM DD, YYYY'
-							leftSection={icon}
+							leftSection={calendarIcon}
 							label='Data urodzenia'
 							placeholder='Wybierz date'
 							{...form.getInputProps('birth')}
@@ -128,9 +114,6 @@ function UserSurvey() {
 							checkIconPosition='right'
 							placeholder='Wybierz swoją specializację'
 							withAsterisk
-							onOptionSubmit={(value) => {
-								checkSpecialization(value);
-							}}
 							data={specializationsDataSelect}
 							{...form.getInputProps('specialization')}
 						/>
@@ -159,7 +142,7 @@ function UserSurvey() {
 							{...form.getInputProps('programingLanguages')}
 						/>
 					</Grid.Col>
-					{specialization && (
+					{hasPickedSpecialization && (
 						<>
 							<Grid.Col>
 								<Textarea
@@ -235,14 +218,11 @@ function UserSurvey() {
 							withAsterisk
 							checkIconPosition='right'
 							placeholder='Wybierz cel'
-							onOptionSubmit={(value) => {
-								checkGoal(value);
-							}}
 							data={goalDataSelect}
 							{...form.getInputProps('goal')}
 						/>
 					</Grid.Col>
-					{showPracticesDataPicker && (
+					{shouldShowPracticesDataPicker && (
 						<>
 							<Text pl={7} my={10}>
 								Data odbywania praktyki (od - do ) jeśli
@@ -253,7 +233,7 @@ function UserSurvey() {
 									clearable
 									withAsterisk
 									valueFormat='MMM DD, YYYY'
-									leftSection={icon}
+									leftSection={calendarIcon}
 									label='Data rozpoczęcia'
 									placeholder='Wybierz date'
 									{...form.getInputProps('practicesStart')}
@@ -264,7 +244,7 @@ function UserSurvey() {
 									clearable
 									withAsterisk
 									valueFormat='MMM DD, YYYY'
-									leftSection={icon}
+									leftSection={calendarIcon}
 									label='Data zakończenia'
 									placeholder='Wybierz date'
 									{...form.getInputProps('practicesEnd')}
@@ -290,11 +270,8 @@ function UserSurvey() {
 							h={{ base: 150, sm: 100 }}
 							openRef={openRef}
 							onDrop={(files: FileWithPath[]) => {
-								setIsAddingFile(true);
 								form.setFieldValue('files', files);
-								setIsAddingFile(false);
 							}}
-							loading={isAddingFile}
 						>
 							<DropzoneChildren
 								openRef={openRef}
