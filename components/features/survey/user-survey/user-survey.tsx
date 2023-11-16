@@ -35,48 +35,69 @@ function UserSurvey() {
 		/>
 	);
 	const initialValues: SurveyValuesType = {
-		name: '',
+		fullName: '',
 		email: '',
-		phone: '',
-		birth: null,
+		phoneNumber: '',
+		dateOfBirth: null,
 		specialization: '',
-		occupation: '',
-		languagelevel: '',
+		nameOfUniversityOrOccupation: '',
+		githubAccount: '',
 		programingLanguages: '',
 		graphicInspiration: '',
 		proficientGraphicTools: '',
 		experience: '',
+		finishedProject: '',
+		englishLevel_Id: '',
 		learningGoals: '',
-		goal: '',
+		goalOfAcademyParticipation: '',
 		practicesStart: null,
 		practicesEnd: null,
-		files: [],
+		additionalInformation: '',
+		file: [],
 	};
 
 	const form = useForm({
 		initialValues,
 		validate: zodResolver(surveyValidationSchema),
 	});
-	const { specialization, goal } = form.values;
+	const { specialization, goalOfAcademyParticipation } = form.values;
 
-	const hasPickedSpecialization =
+	const specializationGroup =
+		specialization === 'react' || specialization === 'react native'
+			? 'frontend'
+			: specialization === '.net' || specialization === 'node.js'
+			? 'backend'
+			: specialization === 'ui/ux' ||
+			  specialization === 'grafika' ||
+			  specialization === 'marketing' ||
+			  specialization === 'pm' ||
+			  specialization === 'copywriting'
+			? 'other'
+			: '';
+	const graphicSpecialization =
 		specialization === 'grafika' || specialization === 'ui/ux';
-	const shouldShowPracticesDataPicker = goal === 'praktyki';
+	const shouldShowPracticesDataPicker =
+		goalOfAcademyParticipation === 'praktyki';
 
-	const dropzoneText = form.values.files.length
-		? form.values.files[0]?.name
+	const dropzoneText = form.values.file.length
+		? form.values.file[0]?.name
 		: 'Wybierz plik bądź przeciągnij go tutaj';
 
 	return (
 		<Container py={20}>
-			<form onSubmit={form.onSubmit((values) => console.log(values))}>
+			<form
+				onSubmit={form.onSubmit((values) => {
+					console.log(values);
+					console.log(specializationGroup);
+				})}
+			>
 				<Grid>
 					<Grid.Col span={{ base: 12, sm: 6 }}>
 						<TextInput
 							withAsterisk
 							label='Imię i Nazwisko'
 							placeholder='Wprowadz dane'
-							{...form.getInputProps('name')}
+							{...form.getInputProps('fullName')}
 						/>
 					</Grid.Col>
 					<Grid.Col span={{ base: 12, sm: 6 }}>
@@ -94,7 +115,7 @@ function UserSurvey() {
 							component={IMaskInput}
 							mask='(+00) 000-000-000'
 							placeholder='+48 000-000-000'
-							{...form.getInputProps('phone')}
+							{...form.getInputProps('phoneNumber')}
 						/>
 					</Grid.Col>
 					<Grid.Col span={{ base: 12, sm: 6 }}>
@@ -105,7 +126,7 @@ function UserSurvey() {
 							leftSection={calendarIcon}
 							label='Data urodzenia'
 							placeholder='Wybierz date'
-							{...form.getInputProps('birth')}
+							{...form.getInputProps('dateOfBirth')}
 						/>
 					</Grid.Col>
 					<Grid.Col span={{ base: 12, sm: 6 }}>
@@ -123,26 +144,36 @@ function UserSurvey() {
 							withAsterisk
 							label='Szkoła / Uczelnia / Aktualny zawód'
 							placeholder='Wprowadz dane'
-							{...form.getInputProps('occupation')}
+							{...form.getInputProps(
+								'nameOfUniversityOrOccupation'
+							)}
 						/>
 					</Grid.Col>
-					<Grid.Col>
-						<TextInput
-							label='Konto na github'
-							placeholder='Wprowadz dane'
-						/>
-					</Grid.Col>
-					<Grid.Col>
-						<Textarea
-							label='Jakie znasz języki programowania?'
-							placeholder='Wprowadz dane'
-							autosize
-							minRows={2}
-							maxRows={4}
-							{...form.getInputProps('programingLanguages')}
-						/>
-					</Grid.Col>
-					{hasPickedSpecialization && (
+					{(specializationGroup === 'frontend' ||
+						specializationGroup === 'backend') && (
+						<>
+							<Grid.Col>
+								<TextInput
+									label='Konto na github'
+									placeholder='Wprowadz dane'
+									{...form.getInputProps('githubAccount')}
+								/>
+							</Grid.Col>
+							<Grid.Col>
+								<Textarea
+									label='Jakie znasz języki programowania?'
+									placeholder='Wprowadz dane'
+									autosize
+									minRows={2}
+									maxRows={4}
+									{...form.getInputProps(
+										'programingLanguages'
+									)}
+								/>
+							</Grid.Col>
+						</>
+					)}
+					{graphicSpecialization && (
 						<>
 							<Grid.Col>
 								<Textarea
@@ -189,6 +220,8 @@ function UserSurvey() {
 							autosize
 							minRows={2}
 							maxRows={4}
+							description="(Jeśli jest możliwość link do projektu plus opis)"
+							{...form.getInputProps('finishedProject')}
 						/>
 					</Grid.Col>
 					<Grid.Col span={{ base: 12, sm: 6 }}>
@@ -198,7 +231,7 @@ function UserSurvey() {
 							checkIconPosition='right'
 							placeholder='Wybierz poziom języka'
 							data={languagelevelDataSelect}
-							{...form.getInputProps('languagelevel')}
+							{...form.getInputProps('englishLevel_Id')}
 						/>
 					</Grid.Col>
 					<Grid.Col>
@@ -219,7 +252,9 @@ function UserSurvey() {
 							checkIconPosition='right'
 							placeholder='Wybierz cel'
 							data={goalDataSelect}
-							{...form.getInputProps('goal')}
+							{...form.getInputProps(
+								'goalOfAcademyParticipation'
+							)}
 						/>
 					</Grid.Col>
 					{shouldShowPracticesDataPicker && (
@@ -260,6 +295,7 @@ function UserSurvey() {
 							autosize
 							minRows={2}
 							maxRows={4}
+							{...form.getInputProps('additionalInformation')}
 						/>
 					</Grid.Col>
 					<Grid.Col span={12}>
@@ -269,8 +305,8 @@ function UserSurvey() {
 						<Dropzone
 							h={{ base: 150, sm: 100 }}
 							openRef={openRef}
-							onDrop={(files: FileWithPath[]) => {
-								form.setFieldValue('files', files);
+							onDrop={(file: FileWithPath[]) => {
+								form.setFieldValue('file', file);
 							}}
 						>
 							<DropzoneChildren
