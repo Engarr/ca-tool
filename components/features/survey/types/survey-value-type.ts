@@ -20,5 +20,5 @@ export type SurveyValuesType = {
 	practicesEnd: Date | null;
 	additionalInformation: '';
 	file: FileWithPath[];
-	// specializationGroup: string 
+	specializationGroup?: string;
 };
