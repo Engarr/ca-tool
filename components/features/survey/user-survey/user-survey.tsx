@@ -33,7 +33,6 @@ import ModalChildrenError from '@/components/UI/modal-children-error/modal-child
 
 function UserSurvey() {
   const openRef = useRef<() => void>(null);
-  const [isSendingError, setIsSendingError] = useState(false);
   const calendarIcon = (
     <IconCalendar
       style={{ width: rem(18), height: rem(18), color: '#44639F' }}
@@ -44,15 +43,12 @@ function UserSurvey() {
     mutate: sendSurvey,
     isPending,
     isSuccess,
+    isError,
+    reset,
   } = useMutation({
     mutationFn: async (sendingDate: SurveyValuesType) => {
-      try {
-        const response = await axios.post('/docelowyadres', sendingDate);
-        console.log(response.data);
-        return response.data;
-      } catch (error) {
-        setIsSendingError(true);
-      }
+      const response = await axios.post('/docelowyadres', sendingDate);
+      return response.data;
     },
   });
   const initialValues: SurveyValuesType = {
@@ -106,7 +102,7 @@ function UserSurvey() {
 
   const modalChildren = isPending ? (
     <ModalChildrenLoader loaderText='Przesyłanie ankiety...' />
-  ) : isSendingError ? (
+  ) : isError ? (
     <ModalChildrenError errorText='Wystąpił błąd wysyłania ankiety, spóbuj ponownie później' />
   ) : null;
 
@@ -120,9 +116,9 @@ function UserSurvey() {
   return (
     <Container py={20}>
       <Modal
-        opened={isPending || isSendingError}
-        onClose={() => setIsSendingError(false)}
-        withCloseButton={isSendingError}
+        opened={isPending || isError}
+        onClose={() => reset()}
+        withCloseButton={isError}
         centered>
         {modalChildren}
       </Modal>
