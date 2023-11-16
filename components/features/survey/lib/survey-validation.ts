@@ -1,30 +1,30 @@
 import { z } from 'zod';
 export const surveyValidationSchema = z
 	.object({
-		name: z.string().min(1, 'Pole wymagane.'),
+		fullName: z.string().min(1, 'Pole wymagane.'),
 		email: z.string().email('Niepoprawny format adresu email'),
-		phone: z
+		phoneNumber: z
 			.string()
 			.refine((value) => /^\(\+\d{2}\) \d{3}-\d{3}-\d{3}$/.test(value), {
 				message: 'Nieprawidłowy format numeru telefonu',
 			}),
-		birth: z
+		dateOfBirth: z
 			.date()
 			.nullable()
 			.refine((value) => value !== null, {
 				message: 'Pole wymagane',
 			}),
 		specialization: z.string().min(1, 'Pole wymagane.'),
-		occupation: z.string().min(1, 'Pole wymagane.'),
-		languagelevel: z.string().min(1, 'Pole wymagane.'),
+		nameOfUniversityOrOccupation: z.string().min(1, 'Pole wymagane.'),
+		englishLevel_Id: z.string().min(1, 'Pole wymagane.'),
 		learningGoals: z.string().min(1, 'Pole wymagane.'),
-		goal: z.string().min(1, 'Pole wymagane.'),
+		goalOfAcademyParticipation: z.string().min(1, 'Pole wymagane.'),
 		practicesStart: z.date().nullable(),
 		practicesEnd: z.date().nullable(),
 	})
 	.refine(
 		(data) =>
-			data?.goal !== 'praktyki'
+			data?.goalOfAcademyParticipation !== 'praktyki'
 				? true
 				: data.practicesStart !== null &&
 				  data.practicesEnd !== null &&
@@ -37,7 +37,7 @@ export const surveyValidationSchema = z
 	)
 	.refine(
 		(data) =>
-			data?.goal !== 'praktyki'
+			data?.goalOfAcademyParticipation !== 'praktyki'
 				? true
 				: data.practicesEnd !== null &&
 				  data.practicesStart !== null &&
