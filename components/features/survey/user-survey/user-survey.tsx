@@ -25,6 +25,8 @@ import {
 	languagelevelDataSelect,
 	specializationsDataSelect,
 } from '@/components/features/survey/lib/select-data';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
 function UserSurvey() {
 	const openRef = useRef<() => void>(null);
@@ -34,6 +36,17 @@ function UserSurvey() {
 			stroke={1.5}
 		/>
 	);
+	const {
+		mutate: sendSurvey,
+		isError,
+		isPending,
+		isSuccess,
+		error,
+	} = useMutation({
+		mutationFn: (sendingDate: SurveyValuesType) => {
+			return axios.post('/docelowyadres', sendingDate);
+		},
+	});
 	const initialValues: SurveyValuesType = {
 		fullName: '',
 		email: '',
@@ -83,12 +96,19 @@ function UserSurvey() {
 		? form.values.file[0]?.name
 		: 'Wybierz plik bądź przeciągnij go tutaj';
 
+	const handleSurveySubmit = (values: SurveyValuesType) => {
+		const sendingDate = {
+			...values,
+			specializationGroup,
+		};
+		sendSurvey(sendingDate);
+	};
+
 	return (
 		<Container py={20}>
 			<form
 				onSubmit={form.onSubmit((values) => {
-					console.log(values);
-					console.log(specializationGroup);
+					handleSurveySubmit(values);
 				})}
 			>
 				<Grid>
@@ -220,7 +240,7 @@ function UserSurvey() {
 							autosize
 							minRows={2}
 							maxRows={4}
-							description="(Jeśli jest możliwość link do projektu plus opis)"
+							description='(Jeśli jest możliwość link do projektu plus opis)'
 							{...form.getInputProps('finishedProject')}
 						/>
 					</Grid.Col>
