@@ -1,0 +1,43 @@
+.header {
+	height: rem(80px);
+	padding-left: var(--mantine-spacing-md);
+	padding-right: var(--mantine-spacing-md);
+	border-bottom: rem(1px) solid
+		light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	padding-left: var(--mantine-spacing-md);
+	padding-right: var(--mantine-spacing-md);
+	margin-top: 0rem;
+	text-decoration: none;
+	color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+	font-weight: 500;
+	font-size: var(--mantine-font-size-md);
+	text-transform: uppercase;
+
+	@mixin hover {
+		color: light-dark(
+			var(--mantine-color-blue-7),
+			var(--mantine-color-blue-3)
+		);
+		transition: color 0.3s;
+	}
+}
+
+.navlogoContainer {
+	position: absolute;
+	top: 0.5rem;
+	z-index: 100000;
+}
+
+@media only screen and (max-width: 48rem) {
+	.link {
+		height: rem(42px);
+		width: 100%;
+		margin-top: 1rem;
+	}
+}
