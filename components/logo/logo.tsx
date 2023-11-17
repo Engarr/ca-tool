@@ -4,11 +4,11 @@ import logo from '@/public/image/cetus-logo.png';
 import Image from 'next/image';
 
 const Logo = () => {
-  return (
-    <div className={classes.logoBox}>
-      <Image src={logo} alt='logo' />
-    </div>
-  );
+	return (
+		<div className={classes.logoBox}>
+			<Image src={logo} alt='logo'/>
+		</div>
+	);
 };
 
 export default Logo;

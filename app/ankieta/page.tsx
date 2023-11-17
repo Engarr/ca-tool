@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Paper } from '@mantine/core';
 import UserSurvey from '@/components/features/survey/user-survey/user-survey';
 import WelcomeText from '@/components/features/survey/welcome-text/welcome-text';
-import Logo from '@/components/logo/logo';
 
 export default function FormPage() {
 	return (
@@ -14,7 +13,6 @@ export default function FormPage() {
 				style={{ position: 'relative' }}
 				py={50}
 			>
-				<Logo />
 				<WelcomeText />
 				<UserSurvey />
 			</Paper>
