@@ -1,0 +1,26 @@
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.625rem;
+}
+.errorText {
+  text-align: center;
+  margin-bottom: 0.625rem;
+  font-size: 1.25rem;
+}
+.icon {
+  width: 5rem;
+  height: 5rem;
+  color: #ff2825;
+}
+@media only screen and (max-width: 48rem) {
+  .errorText {
+    font-size: 1rem;
+  }
+  .icon {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+}

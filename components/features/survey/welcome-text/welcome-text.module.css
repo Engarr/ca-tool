@@ -1,7 +1,12 @@
 .discord-link {
-	color: #2D4B81;
+	color: #2d4b81;
 	transition: color 0.3s;
 }
 .discord-link:hover {
 	color: #5474b4;
+}
+.logoContainer {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

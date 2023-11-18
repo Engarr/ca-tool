@@ -1,7 +1,7 @@
 .text {
   margin-right: 20px;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 48rem) {
   .text {
     margin-right: 0;
     margin-bottom: 20px;

@@ -1,20 +1,24 @@
 import { FileWithPath } from '@mantine/dropzone';
 
 export type SurveyValuesType = {
-	name: string;
+	fullName: string;
 	email: string;
-	phone: string;
-	birth: Date | null;
+	phoneNumber: string;
+	dateOfBirth: Date | null;
 	specialization: string;
-	occupation: string;
-	languagelevel: string;
+	nameOfUniversityOrOccupation: string;
+	githubAccount: string;
 	programingLanguages: string;
 	graphicInspiration: string;
 	proficientGraphicTools: string;
 	experience: string;
+	finishedProject: string;
+	englishLevel_Id: string;
 	learningGoals: string;
-	goal: string;
+	goalOfAcademyParticipation: string;
 	practicesStart: Date | null;
 	practicesEnd: Date | null;
-	files: FileWithPath[];
+	additionalInformation: '';
+	file: FileWithPath[];
+	specializationGroup?: string;
 };

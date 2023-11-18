@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import "@mantine/core/styles.css"
-import { MantineProvider, ColorSchemeScript } from "@mantine/core"
-import { ModalsProvider } from "@mantine/modals"
 import "@mantine/dates/styles.css"
 import "@mantine/dropzone/styles.css"
+import { MantineProvider, ColorSchemeScript } from "@mantine/core"
+import TanStackProvider from "@/components/providers/tanstack-provider"
 
 export const metadata: Metadata = {
   title: "Ca-tool",
@@ -21,9 +21,11 @@ export default function RootLayout({
         <ColorSchemeScript defaultColorScheme="light" />
       </head>
       <body>
-        <MantineProvider defaultColorScheme="light">
-          <ModalsProvider>{children}</ModalsProvider>
-        </MantineProvider>
+        <TanStackProvider>
+          <MantineProvider defaultColorScheme="light">
+            {children}
+          </MantineProvider>
+        </TanStackProvider>
       </body>
     </html>
   )

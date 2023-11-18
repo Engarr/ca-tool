@@ -1,10 +1,14 @@
 import React from 'react';
 import { Container, Text } from '@mantine/core';
 import classes from './welcome-text.module.css';
+import Logo from '@/components/logo/logo';
 
 const WelcomeText = () => {
 	return (
 		<>
+			<div className={classes.logoContainer}>
+				<Logo />
+			</div>
 			<Text
 				ta={'center'}
 				pt={30}
