@@ -28,7 +28,7 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
   } = useSortable({
     id: member.id,
     data: {
-      type: 'MemberType',
+      type: 'Member',
       member,
     },
   });

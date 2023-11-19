@@ -1,4 +1,5 @@
 'use client';
+import React from 'react';
 import {
   Group,
   Button,
@@ -12,8 +13,6 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import classes from './admin-navigation.module.css';
 import Logo from '@/components/logo/logo';
-
-import React from 'react';
 import Link from 'next/link';
 
 const AdminNavigation = () => {
@@ -30,11 +29,11 @@ const AdminNavigation = () => {
               Uczestnicy
             </Link>
             <Link href='/admin/grupy' className={classes.link}>
-              Grupy uczestników
+              Grupy
             </Link>
           </Group>
           <Group visibleFrom='sm'>
-            <Button>Log in</Button>
+            <Button>Log out</Button>
           </Group>
           <Burger
             opened={drawerOpened}
@@ -62,11 +61,11 @@ const AdminNavigation = () => {
             href='/admin/grupy'
             className={classes.link}
             onClick={closeDrawer}>
-            Grupy uczestników
+            Grupy
           </Link>
           <Divider my='md' />
           <Group justify='center' grow pb='xl' px='md'>
-            <Button>Log in</Button>
+            <Button>Log out</Button>
           </Group>
         </ScrollArea>
       </Drawer>

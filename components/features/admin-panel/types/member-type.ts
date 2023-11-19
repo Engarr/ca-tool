@@ -1,5 +1,6 @@
 export type Id = string | number;
 export type MemberType = {
-  id: Id;
-  fullName: string;
+	id: Id;
+	columnId: Id;
+	fullName: string;
 };
