@@ -11,6 +11,7 @@ import classes from './kanban-member-card.module.css';
 import { useSortable } from '@dnd-kit/sortable';
 import { MemberType } from '../types/member-type';
 import { CSS } from '@dnd-kit/utilities';
+import { getCardShadowColor } from '../lib/getShadowCardColor';
 
 type KanbanMemberCardType = {
   member: MemberType;
@@ -18,6 +19,9 @@ type KanbanMemberCardType = {
 
 const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
   const { fullName } = member;
+
+  const cardBackgroundColor = getCardShadowColor(member.specialization.domain);
+
   const {
     setNodeRef,
     attributes,
@@ -54,18 +58,20 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
       mb={20}
       className={classes.cardContainer}
       ref={setNodeRef}
-      style={style}
+      style={{
+        style,
+        boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
+      }}
       {...attributes}
       {...listeners}>
       <Group>
         <div>
           <IconGripVertical className={classes.grapIcon} stroke={1.5} />
         </div>
-
         <div className={classes.userInfoBox}>
-          <Text>{fullName}</Text>
-          <Text c='dimmed' size='xs'>
-            SPECIALIZACJA
+          <Text fw={500}>{fullName}</Text>
+          <Text c='gray' size='sm' fw={700}>
+            {member.specialization.role}
           </Text>
         </div>
       </Group>
