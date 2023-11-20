@@ -1,19 +1,18 @@
 "use client"
 
 import dynamic from "next/dynamic"
-import { Container, Title, Card } from "@mantine/core"
 import styles from "./test.module.css"
+
 import { useState, useMemo } from "react"
-import { Start } from "./_components"
+import { redirect, useSearchParams } from "next/navigation"
 import Image from "next/image"
+
+import { Container } from "@mantine/core"
+import { Start } from "./_components"
 
 const Quiz = dynamic(
   () => import("./_components").then((modules) => modules.Quiz),
   { ssr: false }
-)
-
-const End = dynamic(() =>
-  import("./_components").then((modules) => modules.End)
 )
 
 enum SECTIONS {
@@ -22,16 +21,25 @@ enum SECTIONS {
 }
 
 export default function TestPage() {
+  const params = useSearchParams()
+  const userId = params.get("id")
+  const specializationId = params.get("specialization_Id")
+
+  if (!userId || !specializationId) {
+    redirect("/")
+  }
+
   const [activeSectionName, setActiveSectionName] = useState<SECTIONS>(
     SECTIONS.START
   )
-  const startQuiz = () => {
-    if (activeSectionName !== SECTIONS.START) return
-
-    setActiveSectionName((prev) => prev + 1)
-  }
 
   const activeSection = useMemo(() => {
+    const startQuiz = () => {
+      if (activeSectionName !== SECTIONS.START) return
+
+      setActiveSectionName((prev) => prev + 1)
+    }
+
     if (activeSectionName === SECTIONS.START)
       return <Start startQuiz={startQuiz} />
 
@@ -42,10 +50,9 @@ export default function TestPage() {
     <div className={styles.container}>
       <Image
         fill
-        src="/image/test-bg.png"
+        src="/image/test-bg-2.svg"
         alt="Background image"
         objectFit="cover"
-        objectPosition="center"
       />
       <Container size="xl">{activeSection}</Container>
     </div>

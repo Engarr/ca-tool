@@ -3,6 +3,8 @@ import "@mantine/core/styles.css"
 import "@mantine/dates/styles.css"
 import "@mantine/dropzone/styles.css"
 import { MantineProvider, ColorSchemeScript } from "@mantine/core"
+import { ModalsProvider } from "@mantine/modals"
+
 import TanStackProvider from "@/components/providers/tanstack-provider"
 
 export const metadata: Metadata = {
@@ -23,7 +25,7 @@ export default function RootLayout({
       <body>
         <TanStackProvider>
           <MantineProvider defaultColorScheme="light">
-            {children}
+            <ModalsProvider>{children}</ModalsProvider>
           </MantineProvider>
         </TanStackProvider>
       </body>

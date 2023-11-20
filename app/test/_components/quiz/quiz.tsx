@@ -1,63 +1,76 @@
 "use client"
 
-import { shuffleArray } from "@/utils/shuffle-array"
-import { redirect, useSearchParams } from "next/navigation"
-import { useMemo, useEffect, useState } from "react"
-import { Stack, Progress, Flex, Title, Button, Text } from "@mantine/core"
 import styles from "./quiz.module.css"
+import axios from "axios"
+
+import { useMemo, useCallback, useEffect, useState, memo } from "react"
+import { useQuery } from "@tanstack/react-query"
 import { useCountdown } from "usehooks-ts"
-import { modals } from "@mantine/modals"
+import { redirect, useSearchParams } from "next/navigation"
+import { Question } from "@/types/quiz"
 
-const COUNT_DOWN_INTERVAL = 3 // approximately 30s
-const questionsHardCoded = [
-  {
-    question: "1+1",
-    correctAnswer: "2",
-    answers: ["3", "4", "5"],
-  },
-  {
-    question: "1+2",
-    correctAnswer: "2",
-    answers: ["3", "4", "5"],
-  },
-  {
-    question: "1+3",
-    correctAnswer: "2",
-    answers: ["3", "4", "5"],
-  },
-  {
-    question: "1+4",
-    correctAnswer: "2",
-    answers: ["3", "4", "5"],
-  },
-]
+import { Progress, Title, Stack } from "@mantine/core"
+import { createResultsModal } from ".."
+import { shuffleArray } from "@/utils/shuffle-array"
+
+import { Loading } from "@/components/loading/loading"
+import { QuestionSection } from "./question-section/question-section"
+
+const COUNT_DOWN_LENGTH = 30 // in seconds
+
 export const Quiz: React.FC = () => {
-  //   const params = useSearchParams()
-  //   const userId = params.get("id")
-  //   const specializationId = params.get("specialization_Id")
+  const [questions, setQuestions] = useState<Question[]>()
+  const { isPending, error, data } = useQuery<Question[]>({
+    queryKey: ["questions"],
+    queryFn: () => axios.get("/questions.json").then((res) => res.data),
+  })
 
-  //   if (!userId || !specializationId) {
-  //     redirect("/")
-  //   }
-
-  const [questions, setQuestions] = useState(questionsHardCoded)
   const [userCorrectAnswers, setUserCorrectAnswers] = useState<number>(0)
-
-  const addPoint = () => setUserCorrectAnswers((prev) => prev + 1)
   const [activeQuestionIndex, setActiveQuestionIndex] = useState<number>(0)
 
-  const [count, { startCountdown, resetCountdown }] = useCountdown({
-    countStart: 10000,
-    intervalMs: COUNT_DOWN_INTERVAL,
-  })
+  const [count, { startCountdown, stopCountdown, resetCountdown }] =
+    useCountdown({
+      countStart: COUNT_DOWN_LENGTH * 10,
+      intervalMs: 100,
+    })
+
+  const nextQuestion = useCallback(
+    (userAnswer: string) => {
+      if (!questions) return
+
+      resetCountdown()
+      startCountdown()
+
+      if (userAnswer === questions[activeQuestionIndex].correctAnswer)
+        setUserCorrectAnswers((prev) => prev + 1)
+
+      if (activeQuestionIndex === questions.length - 1) {
+        stopCountdown()
+
+        createResultsModal(questions.length, userCorrectAnswers)
+        return
+      }
+
+      setActiveQuestionIndex((prev) => prev + 1)
+    },
+    [questions, activeQuestionIndex, userCorrectAnswers]
+  )
 
   useEffect(() => {
     if (count === 0) nextQuestion("")
-  }, [count])
+  }, [count, nextQuestion])
 
-  const activeQuestion = useMemo(() => {
+  useEffect(() => {
+    if (isPending || !data) return
+
+    setQuestions(data)
     resetCountdown()
     startCountdown()
+  }, [isPending, data])
+
+  const activeQuestion = useMemo(() => {
+    if (!questions) return
+
     const { question, correctAnswer, answers } = questions[activeQuestionIndex]
     const shuffledAnswers = shuffleArray([correctAnswer, ...answers])
 
@@ -67,65 +80,29 @@ export const Quiz: React.FC = () => {
     }
   }, [questions, activeQuestionIndex])
 
-  const nextQuestion = (userAnswer: string) => {
-    if (userAnswer === questions[activeQuestionIndex].correctAnswer) addPoint
+  if (isPending || !questions || !activeQuestion) {
+    return <Loading />
+  }
 
-    if (activeQuestionIndex === questions.length - 1) {
-      modals.openConfirmModal({
-        title: "Dziękujemy za ukończenie testu.",
-        children: (
-          <Stack align="center">
-            <Title order={3}>
-              Otrzymałeś rangę <strong>CZELADNIK</strong>
-            </Title>
-
-            <Text size="lg">
-              Twój wynik to{" "}
-              {(userCorrectAnswers / questions.length).toFixed(0).concat("%")} (
-              {userCorrectAnswers}/{questions.length})
-            </Text>
-            <Text size="md">Odezwiemy się do Ciebie w najbliższym czasie</Text>
-          </Stack>
-        ),
-      })
-      return
-    }
-
-    setActiveQuestionIndex((prev) => prev + 1)
+  if (error) {
+    return <Title order={1}>Wystąpił nieoczekiwany błąd!</Title>
   }
 
   return (
-    <Flex
-      gap="5rem"
-      align="center"
-      direction="column"
-      className={styles.container}
-    >
+    <Stack align="center" h={"500"} mah={"100vh"} justify="space-between">
       <Progress
-        value={count / 100}
+        value={(10 / COUNT_DOWN_LENGTH) * count}
         size={"xl"}
         className={styles.progress}
         radius="0"
-        animated
       />
-      <Title order={3} className={styles.questionNumber}>
-        Pytanie {activeQuestionIndex + 1}/{questions.length}
-      </Title>
-      <Flex gap="3rem" align="center" direction="column" w="100%">
-        <Title order={1}>{activeQuestion.question}</Title>
-        <Stack className={styles.btnStack}>
-          {activeQuestion.answers.map((answer) => (
-            <Button
-              variant="filled"
-              size="lg"
-              key={answer}
-              onClick={() => nextQuestion(answer)}
-            >
-              {answer}
-            </Button>
-          ))}
-        </Stack>
-      </Flex>
-    </Flex>
+
+      <QuestionSection
+        activeQuestionIndex={activeQuestionIndex}
+        questionsCount={questions.length}
+        activeQuestion={activeQuestion}
+        nextQuestion={nextQuestion}
+      />
+    </Stack>
   )
 }
