@@ -51,23 +51,19 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
       radius='md'
       withBorder
       p='lg'
-      mb={5}
+      mb={20}
       className={classes.cardContainer}
       ref={setNodeRef}
-      style={style}>
+      style={style}
+      {...attributes}
+      {...listeners}>
       <Group>
-        <div
-          style={{
-            paddingRight: '5px',
-          }}
-          {...attributes}
-          {...listeners}>
+        <div>
           <IconGripVertical className={classes.grapIcon} stroke={1.5} />
         </div>
 
-        <div style={{ flex: 1 }}>
-          <Text fw={500}>{fullName}</Text>
-
+        <div className={classes.userInfoBox}>
+          <Text>{fullName}</Text>
           <Text c='dimmed' size='xs'>
             SPECIALIZACJA
           </Text>

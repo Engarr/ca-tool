@@ -7,7 +7,7 @@
   background-color: var(--mantine-color-body);
 }
 .cardContainer:nth-child(even) {
-  background-color: var(--mantine-color-gray-0);
+  background-color: var(--mantine-color-gray-2);
 }
 .iconStyle {
   width: rem(18px);
@@ -15,12 +15,9 @@
   color: var(--mantine-color-ndigo-7);
 }
 .grapIcon {
-  width: rem(25px);
-  height: rem(25px);
+  border-radius: 5px;
   padding: 3px;
   cursor: grab;
-  border-radius: 5px;
-
   transition: background-color 0.1s;
 }
 .grapIcon:hover {
@@ -28,6 +25,16 @@
     var(--mantine-color-gray-1),
     var(--mantine-color-dark-5)
   );
+}
+.userInfoBox {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 .isDraggingCard {
   width: 100%;
