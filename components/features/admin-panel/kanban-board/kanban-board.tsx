@@ -41,8 +41,12 @@ const KanbanBoard = () => {
       onDragOver={(event) => {
         onDragOver({ event, setNewMemberList, newMemberList });
       }}>
-      <ScrollArea scrollbarSize={15}>
-        <Flex direction='row' gap={'xl'} px={50} mb={100}>
+      <ScrollArea scrollbarSize={10}>
+        <Flex
+          direction={{ base: 'column', sm: 'row' }}
+          gap={'xl'}
+          px={50}
+          mb={50}>
           <SortableContext items={columnsId}>
             {columnList.map((col) => (
               <KanbanColumn

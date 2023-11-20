@@ -39,7 +39,7 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
         <div className={classes.memberCount}>{members.length}</div>
       </Group>
       <Divider py={5} />
-      <ScrollArea scrollbarSize={3} h={{ base: 400, sm: 700 }} pr={15}>
+      <ScrollArea scrollbarSize={4} h={{ base: 400, sm: 600 }} pr={15}>
         <SortableContext items={membersIds}>
           {members.map((member) => (
             <React.Fragment key={member.id}>
