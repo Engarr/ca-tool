@@ -1,16 +1,12 @@
 import React from 'react';
-import { Paper, Text, Group, Menu, ActionIcon } from '@mantine/core';
-import {
-  IconGripVertical,
-  IconPencil,
-  IconNote,
-  IconTrash,
-  IconDots,
-} from '@tabler/icons-react';
+import { Paper, Text, Group, Flex } from '@mantine/core';
+import { IconGripVertical } from '@tabler/icons-react';
 import classes from './kanban-member-card.module.css';
 import { useSortable } from '@dnd-kit/sortable';
 import { MemberType } from '../types/member-type';
 import { CSS } from '@dnd-kit/utilities';
+import { getCardShadowColor } from '../lib/getShadowCardColor';
+import UserManagementMenu from '../user-management-menu/user-management-menu';
 
 type KanbanMemberCardType = {
   member: MemberType;
@@ -18,6 +14,7 @@ type KanbanMemberCardType = {
 
 const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
   const { fullName } = member;
+  const cardBackgroundColor = getCardShadowColor(member.specialization.domain);
   const {
     setNodeRef,
     attributes,
@@ -32,11 +29,11 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
       member,
     },
   });
-
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
   };
+
   if (isDragging) {
     return (
       <Paper
@@ -51,59 +48,32 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
       radius='md'
       withBorder
       p='lg'
-      mb={5}
+      mb={15}
       className={classes.cardContainer}
       ref={setNodeRef}
-      style={style}>
-      <Group>
-        <div
-          style={{
-            paddingRight: '5px',
-          }}
-          {...attributes}
-          {...listeners}>
-          <IconGripVertical className={classes.grapIcon} stroke={1.5} />
-        </div>
-
-        <div style={{ flex: 1 }}>
+      style={{
+        style,
+        boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
+      }}
+      {...attributes}
+      {...listeners}>
+      <Group gap={3}>
+        <Group p={2}>
+          <IconGripVertical
+            className={classes.grapIcon}
+            stroke={1.5}
+            size={20}
+          />
+        </Group>
+        <Flex direction={'column'} w={200} className={classes.userInfoBox}>
           <Text fw={500}>{fullName}</Text>
-
-          <Text c='dimmed' size='xs'>
-            SPECIALIZACJA
+          <Text c='gray' size='sm' fw={700}>
+            {member.specialization.role}
           </Text>
-        </div>
+        </Flex>
       </Group>
       <Group gap={0} justify='flex-end'>
-        <ActionIcon variant='subtle'>
-          <IconPencil className={classes.iconStyle} stroke={1.5} />
-        </ActionIcon>
-        <Menu
-          transitionProps={{ transition: 'pop' }}
-          withArrow
-          position='bottom-end'
-          withinPortal>
-          <Menu.Target>
-            <ActionIcon variant='subtle'>
-              <IconDots className={classes.iconStyle} stroke={1.5} />
-            </ActionIcon>
-          </Menu.Target>
-          <Menu.Dropdown>
-            <Menu.Item
-              leftSection={
-                <IconNote className={classes.iconStyle} stroke={1.5} />
-              }>
-              Dodaj notatkę
-            </Menu.Item>
-
-            <Menu.Item
-              leftSection={
-                <IconTrash className={classes.iconStyle} stroke={1.5} />
-              }
-              color='red'>
-              Usuń uczestnika
-            </Menu.Item>
-          </Menu.Dropdown>
-        </Menu>
+        <UserManagementMenu />
       </Group>
     </Paper>
   );
