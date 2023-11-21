@@ -7,4 +7,5 @@ export type MemberType = {
     domain: string;
     role: string;
   };
+  note?: string;
 };
