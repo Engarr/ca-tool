@@ -1,9 +1,7 @@
 import React, { useMemo } from 'react';
 import {
   Card,
-  Container,
   Divider,
-  Flex,
   Group,
   ScrollArea,
   Text,
