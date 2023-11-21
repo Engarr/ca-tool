@@ -1,5 +1,13 @@
 import React, { useMemo } from 'react';
-import { Card, Divider, Group, ScrollArea } from '@mantine/core';
+import {
+  Card,
+  Container,
+  Divider,
+  Flex,
+  Group,
+  ScrollArea,
+  Text,
+} from '@mantine/core';
 import classes from './kanban-column.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { MemberType } from '../types/member-type';
@@ -34,9 +42,13 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
       className={classes.column}
       padding='md'
       miw={400}>
-      <Group className={classes.title} px={10}>
-        <p>{title}</p>
-        <div className={classes.memberCount}>{members.length}</div>
+      <Group px={8} align={'center'} justify='space-between' mb={10}>
+        <Text fw={600} size='xl'>
+          {title}
+        </Text>
+        <Text className={classes.memberCount} size='lg' fw={600}>
+          {members.length}
+        </Text>
       </Group>
       <Divider py={5} />
       <ScrollArea scrollbarSize={4} h={{ base: 400, sm: 600 }} pr={15}>

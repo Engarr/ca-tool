@@ -1,5 +1,5 @@
 'use client';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import KanbanColumn from '../kanban-column/kanban-column';
 import { memberList, columnList } from '../lib/tempMember';
 import { Flex, ScrollArea } from '@mantine/core';
@@ -20,9 +20,7 @@ const KanbanBoard = () => {
   const [newMemberList, setNewMemberList] = useState(memberList);
   const [activeCard, setActiveCard] = useState<MemberType | null>(null);
 
-  const columnsId = useMemo(() => {
-    return newMemberList.map((col) => col.id);
-  }, [newMemberList]);
+  const columnsId = columnList.map((col) => col.id);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
