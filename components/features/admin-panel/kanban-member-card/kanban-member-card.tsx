@@ -9,74 +9,82 @@ import { getCardShadowColor } from '../lib/getShadowCardColor';
 import UserManagementMenu from '../user-management-menu/user-management-menu';
 
 type KanbanMemberCardType = {
-  member: MemberType;
+	member: MemberType;
 };
 
 const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
-  const { fullName } = member;
-  const cardBackgroundColor = getCardShadowColor(member.specialization.domain);
-  const {
-    setNodeRef,
-    attributes,
-    listeners,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({
-    id: member.id,
-    data: {
-      type: 'Member',
-      member,
-    },
-  });
-  const style = {
-    transition,
-    transform: CSS.Transform.toString(transform),
-  };
+	const { fullName } = member;
+	const cardBackgroundColor = getCardShadowColor(
+		member.specialization.domain
+	);
+	const {
+		setNodeRef,
+		attributes,
+		listeners,
+		transform,
+		transition,
+		isDragging,
+	} = useSortable({
+		id: member.id,
+		data: {
+			type: 'Member',
+			member,
+		},
+	});
+	const style = {
+		transition,
+		transform: CSS.Transform.toString(transform),
+	};
 
-  if (isDragging) {
-    return (
-      <Paper
-        ref={setNodeRef}
-        style={style}
-        className={classes.isDraggingCard}></Paper>
-    );
-  }
+	if (isDragging) {
+		return (
+			<Paper
+				ref={setNodeRef}
+				style={style}
+				className={classes.isDraggingCard}
+			></Paper>
+		);
+	}
 
-  return (
-    <Paper
-      radius='md'
-      withBorder
-      p='lg'
-      mb={15}
-      className={classes.cardContainer}
-      ref={setNodeRef}
-      style={{
-        style,
-        boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
-      }}
-      {...attributes}
-      {...listeners}>
-      <Group gap={3}>
-        <Group p={2}>
-          <IconGripVertical
-            className={classes.grapIcon}
-            stroke={1.5}
-            size={20}
-          />
-        </Group>
-        <Flex direction={'column'} w={200} className={classes.userInfoBox}>
-          <Text fw={500}>{fullName}</Text>
-          <Text c='gray' size='sm' fw={700}>
-            {member.specialization.role}
-          </Text>
-        </Flex>
-      </Group>
-      <Group gap={0} justify='flex-end'>
-        <UserManagementMenu />
-      </Group>
-    </Paper>
-  );
+	return (
+		<Paper
+			radius='md'
+			withBorder
+			p='lg'
+			mb={15}
+			className={classes.cardContainer}
+			ref={setNodeRef}
+			style={{
+				style,
+				boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
+			}}
+			{...attributes}
+			{...listeners}
+		>
+			<Group gap={3}>
+				<Group p={2}>
+					<IconGripVertical
+						className={classes.grapIcon}
+						stroke={1.5}
+						size={20}
+					/>
+				</Group>
+				<Flex
+					direction={'column'}
+					w={200}
+					className={classes.userInfoBox}
+				>
+					<Text fw={500}>{fullName}</Text>
+					<Text c='gray' size='sm' fw={700}>
+						{member.specialization.role}
+					</Text>
+				</Flex>
+			</Group>
+			<Group gap={0} justify='flex-end'>
+				<UserManagementMenu memberId={member.id}/>
+			</Group>
+		</Paper>
+	);
 };
 
 export default KanbanMemberCard;
