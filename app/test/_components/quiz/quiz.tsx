@@ -1,9 +1,8 @@
 "use client"
 
 import styles from "./quiz.module.css"
-import axios from "axios"
 
-import { useMemo, useCallback, useEffect, useState, memo } from "react"
+import { useMemo, useCallback, useEffect, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { useCountdown } from "usehooks-ts"
 import { redirect, useSearchParams } from "next/navigation"
@@ -15,14 +14,28 @@ import { shuffleArray } from "@/utils/shuffle-array"
 
 import { Loading } from "@/components/loading/loading"
 import { QuestionSection } from "./question-section/question-section"
+import { axiosClient } from "@/utils/axios"
+import axios from "axios"
 
 const COUNT_DOWN_LENGTH = 30 // in seconds
 
 export const Quiz: React.FC = () => {
+  const params = useSearchParams()
+  const userId = params.get("id")
+  const specializationId = params.get("specialization_Id")
+
+  if (!userId || !specializationId) {
+    redirect("/")
+  }
+
   const [questions, setQuestions] = useState<Question[]>()
   const { isPending, error, data } = useQuery<Question[]>({
     queryKey: ["questions"],
-    queryFn: () => axios.get("/questions.json").then((res) => res.data),
+    queryFn: () =>
+      // axiosClient
+      //   .get(`/Quiz/GetQuestion?id=${specializationId}`)
+      //   .then((res) => res.data),
+      axios.get("/questions.json").then((res) => res.data),
   })
 
   const [userCorrectAnswers, setUserCorrectAnswers] = useState<number>(0)
