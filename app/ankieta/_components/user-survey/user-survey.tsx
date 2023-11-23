@@ -20,13 +20,13 @@ import { DatePickerInput } from '@mantine/dates';
 import { IMaskInput } from 'react-imask';
 import { useForm, zodResolver } from '@mantine/form';
 import DropzoneChildren from '../dropzone/dropzone-children';
-import { SurveyValuesType } from '@/components/features/survey/types/survey-value-type';
-import { surveyValidationSchema } from '@/components/features/survey/lib/survey-validation';
+import { SurveyValuesType } from '@/app/ankieta/_types/survey-value-type';
+import { surveyValidationSchema } from '@/app/ankieta/_lib/survey-validation';
 import {
 	goalDataSelect,
 	languagelevelDataSelect,
 	specializationsDataSelect,
-} from '@/components/features/survey/lib/select-inputs-value';
+} from '@/app/ankieta/_lib/select-inputs-value';
 import { UseQueryResult, useMutation, useQuery } from '@tanstack/react-query';
 import ModalChildrenLoader from '@/components/UI/modal-children-loader/modal-children-loader';
 import ModalChildrenError from '@/components/UI/modal-children-error/modal-children-error';
@@ -34,9 +34,9 @@ import {
 	getGraphicSpecialization,
 	getShouldShowPracticesDataPicker,
 	getSpecializationGroup,
-} from '../lib/survey-conditions';
-import { getSchoolsName, postSurvey } from '../lib/api-survey';
-import { convertFormData } from '../lib/convert-form-data';
+} from '../../_lib/survey-conditions';
+import { getSchoolsName, postSurvey } from '../../_lib/api-survey';
+import { convertFormData } from '../../_lib/convert-form-data';
 
 type SchoolsNameType = {
 	id_School: number;

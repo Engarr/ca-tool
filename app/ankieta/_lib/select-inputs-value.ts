@@ -2,7 +2,7 @@ import {
 	TGoalDataSelect,
 	TLanguagelevelDataSelect,
 	TSpecializationsDataSelect,
-} from '../types/select-data-types';
+} from '../_types/select-data-types';
 
 export const specializationsDataSelect: TSpecializationsDataSelect = [
 	{

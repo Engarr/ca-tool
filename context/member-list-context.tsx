@@ -1,6 +1,6 @@
 'use client';
-import { memberList } from '@/components/features/admin-panel/lib/tempMember';
-import { MemberType } from '@/components/features/admin-panel/types/member-type';
+import { memberList } from '@/app/admin/_lib/tempMember';
+import { MemberType } from '@/app/admin/_types/member-type';
 import { ReactNode, useState, createContext, useContext } from 'react';
 
 type MemberListContextProviderProps = {
@@ -11,9 +11,7 @@ type MemberListContextType = {
 	setNewMemberList: React.Dispatch<React.SetStateAction<MemberType[]>>;
 };
 
-const MemberListContext = createContext<MemberListContextType | null>(
-	null
-);
+const MemberListContext = createContext<MemberListContextType | null>(null);
 
 const MemberListContextProvider = ({
 	children,
@@ -34,9 +32,7 @@ const MemberListContextProvider = ({
 export const useMemberListContext = (): MemberListContextType => {
 	const context = useContext(MemberListContext);
 	if (!context) {
-		throw new Error(
-			'useMemberListContext must be use in MemberProvider'
-		);
+		throw new Error('useMemberListContext must be use in MemberProvider');
 	}
 	return context;
 };

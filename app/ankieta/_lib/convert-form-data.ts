@@ -1,4 +1,4 @@
-import { SurveyValuesType } from '../types/survey-value-type';
+import { SurveyValuesType } from '../_types/survey-value-type';
 
 export function convertFormData(initialValues: SurveyValuesType) {
 	const formData = new FormData();
