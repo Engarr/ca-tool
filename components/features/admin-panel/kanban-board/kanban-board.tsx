@@ -64,11 +64,7 @@ const KanbanBoard = () => {
 			</ScrollArea>
 			{createPortal(
 				<DragOverlay>
-					{activeCard && (
-						<KanbanMemberCard
-							member={activeCard}
-						/>
-					)}
+					{activeCard && <KanbanMemberCard member={activeCard} />}
 				</DragOverlay>,
 				document.body
 			)}

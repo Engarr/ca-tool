@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { SurveyValuesType } from '../types/survey-value-type';
 import config from '@/config';
 
 export const getSchoolsName = async () => {
@@ -7,7 +6,7 @@ export const getSchoolsName = async () => {
 	return response.data;
 };
 
-export const postSurvey = async (sendingDate: SurveyValuesType) => {
+export const postSurvey = async (sendingDate: FormData) => {
 	try {
 		const response = await axios.post(
 			`${config.apiUrl}/ClickUp/CreateUser`,

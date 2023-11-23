@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import {
 	Container,
 	Button,
@@ -15,7 +15,7 @@ import {
 } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { calendarIcon } from '@/components/UI/icons/calendar-icon';
-import { Dropzone, FileWithPath } from '@mantine/dropzone';
+import { Dropzone } from '@mantine/dropzone';
 import { DatePickerInput } from '@mantine/dates';
 import { IMaskInput } from 'react-imask';
 import { useForm, zodResolver } from '@mantine/form';
@@ -36,6 +36,7 @@ import {
 	getSpecializationGroup,
 } from '../lib/survey-conditions';
 import { getSchoolsName, postSurvey } from '../lib/api-survey';
+import { convertFormData } from '../lib/convert-form-data';
 
 type SchoolsNameType = {
 	id_School: number;
@@ -45,6 +46,8 @@ type SchoolsNameType = {
 function UserSurvey() {
 	const openRef = useRef<() => void>(null);
 	const router = useRouter();
+
+	const [formFile, setFormFile] = useState<File>();
 
 	const { data: schoolsNameData }: UseQueryResult<SchoolsNameType[]> =
 		useQuery({
@@ -59,7 +62,7 @@ function UserSurvey() {
 		isError,
 		reset,
 	} = useMutation({
-		mutationFn: async (sendingDate: SurveyValuesType) => {
+		mutationFn: async (sendingDate: FormData) => {
 			postSurvey(sendingDate);
 		},
 	});
@@ -93,7 +96,6 @@ function UserSurvey() {
 		practicesStart: null,
 		practicesEnd: null,
 		additionalInformation: '',
-		formFile: [],
 	};
 
 	const form = useForm({
@@ -108,15 +110,16 @@ function UserSurvey() {
 		goalOfAcademyParticipation
 	);
 
-	const dropzoneText = form.values.formFile.length
-		? form.values.formFile[0]?.name
+	const dropzoneText = formFile
+		? formFile?.name
 		: 'Wybierz plik bądź przeciągnij go tutaj';
 
 	const handleSurveySubmit = async (values: SurveyValuesType) => {
-		sendSurvey({
-			...values,
-			specializationGroup,
-		});
+		const formData = convertFormData(values);
+		if (formFile) {
+			formData.append('formFile', formFile);
+		}
+		sendSurvey(formData);
 	};
 
 	const modalChildren = isPending ? (
@@ -356,8 +359,8 @@ function UserSurvey() {
 						<Dropzone
 							h={{ base: 150, sm: 100 }}
 							openRef={openRef}
-							onDrop={(file: FileWithPath[]) => {
-								form.setFieldValue('formFile', file);
+							onDrop={(file) => {
+								setFormFile(file[0]);
 							}}
 						>
 							<DropzoneChildren
