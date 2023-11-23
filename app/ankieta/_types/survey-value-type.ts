@@ -13,12 +13,10 @@ export type SurveyValuesType = {
 	proficientGraphicTools: string;
 	experience: string;
 	finishedProject: string;
-	englishLevel_Id: string;
+	english_Level: string;
 	learningGoals: string;
 	goalOfAcademyParticipation: string;
 	practicesStart: Date | null;
 	practicesEnd: Date | null;
 	additionalInformation: '';
-	file: FileWithPath[];
-	specializationGroup?: string;
 };

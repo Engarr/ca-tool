@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Paper } from '@mantine/core';
-import UserSurvey from '@/components/features/survey/user-survey/user-survey';
-import WelcomeText from '@/components/features/survey/welcome-text/welcome-text';
+import UserSurvey from '@/app/ankieta/_components/user-survey/user-survey';
+import WelcomeText from '@/app/ankieta/_components/welcome-text/welcome-text';
 
 export default function FormPage() {
 	return (

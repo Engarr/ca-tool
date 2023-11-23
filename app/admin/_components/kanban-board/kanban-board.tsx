@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import KanbanColumn from '../kanban-column/kanban-column';
-import { memberList, columnList } from '../lib/tempMember';
+import { memberList, columnList } from '../../_lib/tempMember';
 import { Flex, ScrollArea } from '@mantine/core';
 import {
 	DndContext,
@@ -11,10 +11,10 @@ import {
 	useSensors,
 } from '@dnd-kit/core';
 import { SortableContext } from '@dnd-kit/sortable';
-import { MemberType } from '../types/member-type';
+import { MemberType } from '../../_types/member-type';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { createPortal } from 'react-dom';
-import { onDragOver, onDragStart } from '../lib/dnd-function';
+import { onDragOver, onDragStart } from '../../_lib/dnd-function';
 import { useMemberListContext } from '@/context/member-list-context';
 
 const KanbanBoard = () => {
@@ -64,11 +64,7 @@ const KanbanBoard = () => {
 			</ScrollArea>
 			{createPortal(
 				<DragOverlay>
-					{activeCard && (
-						<KanbanMemberCard
-							member={activeCard}
-						/>
-					)}
+					{activeCard && <KanbanMemberCard member={activeCard} />}
 				</DragOverlay>,
 				document.body
 			)}

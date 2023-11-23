@@ -2,8 +2,8 @@ import React, { useMemo } from 'react';
 import { Card, Divider, Group, ScrollArea, Text } from '@mantine/core';
 import classes from './kanban-column.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
-import { MemberType } from '../types/member-type';
-import { KanbanColumnType } from '../types/kanban-column-type';
+import { MemberType } from '../../_types/member-type';
+import { KanbanColumnType } from '../../_types/kanban-column-type';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
 
 type KanbanColumnProps = {
@@ -12,11 +12,7 @@ type KanbanColumnProps = {
 	members: MemberType[];
 };
 
-const KanbanColumn = ({
-	column,
-	title,
-	members,
-}: KanbanColumnProps) => {
+const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 	const membersIds = useMemo(() => {
 		return members.map((member) => member.id);
 	}, [members]);
@@ -52,9 +48,7 @@ const KanbanColumn = ({
 				<SortableContext items={membersIds}>
 					{members.map((member) => (
 						<React.Fragment key={member.id}>
-							<KanbanMemberCard
-								member={member}
-							/>
+							<KanbanMemberCard member={member} />
 						</React.Fragment>
 					))}
 				</SortableContext>

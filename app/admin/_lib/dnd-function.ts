@@ -1,6 +1,6 @@
 import { DragStartEvent, DragOverEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
-import { MemberType } from '../types/member-type';
+import { MemberType } from '../_types/member-type';
 
 type OnDragStartType = {
 	event: DragStartEvent;

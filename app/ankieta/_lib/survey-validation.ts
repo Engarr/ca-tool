@@ -16,7 +16,7 @@ export const surveyValidationSchema = z
 			}),
 		specialization: z.string().min(1, 'Pole wymagane.'),
 		nameOfUniversityOrOccupation: z.string().min(1, 'Pole wymagane.'),
-		englishLevel_Id: z.string().min(1, 'Pole wymagane.'),
+		english_Level: z.string().min(1, 'Pole wymagane.'),
 		learningGoals: z.string().min(1, 'Pole wymagane.'),
 		goalOfAcademyParticipation: z.string().min(1, 'Pole wymagane.'),
 		practicesStart: z.date().nullable(),

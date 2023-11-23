@@ -3,10 +3,7 @@ import dynamic from 'next/dynamic';
 import MemberListContextProvider from '@/context/member-list-context';
 
 const KanbanBoard = dynamic(
-	() =>
-		import(
-			'../../components/features/admin-panel/kanban-board/kanban-board'
-		),
+	() => import('./_components/kanban-board/kanban-board'),
 	{
 		ssr: false,
 	}
