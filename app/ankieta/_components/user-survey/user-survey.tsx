@@ -55,7 +55,7 @@ function UserSurvey() {
 			queryFn: getSchoolsName,
 		});
 	const {
-		data: sendSurveyResponseData,
+		data: responseSendSurvey,
 		mutate: sendSurvey,
 		isPending,
 		isSuccess,
@@ -63,7 +63,8 @@ function UserSurvey() {
 		reset,
 	} = useMutation({
 		mutationFn: async (sendingDate: FormData) => {
-			postSurvey(sendingDate);
+			const response = await postSurvey(sendingDate);
+			return response;
 		},
 	});
 
@@ -72,10 +73,11 @@ function UserSurvey() {
 		: [];
 
 	useEffect(() => {
-		if (isSuccess) console.log(sendSurveyResponseData);
-
-		// router.push(`/test?testId=1&userId=`);
-	}, [isSuccess, router, sendSurveyResponseData]);
+		if (isSuccess) {
+			const { resultId, specialization } = responseSendSurvey;
+			router.push(`/test?testId=${resultId}&userId=${specialization}`);
+		}
+	}, [isSuccess, router, responseSendSurvey]);
 
 	const initialValues: SurveyValuesType = {
 		fullName: '',
@@ -140,7 +142,6 @@ function UserSurvey() {
 			</Modal>
 			<form
 				onSubmit={form.onSubmit((values) => {
-					console.log(values);
 					handleSurveySubmit(values);
 				})}
 			>
