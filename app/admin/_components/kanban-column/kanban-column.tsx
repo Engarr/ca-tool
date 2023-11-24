@@ -1,10 +1,14 @@
-import React, { useMemo } from 'react';
-import { Card, Divider, Group, ScrollArea, Text } from '@mantine/core';
+import React, { useMemo, useState } from 'react';
+import { Card, Divider, Group, ScrollArea, Select, Text } from '@mantine/core';
 import classes from './kanban-column.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { MemberType } from '../../_types/member-type';
 import { KanbanColumnType } from '../../_types/kanban-column-type';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
+import {
+	sortUsersByValue,
+	filterUsersByValue,
+} from '../../_lib/members-list-management-functions';
 
 type KanbanColumnProps = {
 	title: string;
@@ -13,9 +17,23 @@ type KanbanColumnProps = {
 };
 
 const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
+	const [sortValue, setSortValue] = useState('');
+	const [filterValue, setFilterValue] = useState('');
+
+	const filteredAndSortedMembers = useMemo(() => {
+		let newMembersList = members;
+		if (sortValue) {
+			newMembersList = sortUsersByValue(sortValue, members);
+		}
+		if (filterValue) {
+			newMembersList = filterUsersByValue(filterValue, members);
+		}
+		return newMembersList;
+	}, [members, sortValue, filterValue]);
+
 	const membersIds = useMemo(() => {
-		return members.map((member) => member.id);
-	}, [members]);
+		return filteredAndSortedMembers.map((member) => member.id);
+	}, [filteredAndSortedMembers]);
 
 	const { setNodeRef } = useSortable({
 		id: column.id,
@@ -43,10 +61,34 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 					{members.length}
 				</Text>
 			</Group>
+			<Group pb={10} pl={10}>
+				<Select
+					onChange={(e) => {
+						if (e) {
+							setSortValue(e);
+						}
+					}}
+					label='Sortuj według rangi'
+					checkIconPosition='right'
+					data={['od najniższej', 'od najwyższej']}
+					disabled={column.title === 'Projekty'}
+				/>
+				<Select
+					onChange={(e) => {
+						if (e) {
+							setFilterValue(e);
+						}
+					}}
+					label='Filtruj specjalizacje'
+					checkIconPosition='right'
+					data={['frontend', 'backend', 'inne', 'wszystkie']}
+					disabled={column.title === 'Projekty'}
+				/>
+			</Group>
 			<Divider py={5} />
 			<ScrollArea scrollbarSize={4} h={{ base: 400, sm: 600 }} pr={15}>
 				<SortableContext items={membersIds}>
-					{members.map((member) => (
+					{filteredAndSortedMembers.map((member) => (
 						<React.Fragment key={member.id}>
 							<KanbanMemberCard member={member} />
 						</React.Fragment>

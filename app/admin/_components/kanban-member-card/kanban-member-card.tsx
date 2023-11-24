@@ -78,6 +78,9 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
 					<Text c='gray' size='sm' fw={700}>
 						{member.specialization.role}
 					</Text>
+					<Text c='gray' size='sm' fw={700}>
+						{member.range}
+					</Text>
 				</Flex>
 			</Group>
 			<Group gap={0} justify='flex-end'>

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import KanbanColumn from '../kanban-column/kanban-column';
-import { memberList, columnList } from '../../_lib/tempMember';
+import { columnList } from '../../_lib/tempMember';
 import { Flex, ScrollArea } from '@mantine/core';
 import {
 	DndContext,
