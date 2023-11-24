@@ -1,0 +1,6 @@
+.memberCount {
+  padding: rem(3px) rem(15px);
+  border-radius: rem(5px);
+  border: rem(1px) solid
+    light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+}
