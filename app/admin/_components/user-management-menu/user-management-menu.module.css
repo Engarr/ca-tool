@@ -2,4 +2,21 @@
   width: rem(18px);
   height: rem(18px);
   color: var(--mantine-color-ndigo-7);
+  transition: transform 0.3s;
+}
+.listItem {
+  padding-left: 10px;
+  cursor: pointer;
+}
+.listItem:hover {
+  background-color: light-dark(
+    var(--mantine-color-gray-2),
+    var(--mantine-color-white-2)
+  );
+  transition: background-color 0.3s;
+}
+.listItem::before {
+  content: '\2022';
+  color: #007bff;
+  margin-right: 10px;
 }

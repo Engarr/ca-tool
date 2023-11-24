@@ -12,10 +12,13 @@ export const columnList: KanbanColumnType[] = [
 ];
 
 export const confirmedProjectList: ProjectType[] = [
-  { id: '0', projectTitle: 'Brak projektu' },
+  { id: '0', projectTitle: 'Nie przypisani' },
   { id: '1', projectTitle: 'ca-tool' },
   { id: '2', projectTitle: 'food-tool' },
   { id: '3', projectTitle: 'rate-tool' },
+  { id: '4', projectTitle: 'ka-tool' },
+  { id: '5', projectTitle: 'bio-tool' },
+  { id: '6', projectTitle: 'use-tool' },
 ];
 
 export const memberList: MemberType[] = [
@@ -29,7 +32,7 @@ export const memberList: MemberType[] = [
     },
     note: 'Tekst notatki',
     assignedToProjectId: '0',
-		range: 4,
+    range: 4,
   },
   {
     id: 2,
@@ -39,7 +42,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'React/Next.js',
     },
-		range: 2,
+    range: 2,
   },
   {
     id: 3,
@@ -49,7 +52,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'React/Next.js',
     },
-		range: 3,
+    range: 3,
   },
   {
     id: 17,
@@ -59,7 +62,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
-		range: 2,
+    range: 2,
   },
   {
     id: 16,
@@ -69,7 +72,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
-		range: 0,
+    range: 0,
   },
   {
     id: 18,
@@ -79,7 +82,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
-		range: 4,
+    range: 4,
   },
 
   {
@@ -90,7 +93,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
-		range: 1,
+    range: 1,
   },
   {
     id: 5,
@@ -100,7 +103,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
-		range: 1,
+    range: 1,
   },
 
   {
@@ -111,7 +114,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Grafika',
     },
-		range: 1,
+    range: 1,
   },
   {
     id: 7,
@@ -121,7 +124,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Grafika',
     },
-		range: 2,
+    range: 2,
   },
   {
     id: 19,
@@ -131,7 +134,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Grafika',
     },
-		range: 1,
+    range: 1,
   },
   {
     id: 8,
@@ -142,7 +145,7 @@ export const memberList: MemberType[] = [
       role: '.Net',
     },
     assignedToProjectId: '2',
-		range: 3,
+    range: 3,
   },
   {
     id: 9,
@@ -153,7 +156,7 @@ export const memberList: MemberType[] = [
       role: 'UI/UX',
     },
     assignedToProjectId: '3',
-		range: 4,
+    range: 4,
   },
   {
     id: 10,
@@ -163,7 +166,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
-		range: 2,
+    range: 2,
   },
   {
     id: 11,
@@ -173,7 +176,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
-		range: 2,
+    range: 2,
   },
 
   {
@@ -185,7 +188,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'PM',
     },
-		range: 2,
+    range: 2,
   },
   {
     id: 13,
@@ -195,7 +198,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Copywriting',
     },
-		range: 2,
+    range: 2,
   },
   {
     id: 14,
@@ -205,7 +208,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'UI/UX',
     },
-		range: 0,
+    range: 0,
   },
   {
     id: 15,
@@ -215,7 +218,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
-		range: 0,
+    range: 0,
   },
   {
     id: 20,
@@ -225,7 +228,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Social Media/Marketing',
     },
-		range: 0,
+    range: 0,
   },
   {
     id: 21,
@@ -235,7 +238,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Copywriting',
     },
-		range: 1,
+    range: 1,
   },
   {
     id: 22,
@@ -245,7 +248,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
-		range: 1,
+    range: 1,
   },
   {
     id: 23,
@@ -255,7 +258,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: 'Node.js',
     },
-		range: 1,
+    range: 1,
   },
   {
     id: 24,
@@ -265,7 +268,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
-		range: 2,
+    range: 2,
   },
   {
     id: 25,
@@ -276,7 +279,7 @@ export const memberList: MemberType[] = [
       role: 'Copywriting',
     },
     assignedToProjectId: '1',
-		range: 2,
+    range: 2,
   },
   {
     id: 26,
@@ -287,7 +290,7 @@ export const memberList: MemberType[] = [
       role: 'Mobile(React Native)',
     },
     assignedToProjectId: '3',
-		range: 2,
+    range: 2,
   },
   {
     id: 27,
@@ -298,7 +301,7 @@ export const memberList: MemberType[] = [
       role: 'Social Media/Marketing',
     },
     assignedToProjectId: '',
-		range: 3,
+    range: 3,
   },
   {
     id: 28,
@@ -308,6 +311,6 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: 'Node.js',
     },
-		range: 4,
+    range: 4,
   },
 ];
