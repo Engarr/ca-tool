@@ -9,7 +9,7 @@ type ColumntTitleType = {
 const ColumntTitle = ({ title, memberCount }: ColumntTitleType) => {
   return (
     <>
-      <Group px={8} align={'center'} justify='space-between' mb={10}>
+      <Group px={8} align={'center'} justify='space-between' >
         <Text fw={600} size='xl'>
           {title}
         </Text>

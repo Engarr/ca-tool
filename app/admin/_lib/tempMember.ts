@@ -24,66 +24,73 @@ export const memberList: MemberType[] = [
     columnId: '4',
     fullName: 'Andrzej Nowicki',
     specialization: {
-      domain: 'Frontednd',
+      domain: 'Frontend',
       role: 'React/Next.js',
     },
     note: 'Tekst notatki',
     assignedToProjectId: '0',
+		range: 4,
   },
   {
     id: 2,
-    columnId: '1',
+    columnId: '2',
     fullName: 'Jacek Gregorczyk',
     specialization: {
-      domain: 'Frontednd',
+      domain: 'Frontend',
       role: 'React/Next.js',
     },
+		range: 2,
   },
   {
     id: 3,
-    columnId: '1',
+    columnId: '2',
     fullName: 'Przemek Król',
     specialization: {
-      domain: 'Frontednd',
+      domain: 'Frontend',
       role: 'React/Next.js',
     },
+		range: 3,
   },
   {
     id: 17,
     columnId: '1',
     fullName: 'Przemek Tracz',
     specialization: {
-      domain: 'Frontednd',
+      domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
+		range: 2,
   },
   {
     id: 16,
     columnId: '1',
     fullName: 'Przemek Michałowicz',
     specialization: {
-      domain: 'Frontednd',
+      domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
+		range: 0,
   },
   {
     id: 18,
     columnId: '1',
     fullName: 'Piotr Kowalski',
     specialization: {
-      domain: 'Frontednd',
+      domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
+		range: 4,
   },
 
   {
     id: 4,
-    columnId: '2',
+    columnId: '1',
     fullName: 'Anna Nowak',
     specialization: {
       domain: 'Backend',
       role: '.Net',
     },
+		range: 1,
   },
   {
     id: 5,
@@ -93,6 +100,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
+		range: 1,
   },
 
   {
@@ -103,6 +111,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Grafika',
     },
+		range: 1,
   },
   {
     id: 7,
@@ -112,15 +121,17 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Grafika',
     },
+		range: 2,
   },
   {
     id: 19,
-    columnId: '3',
+    columnId: '1',
     fullName: 'Michał Kuternoga',
     specialization: {
       domain: 'Others',
       role: 'Grafika',
     },
+		range: 1,
   },
   {
     id: 8,
@@ -131,6 +142,7 @@ export const memberList: MemberType[] = [
       role: '.Net',
     },
     assignedToProjectId: '2',
+		range: 3,
   },
   {
     id: 9,
@@ -141,15 +153,17 @@ export const memberList: MemberType[] = [
       role: 'UI/UX',
     },
     assignedToProjectId: '3',
+		range: 4,
   },
   {
     id: 10,
     columnId: '5',
     fullName: 'Karolina Wójcik',
     specialization: {
-      domain: 'Frontednd',
+      domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
+		range: 2,
   },
   {
     id: 11,
@@ -159,6 +173,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
+		range: 2,
   },
 
   {
@@ -170,6 +185,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'PM',
     },
+		range: 2,
   },
   {
     id: 13,
@@ -179,6 +195,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Copywriting',
     },
+		range: 2,
   },
   {
     id: 14,
@@ -188,6 +205,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'UI/UX',
     },
+		range: 0,
   },
   {
     id: 15,
@@ -197,6 +215,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
+		range: 0,
   },
   {
     id: 20,
@@ -206,6 +225,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Social Media/Marketing',
     },
+		range: 0,
   },
   {
     id: 21,
@@ -215,15 +235,17 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Copywriting',
     },
+		range: 1,
   },
   {
     id: 22,
-    columnId: '2',
+    columnId: '1',
     fullName: 'Jacek Placek',
     specialization: {
       domain: 'Backend',
       role: '.Net',
     },
+		range: 1,
   },
   {
     id: 23,
@@ -233,6 +255,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: 'Node.js',
     },
+		range: 1,
   },
   {
     id: 24,
@@ -242,6 +265,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
+		range: 2,
   },
   {
     id: 25,
@@ -252,16 +276,18 @@ export const memberList: MemberType[] = [
       role: 'Copywriting',
     },
     assignedToProjectId: '1',
+		range: 2,
   },
   {
     id: 26,
     columnId: '4',
     fullName: 'Mikołaj Kopernik',
     specialization: {
-      domain: 'Frontednd',
+      domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
     assignedToProjectId: '3',
+		range: 2,
   },
   {
     id: 27,
@@ -272,6 +298,7 @@ export const memberList: MemberType[] = [
       role: 'Social Media/Marketing',
     },
     assignedToProjectId: '',
+		range: 3,
   },
   {
     id: 28,
@@ -281,5 +308,6 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: 'Node.js',
     },
+		range: 4,
   },
 ];

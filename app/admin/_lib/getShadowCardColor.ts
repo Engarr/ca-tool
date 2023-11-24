@@ -1,6 +1,6 @@
 export const getCardShadowColor = (domain: string) => {
   const color =
-    domain === 'Frontednd'
+    domain === 'Frontend'
       ? '--mantine-color-lime-5'
       : domain === 'Backend'
       ? '--mantine-color-indigo-8'
