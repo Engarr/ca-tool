@@ -8,4 +8,5 @@ export type MemberType = {
     role: string;
   };
   note?: string;
+  assignedToProjectId?: string | number | null;
 };
