@@ -15,6 +15,7 @@ import { MemberType } from '../../_types/member-type';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { createPortal } from 'react-dom';
 import { onDragOver, onDragStart } from '../../_lib/dnd-function';
+
 import { useMemberListContext } from '@/context/member-list-context';
 
 const KanbanBoard = () => {
@@ -29,10 +30,14 @@ const KanbanBoard = () => {
       },
     })
   );
+  const onDragEnd = () => {
+    setActiveCard(null);
+  };
 
   return (
     <DndContext
       sensors={sensors}
+      onDragEnd={onDragEnd}
       onDragStart={(event) => {
         onDragStart({ event, setActiveCard });
       }}

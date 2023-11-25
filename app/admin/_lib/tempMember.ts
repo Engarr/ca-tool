@@ -12,13 +12,12 @@ export const columnList: KanbanColumnType[] = [
 ];
 
 export const confirmedProjectList: ProjectType[] = [
-  { id: '0', projectTitle: 'Nie przypisani' },
-  { id: '1', projectTitle: 'ca-tool' },
-  { id: '2', projectTitle: 'food-tool' },
-  { id: '3', projectTitle: 'rate-tool' },
-  { id: '4', projectTitle: 'ka-tool' },
-  { id: '5', projectTitle: 'bio-tool' },
-  { id: '6', projectTitle: 'use-tool' },
+  { id: 'notAssigned', projectTitle: 'Nie przypisani' },
+  { id: 'ca-tool', projectTitle: 'ca-tool' },
+  { id: 'food-tool', projectTitle: 'food-tool' },
+  { id: 'rate-tool', projectTitle: 'rate-tool' },
+  { id: 'bio-tool', projectTitle: 'bio-tool' },
+  { id: 'bio-tool2', projectTitle: 'bio-tool2' },
 ];
 
 export const memberList: MemberType[] = [
@@ -31,7 +30,7 @@ export const memberList: MemberType[] = [
       role: 'React/Next.js',
     },
     note: 'Tekst notatki',
-    assignedToProjectId: '0',
+    assignedToProjectId: 'notAssigned',
     range: 4,
   },
   {
@@ -144,7 +143,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
-    assignedToProjectId: '2',
+    assignedToProjectId: 'notAssigned',
     range: 3,
   },
   {
@@ -155,7 +154,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'UI/UX',
     },
-    assignedToProjectId: '3',
+    assignedToProjectId: 'notAssigned',
     range: 4,
   },
   {
@@ -278,7 +277,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Copywriting',
     },
-    assignedToProjectId: '1',
+    assignedToProjectId: 'notAssigned',
     range: 2,
   },
   {
@@ -289,7 +288,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
-    assignedToProjectId: '3',
+    assignedToProjectId: 'notAssigned',
     range: 2,
   },
   {
@@ -300,7 +299,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Social Media/Marketing',
     },
-    assignedToProjectId: '',
+    assignedToProjectId: 'notAssigned',
     range: 3,
   },
   {

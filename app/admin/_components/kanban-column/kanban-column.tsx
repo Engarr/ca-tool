@@ -8,7 +8,6 @@ import {
   Select,
   Text,
   Collapse,
-  Flex,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { IconArrowBadgeDown, IconArrowBadgeUp } from '@tabler/icons-react';
@@ -46,6 +45,8 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
   const membersIds = useMemo(() => {
     return filteredAndSortedMembers.map((member) => member.id);
   }, [filteredAndSortedMembers]);
+
+  const projectBoxIds = confirmedProjectList.map((project) => project.id);
 
   const { setNodeRef } = useSortable({
     id: column.id,
@@ -114,7 +115,7 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
       <Divider py={5} />
       <ScrollArea scrollbarSize={6} pr={15} mah={650}>
         {title === 'Projekty' ? (
-          <>
+          <SortableContext items={projectBoxIds}>
             {confirmedProjectList.map((project) => (
               <React.Fragment key={project.id}>
                 <ProjectBox
@@ -126,7 +127,7 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
                 />
               </React.Fragment>
             ))}
-          </>
+          </SortableContext>
         ) : (
           <SortableContext items={membersIds}>
             {filteredAndSortedMembers.map((member) => (

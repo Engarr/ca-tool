@@ -46,15 +46,12 @@ export const onDragOver = ({
     setNewMemberList((memberList) => {
       const activeIndex = memberList.findIndex((m) => m.id === active.id);
       const overIndex = memberList.findIndex((m) => m.id === over.id);
-      console.log('activeIndex', activeIndex);
-      console.log('overIndex', overIndex);
+      //If the user is in a different column, assigns a column the same as another user in a given column and the same project
       if (memberList[activeIndex].columnId != memberList[overIndex].columnId) {
         newMemberList[activeIndex].columnId = newMemberList[overIndex].columnId;
         newMemberList[activeIndex].assignedToProjectId =
           newMemberList[overIndex].assignedToProjectId || '';
-      } else if (
-        memberList[activeIndex].columnId === memberList[overIndex].columnId
-      ) {
+      } else {
         newMemberList[activeIndex].assignedToProjectId =
           newMemberList[overIndex].assignedToProjectId;
       }
@@ -68,12 +65,22 @@ export const onDragOver = ({
     setNewMemberList((memberList) => {
       const activeIndex = memberList.findIndex((m) => m.id === activeId);
       memberList[activeIndex].columnId = overId;
-      memberList;
+
+      // Dropping member into project column but do not in to specific project so auto asigne to 'not assigned to the project'
+      if (over.data.current?.column.title === 'Projekty') {
+        memberList[activeIndex].assignedToProjectId = '0';
+      }
+
+      // Dropping member out of projectBox and remove assignedToProjectId
+      if (over.data.current?.column.title !== 'Projekty') {
+        memberList[activeIndex].assignedToProjectId = '';
+      }
+
       return arrayMove(memberList, activeIndex, activeIndex);
     });
   }
 
-  // Im dropping a Member over a ProjectBox but not over a Column
+  // Im dropping a Member in to empty ProjectBox
 
   if (isActiveAMember && isOverAProjectBox) {
     setNewMemberList((memberList) => {
