@@ -1,5 +1,12 @@
-.arrowIcon {
+.filterText {
 	cursor: pointer;
+}
+.arrowIconBox {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5rem;
 }
 .overColumn {
 	background-color: var(--mantine-color-gray-4);

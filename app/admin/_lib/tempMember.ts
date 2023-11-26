@@ -31,7 +31,7 @@ export const memberList: MemberType[] = [
     },
     note: 'Tekst notatki',
     assignedToProjectId: 'notAssigned',
-    range: 4,
+    range: 3,
   },
   {
     id: 2,
@@ -81,7 +81,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
-    range: 4,
+    range: 3,
   },
 
   {
@@ -155,7 +155,7 @@ export const memberList: MemberType[] = [
       role: 'UI/UX',
     },
     assignedToProjectId: 'notAssigned',
-    range: 4,
+    range: 3,
   },
   {
     id: 10,
@@ -310,6 +310,6 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: 'Node.js',
     },
-    range: 4,
+    range: 3,
   },
 ];

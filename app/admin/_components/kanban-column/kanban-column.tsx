@@ -33,8 +33,11 @@ type KanbanColumnProps = {
 
 const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 	const { setNewMemberList } = useMemberListContext();
-	const [sortValue, setSortValue] = useState('');
-	const [filterValue, setFilterValue] = useState('');
+	const [sortFilterValues, setSortFilterValue] = useState({
+		sortValue: '',
+		filterRangValue: '',
+	});
+
 	const [opened, { toggle }] = useDisclosure(false);
 
 	const [{ isOver }, drop] = useDrop(() => ({
@@ -63,11 +66,18 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 
 	const filteredAndSortedMembers = useMemo(() => {
 		let newMembersList = members;
-		if (sortValue) newMembersList = sortUsersByValue(sortValue, members);
-		if (filterValue)
-			newMembersList = filterUsersByValue(filterValue, members);
+		if (sortFilterValues.sortValue)
+			newMembersList = sortUsersByValue(
+				sortFilterValues.sortValue,
+				members
+			);
+		if (sortFilterValues.filterRangValue)
+			newMembersList = filterUsersByValue(
+				sortFilterValues.filterRangValue,
+				members
+			);
 		return newMembersList;
-	}, [members, sortValue, filterValue]);
+	}, [members, sortFilterValues]);
 
 	return (
 		<Card
@@ -83,46 +93,58 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 			<ColumntTitle memberCount={members.length} title={column.title} />
 			<Box mr={15}>
 				<Group justify='end' mb={10} onClick={toggle}>
-					<Text
-						size='xs'
-						mt={'xs'}
-						fw={500}
-						className={classes.arrowIcon}
-					>
+					<Text size='xs' fw={500} className={classes.filterText}>
 						Pokaż filtry
 					</Text>
 					{opened ? (
-						<IconArrowBadgeUp
-							className={classes.arrowIcon}
-							stroke={1.5}
-							size={15}
-						/>
+						<Box className={classes.arrowIconBox}>
+							<IconArrowBadgeUp
+								className={classes.arrowIcon}
+								stroke={1.5}
+								size={18}
+							/>
+						</Box>
 					) : (
-						<IconArrowBadgeDown
-							className={classes.arrowIcon}
-							stroke={1.5}
-							size={15}
-						/>
+						<Box className={classes.arrowIconBox}>
+							<IconArrowBadgeDown
+								className={classes.arrowIcon}
+								stroke={1.5}
+								size={18}
+							/>
+						</Box>
 					)}
 				</Group>
-
 				<Collapse pb={10} pl={10} in={opened}>
 					<Select
 						onChange={(e) => {
 							if (e) {
-								setSortValue(e);
+								setSortFilterValue((prev) => {
+									return {
+										...prev,
+										sortValue: e,
+									};
+								});
 							}
 						}}
 						mb={'xs'}
 						placeholder='Wybierz opcję'
-						label='Sortuj według rangi'
+						label='Sortuj według'
 						checkIconPosition='right'
-						data={['Od najniższej', 'Od najwyższej']}
+						data={[
+							'Od najniższej rangi',
+							'Od najwyższej rangi',
+							'Alfabetycznie po nazwisku',
+						]}
 					/>
 					<Select
 						onChange={(e) => {
 							if (e) {
-								setFilterValue(e);
+								setSortFilterValue((prev) => {
+									return {
+										...prev,
+										filterRangValue: e,
+									};
+								});
 							}
 						}}
 						placeholder='Wybierz opcję'
