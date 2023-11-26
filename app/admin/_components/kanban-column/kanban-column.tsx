@@ -8,9 +8,14 @@ import {
 	Select,
 	Text,
 	Collapse,
+	Flex,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconArrowBadgeDown, IconArrowBadgeUp } from '@tabler/icons-react';
+import {
+	IconArrowBadgeDown,
+	IconArrowBadgeUp,
+	IconX,
+} from '@tabler/icons-react';
 import classes from './kanban-column.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { Id, MemberType } from '../../_types/member-type';
@@ -98,22 +103,39 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 					</Text>
 					{opened ? (
 						<Box className={classes.arrowIconBox}>
-							<IconArrowBadgeUp
-								className={classes.arrowIcon}
-								stroke={1.5}
-								size={18}
-							/>
+							<IconArrowBadgeUp stroke={1.5} size={18} />
 						</Box>
 					) : (
 						<Box className={classes.arrowIconBox}>
-							<IconArrowBadgeDown
-								className={classes.arrowIcon}
-								stroke={1.5}
-								size={18}
-							/>
+							<IconArrowBadgeDown stroke={1.5} size={18} />
 						</Box>
 					)}
 				</Group>
+				{(sortFilterValues.filterRangValue ||
+					sortFilterValues.sortValue) &&
+					!opened && (
+						<Flex align='center' mb={5}>
+							<Text
+								size='xs'
+								fw={500}
+								className={classes.filterMethod}
+							>
+								{`${sortFilterValues.sortValue},
+								${sortFilterValues.filterRangValue}`}
+							</Text>
+							<IconX
+								className={classes.cleanFilersIcon}
+								size={20}
+								onClick={() => {
+									setSortFilterValue({
+										sortValue: '',
+										filterRangValue: '',
+									});
+								}}
+							/>
+						</Flex>
+					)}
+
 				<Collapse pb={10} pl={10} in={opened}>
 					<Select
 						onChange={(e) => {
