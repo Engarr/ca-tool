@@ -28,6 +28,9 @@ const AdminNavigation = () => {
             <Link href='/admin' className={classes.link}>
               Uczestnicy
             </Link>
+            <Link href='/admin/projekty' className={classes.link}>
+              Projekty
+            </Link>
             <Link href='/admin/grupy' className={classes.link}>
               Grupy
             </Link>

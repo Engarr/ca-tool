@@ -1,0 +1,17 @@
+.filterText {
+	cursor: pointer;
+}
+.arrowIconBox {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.5rem;
+}
+.cleanFilersIcon {
+	cursor: pointer;
+	color: blue;
+}
+.filterMethod {
+	color: blue;
+}

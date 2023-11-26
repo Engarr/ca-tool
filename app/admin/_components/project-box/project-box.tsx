@@ -6,6 +6,7 @@ import ColumntTitle from '../kanban-column-title/columnt-title';
 import classes from './project-box.module.css';
 import { useDrop } from 'react-dnd';
 import { useMemberListContext } from '@/context/member-list-context';
+import { addMemberToProject } from '../../_lib/dnd-functions';
 
 type ProjectBoxType = {
 	projectBox: ProjectType;
@@ -22,27 +23,17 @@ const ProjectBox = ({
 
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'Member',
-		drop: (member: { id: Id }) => addMemberToProject(member.id),
+		drop: (member: { id: Id }) =>
+			addMemberToProject(
+				member.id,
+				columnId,
+				projectBox.id,
+				setNewMemberList
+			),
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
 		}),
 	}));
-
-	const addMemberToProject = (memberId: Id) => {
-		setNewMemberList((memberList) => {
-			return memberList.map((m) => {
-				if (m.id === memberId) {
-					return {
-						...m,
-						columnId: columnId,
-						assignedToProjectId: projectBox.id,
-					};
-				} else {
-					return m;
-				}
-			});
-		});
-	};
 
 	return (
 		<Card
