@@ -25,22 +25,6 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
     }),
   }));
 
-  if (isDragging) {
-    return (
-      <Paper
-        radius='md'
-        ref={drag}
-        withBorder
-        p='lg'
-        mb={'xs'}
-        opacity={0.7}
-        className={classes.cardContainer}
-        style={{
-          boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
-        }}
-      />
-    );
-  }
   return (
     <Paper
       radius='md'
@@ -48,7 +32,9 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
       withBorder
       p='lg'
       mb={'xs'}
-      className={classes.cardContainer}
+      className={`${classes.cardContainer} ${
+        isDragging ? classes.isDragging : ''
+      }`}
       style={{
         boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
       }}>
