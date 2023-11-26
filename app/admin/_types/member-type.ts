@@ -9,5 +9,5 @@ export type MemberType = {
 	};
 	range: number;
 	note?: string;
-  assignedToProjectId?: string | number | null;
+	assignedToProjectId?: string | number | null;
 };
