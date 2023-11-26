@@ -1,3 +1,7 @@
 .arrowIcon {
 	cursor: pointer;
 }
+.overColumn {
+	background-color: var(--mantine-color-gray-4);
+	transition: background-color 0.2s;
+}
