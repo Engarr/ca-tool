@@ -9,17 +9,17 @@ import { useMemberListContext } from '@/context/member-list-context';
 import { addMemberToProject } from '../../_lib/dnd-functions';
 
 type ProjectBoxType = {
-	projectBox: ProjectType;
-	projectMembers: MemberType[];
-	columnId: Id;
+  projectBox: ProjectType;
+  projectMembers: MemberType[];
+  columnId: Id;
 };
 
 const ProjectBox = ({
-	projectMembers,
-	projectBox,
-	columnId,
+  projectMembers,
+  projectBox,
+  columnId,
 }: ProjectBoxType) => {
-	const { setNewMemberList } = useMemberListContext();
+  const { setNewMemberList } = useMemberListContext();
 
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'Member',
@@ -35,37 +35,36 @@ const ProjectBox = ({
 		}),
 	}));
 
-	return (
-		<Card
-			withBorder
-			mih={100}
-			className={` ${isOver ? classes.overProject : ''}`}
-			mb={'md'}
-			ref={drop}
-		>
-			<ColumntTitle
-				memberCount={projectMembers.length}
-				title={projectBox.projectTitle}
-			/>
-			<Divider py={5} />
-			<ScrollArea pr={15} scrollbarSize={4}>
-				<Group gap={0}>
-					{projectMembers
-						.filter(
-							(member) =>
-								member.assignedToProjectId === projectBox.id ||
-								member.assignedToProjectId === null
-						)
-						.map((filteredMember) => (
-							<KanbanMemberCard
-								key={filteredMember.id}
-								member={filteredMember}
-							/>
-						))}
-				</Group>
-			</ScrollArea>
-		</Card>
-	);
+  return (
+    <Card
+      withBorder
+      mih={100}
+      className={` ${isOver ? classes.overProject : ''}`}
+      mb={'md'}
+      ref={drop}>
+      <ColumntTitle
+        memberCount={projectMembers.length}
+        title={projectBox.projectTitle}
+      />
+      <Divider py={5} />
+      <ScrollArea pr={15} scrollbarSize={4}>
+        <Group gap={0}>
+          {projectMembers
+            .filter(
+              (member) =>
+                member.assignedToProjectId === projectBox.id ||
+                member.assignedToProjectId === null
+            )
+            .map((filteredMember) => (
+              <KanbanMemberCard
+                key={filteredMember.id}
+                member={filteredMember}
+              />
+            ))}
+        </Group>
+      </ScrollArea>
+    </Card>
+  );
 };
 
 export default ProjectBox;
