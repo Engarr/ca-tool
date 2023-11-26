@@ -9,69 +9,72 @@ import { useDrag } from 'react-dnd';
 import { getRangTitle } from '../../_lib/getRangTitle';
 
 type KanbanMemberCardType = {
-	member: MemberType;
+  member: MemberType;
 };
 
 const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
-	const { fullName, note, id } = member;
-	const cardBackgroundColor = getCardShadowColor(
-		member.specialization.domain
-	);
-	const rangTitle = getRangTitle(member.range);
+  const { fullName, note, id } = member;
+  const cardBackgroundColor = getCardShadowColor(member.specialization.domain);
+  const rangTitle = getRangTitle(member.range);
 
-	const [{ isDragging }, drag] = useDrag(() => ({
-		type: 'Member',
-		item: { id },
-		collect: (monitor) => ({
-			isDragging: !!monitor.isDragging(),
-		}),
-	}));
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'Member',
+    item: { id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
 
-	return (
-		<Paper
-			radius='md'
-			ref={drag}
-			withBorder
-			p='lg'
-			mb={'xs'}
-			className={`${classes.cardContainer} ${
-				isDragging ? classes.isDraggingCard : ''
-			}`}
-			style={{
-				boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
-			}}
-		>
-			<Group gap={3}>
-				<Group p={2}>
-					<IconGripVertical
-						className={classes.grapIcon}
-						stroke={1.5}
-						size={20}
-					/>
-				</Group>
-				<Flex
-					direction={'column'}
-					w={200}
-					className={classes.userInfoBox}
-				>
-					<Text fw={500}>{fullName}</Text>
-					<Text c='gray' size='sm' fw={700}>
-						{member.specialization.role}
-					</Text>
-					<Text c='gray' size='sm' fw={700}>
-						{rangTitle}
-					</Text>
-				</Flex>
-			</Group>
-			<Group gap={0} justify='flex-end'>
-				<UserManagementMenu
-					memberId={id}
-					fullName={fullName}
-					note={note}
-				/>
-			</Group>
-		</Paper>
-	);
+  if (isDragging) {
+    return (
+      <Paper
+        radius='md'
+        ref={drag}
+        withBorder
+        p='lg'
+        mb={'xs'}
+        opacity={0.7}
+        className={classes.cardContainer}
+        style={{
+          boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
+        }}
+      />
+    );
+  }
+  return (
+    <Paper
+      radius='md'
+      ref={drag}
+      withBorder
+      p='lg'
+      mb={'xs'}
+      className={classes.cardContainer}
+      style={{
+        boxShadow: `inset 20px 0 2px var(${cardBackgroundColor})`,
+      }}>
+      <Group gap={3}>
+        <Group p={2}>
+          <IconGripVertical
+            className={classes.grapIcon}
+            stroke={1.5}
+            size={20}
+          />
+        </Group>
+        <Flex direction={'column'} w={200} className={classes.userInfoBox}>
+          <Text fw={500}>{fullName}</Text>
+          <Text c='gray' size='sm' fw={700}>
+            {member.specialization.role}
+          </Text>
+          <Text c='gray' size='sm' fw={700}>
+            {rangTitle}
+          </Text>
+        </Flex>
+      </Group>
+      <Group gap={0} justify='flex-end'>
+        <UserManagementMenu memberId={id} fullName={fullName} note={note} />
+      </Group>
+    </Paper>
+  );
 };
 
 export default KanbanMemberCard;

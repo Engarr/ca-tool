@@ -5,6 +5,7 @@
   width: 100%;
   height: rem(80px);
 }
+
 .grapIcon {
   border-radius: rem(5px);
   cursor: grab;
@@ -22,12 +23,4 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-}
-.isDraggingCard {
-  width: 100%;
-  height: rem(80px);
-  opacity: 0.5;
-  margin-bottom: rem(5px);
-  background-color: var(--mantine-color-gray-0);
-  border: 1px solid var(--mantine-color-blue-2);
 }
