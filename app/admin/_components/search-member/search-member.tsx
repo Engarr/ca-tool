@@ -41,7 +41,8 @@ const SearchMember = () => {
           <Autocomplete
             label='Wyszukaj użytkownika:'
             placeholder='Wprowadź dane użytkownika'
-            w={270}
+            w={200}
+            size='xs'
             onChange={setSearchValue}
             data={
               hasSearchResults
