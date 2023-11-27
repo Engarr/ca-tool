@@ -1,12 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Card, Divider, ScrollArea } from '@mantine/core';
+import { Card, Divider, ScrollArea, Group } from '@mantine/core';
 import classes from './kanban-column.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { Id, MemberType } from '../../_types/member-type';
 import { KanbanColumnType } from '../../_types/kanban-column-type';
 import {
-  sortUsersByValue,
-  filterUsersByValue,
+	sortUsersByValue,
+	filterUsersByValue,
 } from '../../_lib/members-list-management-functions';
 import { confirmedProjectList } from '../../_lib/tempMember';
 import ProjectBox from '../project-box/project-box';
@@ -17,9 +17,9 @@ import ColumnFilterMenu from '../column-filter-menu/column-filter-menu';
 import { addMemberToColumn } from '../../_lib/dnd-functions';
 
 type KanbanColumnProps = {
-  title: string;
-  column: KanbanColumnType;
-  members: MemberType[];
+	title: string;
+	column: KanbanColumnType;
+	members: MemberType[];
 };
 
 const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
@@ -90,13 +90,13 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 						))}
 					</>
 				) : (
-					<>
+					<Group gap={10}>
 						{filteredAndSortedMembers.map((member) => (
 							<React.Fragment key={member.id}>
 								<KanbanMemberCard member={member} />
 							</React.Fragment>
 						))}
-					</>
+					</Group>
 				)}
 			</ScrollArea>
 		</Card>

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Card, Divider, ScrollArea } from '@mantine/core';
+import { Card, Divider, ScrollArea, Group } from '@mantine/core';
 import classes from './kanban-column-project.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { Id, MemberType } from '../../_types/member-type';
@@ -71,11 +71,13 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
 			/>
 			<Divider py={5} />
 			<ScrollArea scrollbarSize={6} pr={15} mah={650}>
-				{filteredAndSortedMembers.map((member) => (
-					<React.Fragment key={member.id}>
-						<KanbanMemberCard member={member} />
-					</React.Fragment>
-				))}
+				<Group gap={10}>
+					{filteredAndSortedMembers.map((member) => (
+						<React.Fragment key={member.id}>
+							<KanbanMemberCard member={member} />
+						</React.Fragment>
+					))}
+				</Group>
 			</ScrollArea>
 		</Card>
 	);
