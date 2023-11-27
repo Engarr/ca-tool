@@ -57,7 +57,7 @@ const ProjectBox = ({
       />
       <Divider py={5} />
       <ScrollArea pr={15} scrollbarSize={4}>
-        <Group gap={0}>
+        <Group gap={10}>
           {projectMembers
             .filter(
               (member) =>

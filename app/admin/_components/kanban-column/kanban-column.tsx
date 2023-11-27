@@ -89,6 +89,7 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
       radius='md'
       withBorder
       padding='xs'
+      mt={20}
       className={`${isOver ? classes.overColumn : ''}`}
       w={title === 'Projekty' ? 500 : 400}>
       <ColumntTitle memberCount={members.length} title={column.title} />
@@ -184,13 +185,13 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
             ))}
           </>
         ) : (
-          <>
+          <Group gap={10}>
             {filteredAndSortedMembers.map((member) => (
               <React.Fragment key={member.id}>
                 <KanbanMemberCard member={member} />
               </React.Fragment>
             ))}
-          </>
+          </Group>
         )}
       </ScrollArea>
     </Card>
