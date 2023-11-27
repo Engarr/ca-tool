@@ -126,7 +126,7 @@ const UserManagementMenu = ({
                           onClick={() =>
                             handlerMoveUserToSelectedProject(project.id, col.id)
                           }>
-                          {project.projectTitle}
+                          {project.title}
                         </Text>
                       ))}
                     </ScrollArea>

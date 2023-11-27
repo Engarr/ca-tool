@@ -12,12 +12,11 @@ export const columnList: KanbanColumnType[] = [
 ];
 
 export const confirmedProjectList: ProjectType[] = [
-  { id: 'notAssigned', projectTitle: 'Nie przypisani' },
-  { id: 'ca-tool', projectTitle: 'ca-tool' },
-  { id: 'food-tool', projectTitle: 'food-tool' },
-  { id: 'rate-tool', projectTitle: 'rate-tool' },
-  { id: 'bio-tool', projectTitle: 'bio-tool' },
-  { id: 'bio-tool2', projectTitle: 'bio-tool2' },
+  { id: '1', title: 'Nie przypisani' },
+  { id: '2', title: 'ca-tool' },
+  { id: '3', title: 'food-tool' },
+  { id: '4', title: 'rate-tool' },
+  { id: '5', title: 'bio-tool' },
 ];
 
 export const memberList: MemberType[] = [
@@ -30,7 +29,7 @@ export const memberList: MemberType[] = [
       role: 'React/Next.js',
     },
     note: 'Tekst notatki',
-    assignedToProjectId: 'notAssigned',
+    assignedToProjectId: '1',
     range: 3,
   },
   {
@@ -143,7 +142,7 @@ export const memberList: MemberType[] = [
       domain: 'Backend',
       role: '.Net',
     },
-    assignedToProjectId: 'notAssigned',
+    assignedToProjectId: '1',
     range: 3,
   },
   {
@@ -154,7 +153,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'UI/UX',
     },
-    assignedToProjectId: 'notAssigned',
+    assignedToProjectId: '1',
     range: 3,
   },
   {
@@ -277,7 +276,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Copywriting',
     },
-    assignedToProjectId: 'notAssigned',
+    assignedToProjectId: '1',
     range: 2,
   },
   {
@@ -288,7 +287,7 @@ export const memberList: MemberType[] = [
       domain: 'Frontend',
       role: 'Mobile(React Native)',
     },
-    assignedToProjectId: 'notAssigned',
+    assignedToProjectId: '1',
     range: 2,
   },
   {
@@ -299,7 +298,7 @@ export const memberList: MemberType[] = [
       domain: 'Others',
       role: 'Social Media/Marketing',
     },
-    assignedToProjectId: 'notAssigned',
+    assignedToProjectId: '1',
     range: 3,
   },
   {

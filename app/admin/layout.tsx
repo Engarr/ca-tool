@@ -1,12 +1,13 @@
 import React from 'react';
 import AdminNavigation from '@/app/admin/_components/admin-navigation/admin-navigation';
+import MemberListContextProvider from '@/context/member-list-context';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<div>
+		<MemberListContextProvider>
 			<AdminNavigation />
 			{children}
-		</div>
+		</MemberListContextProvider>
 	);
 };
 
