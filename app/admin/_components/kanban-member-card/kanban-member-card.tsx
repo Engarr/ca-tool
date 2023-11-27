@@ -31,7 +31,6 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
       ref={drag}
       withBorder
       p='lg'
-      mb={'xs'}
       className={`${classes.cardContainer} ${
         isDragging ? classes.isDragging : ''
       }`}
