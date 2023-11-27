@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Card, Divider, ScrollArea, Group } from '@mantine/core';
-import classes from './kanban-column.module.css';
+import classes from './kanban-column-project.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { Id, MemberType } from '../../_types/member-type';
 import { KanbanColumnType } from '../../_types/kanban-column-type';
@@ -8,13 +8,11 @@ import {
 	sortUsersByValue,
 	filterUsersByValue,
 } from '../../_lib/members-list-management-functions';
-import { confirmedProjectList } from '../../_lib/tempMember';
-import ProjectBox from '../project-box/project-box';
 import { useDrop } from 'react-dnd';
 import { useMemberListContext } from '@/context/member-list-context';
 import ColumnTitle from '../kanban-column-title/columnt-title';
 import ColumnFilterMenu from '../column-filter-menu/column-filter-menu';
-import { addMemberToColumn } from '../../_lib/dnd-functions';
+import { addMemberToProject } from '../../_lib/dnd-functions';
 
 type KanbanColumnProps = {
 	title: string;
@@ -22,7 +20,7 @@ type KanbanColumnProps = {
 	members: MemberType[];
 };
 
-const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
+const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
 	const { setNewMemberList } = useMemberListContext();
 	const [sortFilterValues, setSortFilterValue] = useState<{
 		sortValue: string | null;
@@ -34,7 +32,7 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 	const [{ isOver }, drop] = useDrop(() => ({
 		accept: 'Member',
 		drop: (member: { id: Id }) =>
-			addMemberToColumn(member.id, column.id, setNewMemberList),
+			addMemberToProject(member.id, column.id, setNewMemberList),
 		collect: (monitor) => ({
 			isOver: !!monitor.isOver(),
 		}),
@@ -57,14 +55,14 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 
 	return (
 		<Card
-			ref={title !== 'Projekty' ? drop : null}
+			ref={drop}
 			key={title}
 			shadow='md'
 			radius='md'
 			withBorder
 			padding='xs'
 			className={`${isOver ? classes.overColumn : ''}`}
-			w={title === 'Projekty' ? 500 : 400}
+			w={400}
 		>
 			<ColumnTitle memberCount={members.length} title={column.title} />
 			<ColumnFilterMenu
@@ -73,34 +71,16 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
 			/>
 			<Divider py={5} />
 			<ScrollArea scrollbarSize={6} pr={15} mah={650}>
-				{title === 'Projekty' ? (
-					<>
-						{confirmedProjectList.map((project) => (
-							<React.Fragment key={project.id}>
-								<ProjectBox
-									projectMembers={filteredAndSortedMembers.filter(
-										(member) =>
-											member.assignedToProjectId ===
-											project.id
-									)}
-									projectBox={project}
-									columnId={column.id}
-								/>
-							</React.Fragment>
-						))}
-					</>
-				) : (
-					<Group gap={10}>
-						{filteredAndSortedMembers.map((member) => (
-							<React.Fragment key={member.id}>
-								<KanbanMemberCard member={member} />
-							</React.Fragment>
-						))}
-					</Group>
-				)}
+				<Group gap={10}>
+					{filteredAndSortedMembers.map((member) => (
+						<React.Fragment key={member.id}>
+							<KanbanMemberCard member={member} />
+						</React.Fragment>
+					))}
+				</Group>
 			</ScrollArea>
 		</Card>
 	);
 };
 
-export default KanbanColumn;
+export default KanbanColumnProject;

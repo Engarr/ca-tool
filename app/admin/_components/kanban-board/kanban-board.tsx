@@ -1,33 +1,60 @@
 'use client';
 import React from 'react';
 import KanbanColumn from '../kanban-column/kanban-column';
-import { columnList } from '../../_lib/tempMember';
+import KanbanColumnProject from '../kanban-column-project/kanban-column-project';
 import { Flex, ScrollArea } from '@mantine/core';
-import { useMemberListContext } from '@/context/member-list-context';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { MemberType } from '../../_types/member-type';
+import { KanbanColumnType } from '../../_types/kanban-column-type';
 
-const KanbanBoard = () => {
-  const { newMemberList } = useMemberListContext();
+type KanbanBoardType = {
+	kanbanMemberList: MemberType[];
+	columnList: KanbanColumnType[];
+	isProjectBoard: boolean;
+};
 
-  return (
-    <ScrollArea scrollbarSize={10}>
-      <Flex
-        direction={{ base: 'column', sm: 'row' }}
-        gap={'xl'}
-        px={50}
-        mb={50}>
-        {columnList.map((col) => (
-          <KanbanColumn
-            key={col.id}
-            title={col.title}
-            column={col}
-            members={newMemberList.filter(
-              (member) => member.columnId === col.id
-            )}
-          />
-        ))}
-      </Flex>
-    </ScrollArea>
-  );
+const KanbanBoard = ({
+	kanbanMemberList,
+	columnList,
+	isProjectBoard,
+}: KanbanBoardType) => {
+	return (
+		<DndProvider backend={HTML5Backend}>
+			<ScrollArea scrollbarSize={10}>
+				<Flex
+					direction={{ base: 'column', sm: 'row' }}
+					gap={'xl'}
+					px={50}
+					mb={50}
+				>
+					{!isProjectBoard &&
+						columnList.map((col) => (
+							<KanbanColumn
+								key={col.id}
+								title={col.title}
+								column={col}
+								members={kanbanMemberList.filter(
+									(member) => member.columnId === col.id
+								)}
+							/>
+						))}
+					{isProjectBoard &&
+						columnList.map((col) => (
+							<KanbanColumnProject
+								key={col.id}
+								title={col.title}
+								column={col}
+								members={kanbanMemberList.filter(
+									(member) =>
+										member.assignedToProjectId === col.id
+								)}
+							/>
+						))}
+				</Flex>
+			</ScrollArea>
+		</DndProvider>
+	);
 };
 
 export default KanbanBoard;

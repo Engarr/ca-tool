@@ -6,7 +6,7 @@ type ColumntTitleType = {
   memberCount: number;
 };
 
-const ColumntTitle = ({ title, memberCount }: ColumntTitleType) => {
+const ColumnTitle = ({ title, memberCount }: ColumntTitleType) => {
   return (
     <>
       <Group px={8} align={'center'} justify='space-between' >
@@ -21,4 +21,4 @@ const ColumntTitle = ({ title, memberCount }: ColumntTitleType) => {
   );
 };
 
-export default ColumntTitle;
+export default ColumnTitle;
