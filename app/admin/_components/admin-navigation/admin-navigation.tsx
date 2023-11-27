@@ -14,8 +14,9 @@ import { useDisclosure } from '@mantine/hooks';
 import classes from './admin-navigation.module.css';
 import Logo from '@/components/logo/logo';
 import Link from 'next/link';
-
+import { usePathname } from 'next/navigation';
 const AdminNavigation = () => {
+  const path = usePathname();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
 
@@ -25,13 +26,25 @@ const AdminNavigation = () => {
         <Group justify='space-between' h='100%'>
           <Logo />
           <Group h='100%' gap={0} visibleFrom='sm'>
-            <Link href='/admin' className={classes.link}>
+            <Link
+              href='/admin'
+              className={`${classes.link} ${
+                path === '/admin' ? classes.active : ''
+              }`}>
               Uczestnicy
             </Link>
-            <Link href='/admin/projekty' className={classes.link}>
+            <Link
+              href='/admin/projekty'
+              className={`${classes.link} ${
+                path === '/admin/projekty' ? classes.active : ''
+              }`}>
               Projekty
             </Link>
-            <Link href='/admin/grupy' className={classes.link}>
+            <Link
+              href='/admin/grupy'
+              className={`${classes.link} ${
+                path === '/admin/grupy' ? classes.active : ''
+              }`}>
               Grupy
             </Link>
           </Group>
