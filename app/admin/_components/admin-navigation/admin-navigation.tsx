@@ -20,7 +20,7 @@ const AdminNavigation = () => {
     useDisclosure(false);
 
   return (
-    <Box pb={20}>
+    <Box pb={10}>
       <header className={classes.header}>
         <Group justify='space-between' h='100%'>
           <Logo />
