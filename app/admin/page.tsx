@@ -8,21 +8,16 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const Page = () => {
-  return (
-    <MemberListContextProvider>
-      <DndProvider backend={HTML5Backend}>
-        <SearchMember />
-        <KanbanBoard />
-      </DndProvider>
-    </MemberListContextProvider>
-  );
 	const { newMemberList } = useMemberListContext();
 	return (
-		<KanbanBoard
-			kanbanMemberList={newMemberList}
-			columnList={columnList}
-			isProjectBoard={false}
-		/>
+		<DndProvider backend={HTML5Backend}>
+			<SearchMember />
+			<KanbanBoard
+				kanbanMemberList={newMemberList}
+				columnList={columnList}
+				isProjectBoard={false}
+			/>
+		</DndProvider>
 	);
 };
 
