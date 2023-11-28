@@ -1,6 +1,6 @@
 'use client';
-import React, { useState } from 'react';
-import { Group, Button, Modal } from '@mantine/core';
+import React from 'react';
+import { Group, Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import ProjectForm from '../project-form/project-form';
@@ -16,7 +16,7 @@ const CreateNewProject = () => {
       <Button onClick={openProjectFormModal}>Dodaj nowy projekt</Button>
       <ProjectForm
         closeModal={closeProjectFormModal}
-        opened={isOpenedProjectFormModal}
+        opened={isOpenedProjectFormModal} 
       />
     </Group>
   );
