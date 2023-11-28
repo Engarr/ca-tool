@@ -19,23 +19,22 @@ import classes from './project-form.module.css';
 type ProjectFormType = {
   closeModal: () => void;
   opened: boolean;
-  close: () => void;
-  columnId?: Id;
+  columnProjectId?: Id;
 };
 
 const ProjectForm = ({
   closeModal,
-  columnId,
+  columnProjectId,
   opened,
-  close,
 }: ProjectFormType) => {
   const { newConfirmedProjectList, setNewConfirmedProjectList } =
     useProjectListContext();
-  const columnTitle = columnId
-    ? newConfirmedProjectList.find((project) => project.id === columnId)?.title
+  const columnTitle = columnProjectId
+    ? newConfirmedProjectList.find((project) => project.id === columnProjectId)
+        ?.title
     : '';
-  const projectTechnologies = columnId
-    ? newConfirmedProjectList.find((project) => project.id === columnId)
+  const projectTechnologies = columnProjectId
+    ? newConfirmedProjectList.find((project) => project.id === columnProjectId)
         ?.technologies
     : '';
   const [newProjectTitle, setNewProjectTitle] = useState(columnTitle || '');
@@ -67,9 +66,9 @@ const ProjectForm = ({
       title: newProjectTitle,
       technologies: newProjectTechnologies,
     };
-    const updatedProjectList = columnId
+    const updatedProjectList = columnProjectId
       ? newConfirmedProjectList.map((project) =>
-          project.id === columnId
+          project.id === columnProjectId
             ? {
                 ...project,
                 title: newProjectTitle,
@@ -91,12 +90,14 @@ const ProjectForm = ({
   }, [columnTitle, opened, projectTechnologies]);
 
   return (
-    <Modal opened={opened} onClose={close} centered>
+    <Modal opened={opened} onClose={closeModal} centered>
       <form onSubmit={handleAddProject}>
         <Paper py='xl' px='md'>
           <TextInput
             label={
-              columnId ? 'Edytuj tytuł projektu:' : 'Tytuł nowego projektu:'
+              columnProjectId
+                ? 'Edytuj tytuł projektu:'
+                : 'Tytuł nowego projektu:'
             }
             placeholder='Wprowadz tytuł dla projektu'
             variant='filled'
@@ -147,7 +148,7 @@ const ProjectForm = ({
           )}
           <Center>
             <Button variant='filled' size='xs' mt={10} type='submit' fullWidth>
-              {columnId ? 'Zapisz zmiany' : 'Dodaj projekt'}
+              {columnProjectId ? 'Zapisz zmiany' : 'Dodaj projekt'}
             </Button>
           </Center>
         </Paper>

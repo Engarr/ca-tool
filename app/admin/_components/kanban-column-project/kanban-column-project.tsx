@@ -1,18 +1,18 @@
 import React, { useMemo, useState } from 'react';
 import { Card, Divider, ScrollArea, Group } from '@mantine/core';
 import classes from './kanban-column-project.module.css';
-import KanbanMemberCard from '../../../_components/kanban-member-card/kanban-member-card';
-import { Id, MemberType } from '../../../_types/member-type';
+import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
+import { Id, MemberType } from '../../_types/member-type';
 import {
   sortUsersByValue,
   filterUsersByValue,
-} from '../../../_lib/members-list-management-functions';
+} from '../../_lib/members-list-management-functions';
 import { useDrop } from 'react-dnd';
 import { useMemberListContext } from '@/context/member-list-context';
-import ColumnTitle from '../../../_components/kanban-column-title/columnt-title';
-import ColumnFilterMenu from '../../../_components/column-filter-menu/column-filter-menu';
-import { addMemberToProject } from '../../../_lib/dnd-functions';
-import { ProjectType } from '../../../_types/project-type';
+import ColumnTitle from '../kanban-column-title/columnt-title';
+import ColumnFilterMenu from '../column-filter-menu/column-filter-menu';
+import { addMemberToProject } from '../../_lib/dnd-functions';
+import { ProjectType } from '../../_types/project-type';
 
 type KanbanColumnProps = {
   title: string;
@@ -64,7 +64,7 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
         memberCount={members.length}
         title={column.title}
         isProjectColumn={true}
-        columnId={column.id}
+        columnProjectId={column.id}
       />
       <ColumnFilterMenu
         setSortFilterValue={setSortFilterValue}
