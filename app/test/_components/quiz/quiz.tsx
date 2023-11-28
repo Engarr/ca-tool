@@ -21,10 +21,11 @@ const COUNT_DOWN_LENGTH = 30 // in seconds
 
 export const Quiz: React.FC = () => {
   const params = useSearchParams()
-  const userId = params.get("id")
-  const specializationId = params.get("specialization_Id")
 
-  if (!userId || !specializationId) {
+  const userId = params.get("userId")
+  const testId = params.get("testId")
+
+  if (!userId || !testId) {
     redirect("/")
   }
 
@@ -32,10 +33,7 @@ export const Quiz: React.FC = () => {
   const { isPending, error, data } = useQuery<Question[]>({
     queryKey: ["questions"],
     queryFn: () =>
-      // axiosClient
-      //   .get(`/Quiz/GetQuestion?id=${specializationId}`)
-      //   .then((res) => res.data),
-      axios.get("/questions.json").then((res) => res.data),
+      axiosClient.get(`/Quiz/GetQuestion?id=${testId}`).then((res) => res.data),
   })
 
   const [userCorrectAnswers, setUserCorrectAnswers] = useState<number>(0)

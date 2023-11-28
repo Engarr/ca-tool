@@ -22,10 +22,10 @@ enum SECTIONS {
 
 export default function TestPage() {
   const params = useSearchParams()
-  const userId = params.get("id")
-  const specializationId = params.get("specialization_Id")
+  const userId = params.get("userId")
+  const testId = params.get("testId")
 
-  if (!userId || !specializationId) {
+  if (!userId || !testId) {
     redirect("/")
   }
 
