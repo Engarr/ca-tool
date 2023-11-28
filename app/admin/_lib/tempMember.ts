@@ -13,11 +13,11 @@ export const columnList: KanbanColumnType[] = [
 ];
 
 export const confirmedProjectList: ProjectType[] = [
-	{ id: '1', title: 'Nie przypisani' },
-	{ id: '2', title: 'ca-tool' },
-	{ id: '3', title: 'food-tool' },
-	{ id: '4', title: 'rate-tool' },
-	{ id: '5', title: 'bio-tool' },
+  { id: '1', title: 'Nie przypisani' },
+  { id: '2', title: 'ca-tool', technologies: ['Next.js', 'Node.js'] },
+  { id: '3', title: 'food-tool' },
+  { id: '4', title: 'rate-tool' },
+  { id: '5', title: 'bio-tool' },
 ];
 
 export const memberList: MemberType[] = [

@@ -1,0 +1,12 @@
+.overColumn {
+  border: 2px solid var(--mantine-color-blue-5);
+  background-color: var(--mantine-color-blue-1);
+  transition: background-color 0.3s, border 0.3;
+}
+.technologyCard {
+  background-color: var(--mantine-color-blue-6);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: 12px;
+}

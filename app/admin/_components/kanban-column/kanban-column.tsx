@@ -68,7 +68,7 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
         sortFilterValues={sortFilterValues}
       />
       <Divider py={5} />
-      <ScrollArea scrollbarSize={6} pr={15} h={650}>
+      <ScrollArea scrollbarSize={6} pr={15} h={550}>
         {title === 'Projekty' ? (
           <>
             {confirmedProjectList.map((project) => (

@@ -1,0 +1,35 @@
+[
+  {
+    "question": "What does HTML stand for?",
+    "correctAnswer": "Hypertext Markup Language",
+    "answers": [
+      "Hypertext Makeup Language",
+      "Hypertext Markdown Language",
+      "Hyperlink and Text Markup Language"
+    ]
+  },
+  {
+    "question": "Which CSS property is used to change the text color of an element?",
+    "correctAnswer": "color",
+    "answers": ["text-color", "font-color", "background-color"]
+  },
+  {
+    "question": "What is the purpose of JavaScript?",
+    "correctAnswer": "To make web pages interactive",
+    "answers": [
+      "To create stylish designs",
+      "To define the structure of a webpage",
+      "To add flavors to coffee"
+    ]
+  },
+  {
+    "question": "What is the latest version of ECMAScript (JavaScript) as of 2022?",
+    "correctAnswer": "ES11",
+    "answers": ["ES10", "ES09", "ES13"]
+  },
+  {
+    "question": "Which framework is commonly used for building user interfaces in React?",
+    "correctAnswer": "React",
+    "answers": ["Angular", "Vue", "Ember"]
+  }
+]
