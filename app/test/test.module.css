@@ -1,0 +1,12 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 4rem;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.container > img {
+  z-index: -10;
+  filter: blur(3px);
+}

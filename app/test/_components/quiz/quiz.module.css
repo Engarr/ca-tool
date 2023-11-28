@@ -1,0 +1,11 @@
+.progress {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.progress * {
+  -webkit-transition: width 100ms linear;
+  -o-transition: width 100ms linear;
+  transition: width 100ms linear;
+}
