@@ -1,0 +1,21 @@
+.technologyCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--mantine-color-blue-5);
+  padding: 5px;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.technologyCard:hover {
+  background-color: var(--mantine-color-blue-7);
+  transition: background-color 0.3s;
+}
+.xIcon {
+  cursor: pointer;
+}
+.xIcon:hover {
+  transform: scale(1.2);
+  transition: transform 0.3s;
+}
