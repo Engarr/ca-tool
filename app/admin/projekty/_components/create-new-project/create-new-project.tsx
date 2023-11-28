@@ -16,7 +16,6 @@ const CreateNewProject = () => {
       <Button onClick={openProjectFormModal}>Dodaj nowy projekt</Button>
       <ProjectForm
         closeModal={closeProjectFormModal}
-        close={closeProjectFormModal}
         opened={isOpenedProjectFormModal}
       />
     </Group>
