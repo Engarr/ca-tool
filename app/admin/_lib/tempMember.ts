@@ -13,11 +13,11 @@ export const columnList: KanbanColumnType[] = [
 ];
 
 export const confirmedProjectList: ProjectType[] = [
-  { id: '1', title: 'Nie przypisani' },
-  { id: '2', title: 'ca-tool', technologies: ['Next.js', 'Node.js'] },
-  { id: '3', title: 'food-tool' },
-  { id: '4', title: 'rate-tool' },
-  { id: '5', title: 'bio-tool' },
+	{ id: '1', title: 'Nie przypisani' },
+	{ id: '2', title: 'ca-tool', technologies: ['Next.js', 'Node.js'] },
+	{ id: '3', title: 'food-tool' },
+	{ id: '4', title: 'rate-tool' },
+	{ id: '5', title: 'bio-tool' },
 ];
 
 export const memberList: MemberType[] = [
@@ -32,6 +32,7 @@ export const memberList: MemberType[] = [
 		note: 'Tekst notatki',
 		assignedToProjectId: '1',
 		range: 3,
+		nameOfUniversityOrOccupation: 'ZST Jasło',
 	},
 	{
 		id: 2,
@@ -42,6 +43,7 @@ export const memberList: MemberType[] = [
 			role: 'React/Next.js',
 		},
 		range: 2,
+		nameOfUniversityOrOccupation: 'ZST Rzeszów',
 	},
 	{
 		id: 3,
@@ -52,6 +54,7 @@ export const memberList: MemberType[] = [
 			role: 'React/Next.js',
 		},
 		range: 3,
+		nameOfUniversityOrOccupation: 'ZST Jasło',
 	},
 	{
 		id: 17,

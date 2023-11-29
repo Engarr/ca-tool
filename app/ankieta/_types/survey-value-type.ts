@@ -1,4 +1,3 @@
-import { FileWithPath } from '@mantine/dropzone';
 
 export type SurveyValuesType = {
 	fullName: string;
