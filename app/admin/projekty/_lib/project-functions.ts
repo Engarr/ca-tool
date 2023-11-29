@@ -8,7 +8,7 @@ export const updateProjectList = (
   newProjectTechnologies: string[]
 ) => {
   const newProject = {
-    id: String(new Date()),
+    id: new Date().toISOString().replace(/\D/g, ''),
     title: newProjectTitle,
     technologies: newProjectTechnologies,
   };

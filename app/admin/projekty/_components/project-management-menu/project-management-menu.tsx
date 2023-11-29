@@ -3,15 +3,17 @@ import React, { useState } from 'react';
 import { Id } from '@/app/admin/_types/member-type';
 import ProjectForm from '@/app/admin/projekty/_components/project-form/project-form';
 import { useProjectListContext } from '@/context/project-list-context';
-import { Menu, ActionIcon, Alert, Modal } from '@mantine/core';
+import { Menu, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
   IconPencil,
   IconNote,
   IconTrash,
   IconDotsVertical,
+  IconUserCheck,
 } from '@tabler/icons-react';
 import AlertModal from '../alert-modal/alert-modal';
+import ChoseProjectPm from './chose-project-pm/chose-project-pm';
 
 type ProjectTitleActionsType = {
   columnProjectId?: Id;
@@ -22,15 +24,17 @@ const ProjectManagementMenu = ({
   columnProjectId,
   memberCount,
 }: ProjectTitleActionsType) => {
+  const { newConfirmedProjectList, setNewConfirmedProjectList } =
+    useProjectListContext();
+
   const [
     isOpenedProjectFormModal,
     { open: openProjectFormModal, close: closeProjectFormModal },
   ] = useDisclosure(false);
-  const { newConfirmedProjectList, setNewConfirmedProjectList } =
-    useProjectListContext();
   const [modalConfig, setModalConfig] = useState({ type: '', message: '' });
   const [isOpenedAlertModal, { open: openAlertModal, close: closeAlertModal }] =
     useDisclosure(false);
+  const [isMemebrsListOpened, { toggle }] = useDisclosure(false);
 
   const openAlertModalHandler = () => {
     if (memberCount > 0) {
@@ -88,6 +92,16 @@ const ProjectManagementMenu = ({
           <Menu.Item leftSection={<IconNote stroke={1.5} />}>
             Dodaj notatkę
           </Menu.Item>
+          <Menu.Item
+            closeMenuOnClick={false}
+            onClick={toggle}
+            leftSection={<IconUserCheck stroke={1.5} />}>
+            Wybierz PM
+          </Menu.Item>
+          <ChoseProjectPm
+            columnProjectId={columnProjectId}
+            isMemebrsListOpened={isMemebrsListOpened}
+          />
           <Menu.Item
             leftSection={<IconTrash stroke={1.5} />}
             color='red'
