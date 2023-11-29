@@ -13,7 +13,7 @@ import {
   IconUserCheck,
 } from '@tabler/icons-react';
 import AlertModal from '../alert-modal/alert-modal';
-import ChoseProjectPm from './chose-project-pm/chose-project-pm';
+import SelectProjectPm from './select-project-pm/select-project-pm';
 
 type ProjectTitleActionsType = {
   columnProjectId?: Id;
@@ -98,7 +98,7 @@ const ProjectManagementMenu = ({
             leftSection={<IconUserCheck stroke={1.5} />}>
             Wybierz PM
           </Menu.Item>
-          <ChoseProjectPm
+          <SelectProjectPm
             columnProjectId={columnProjectId}
             isMemebrsListOpened={isMemebrsListOpened}
           />

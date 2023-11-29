@@ -2,7 +2,7 @@ import React from 'react';
 import { Collapse, Text, ScrollArea, Menu } from '@mantine/core';
 import { useMemberListContext } from '@/context/member-list-context';
 import { Id } from '@/app/admin/_types/member-type';
-import classes from './chose-project-pm.module.css';
+import classes from './select-project-pm.module.css';
 import { useProjectListContext } from '@/context/project-list-context';
 
 type ChoseProjectPmType = {
@@ -10,7 +10,7 @@ type ChoseProjectPmType = {
   isMemebrsListOpened: boolean;
 };
 
-const ChoseProjectPm = ({
+const SelectProjectPm = ({
   columnProjectId,
   isMemebrsListOpened,
 }: ChoseProjectPmType) => {
@@ -60,4 +60,4 @@ const ChoseProjectPm = ({
   );
 };
 
-export default ChoseProjectPm;
+export default SelectProjectPm;
