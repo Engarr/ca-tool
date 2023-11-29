@@ -38,7 +38,7 @@ import {
 import { getSchoolsName, postSurvey } from '../../_lib/api-survey';
 import { convertFormData } from '../../_lib/convert-form-data';
 
-type SchoolsNameType = {
+export type SchoolsNameType = {
 	id_School: number;
 	name: string;
 };
@@ -60,6 +60,7 @@ function UserSurvey() {
 		isPending,
 		isSuccess,
 		isError,
+		error,
 		reset,
 	} = useMutation({
 		mutationFn: async (sendingDate: FormData) => {
@@ -75,9 +76,13 @@ function UserSurvey() {
 	useEffect(() => {
 		if (isSuccess) {
 			const { resultId, specialization } = responseSendSurvey;
-			router.push(`/test?testId=${resultId}&userId=${specialization}`);
+			if (resultId && specialization) {
+				router.push(
+					`/test?testId=${resultId}&userId=${specialization}`
+				);
+			}
 		}
-	}, [isSuccess, router, responseSendSurvey]);
+	}, [isSuccess, router, responseSendSurvey, error, isError]);
 
 	const initialValues: SurveyValuesType = {
 		fullName: '',
@@ -118,6 +123,7 @@ function UserSurvey() {
 
 	const handleSurveySubmit = async (values: SurveyValuesType) => {
 		const formData = convertFormData(values);
+		console.log(values);
 		if (formFile) {
 			formData.append('formFile', formFile);
 		}
