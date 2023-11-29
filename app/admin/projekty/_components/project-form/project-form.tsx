@@ -11,10 +11,11 @@ import {
   Text,
 } from '@mantine/core';
 import { useProjectListContext } from '@/context/project-list-context';
-import { ProjectType } from '@/app/admin/_types/project-type';
 import { Id } from '@/app/admin/_types/member-type';
 import { IconPlus, IconX } from '@tabler/icons-react';
 import classes from './project-form.module.css';
+import { updateProjectList } from '../../_lib/project-functions';
+import { technologies } from '../../_lib/constants';
 
 type ProjectFormType = {
   closeModal: () => void;
@@ -42,7 +43,6 @@ const ProjectForm = ({
   const [newProjectTechnologies, setNewProjectTechnologies] = useState<
     string[]
   >(projectTechnologies || []);
-  const technologies = ['React', 'Next.js', '.Net', 'Node.js', 'React Native'];
 
   const handleNewProjectTitle = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -61,22 +61,12 @@ const ProjectForm = ({
 
   const handleAddProject = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newProject: ProjectType = {
-      id: String(newConfirmedProjectList.length + 1),
-      title: newProjectTitle,
-      technologies: newProjectTechnologies,
-    };
-    const updatedProjectList = columnProjectId
-      ? newConfirmedProjectList.map((project) =>
-          project.id === columnProjectId
-            ? {
-                ...project,
-                title: newProjectTitle,
-                technologies: newProjectTechnologies,
-              }
-            : project
-        )
-      : [...newConfirmedProjectList, newProject];
+    const updatedProjectList = updateProjectList(
+      newConfirmedProjectList,
+      columnProjectId,
+      newProjectTitle,
+      newProjectTechnologies
+    );
     setNewConfirmedProjectList(updatedProjectList);
 
     closeModal();
