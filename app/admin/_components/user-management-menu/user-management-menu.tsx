@@ -107,12 +107,7 @@ const UserManagementMenu = ({
                   </Text>
                 </Menu.Item>
 
-                <Collapse
-                  pb={10}
-                  pl={10}
-                  mr={10}
-                  in={isProjektsListOpened}
-                  className={classes.collapse}>
+                <Collapse pb={10} pl={10} mr={10} in={isProjektsListOpened}>
                   {confirmedProjectList.length === 0 ? (
                     <Text className={classes.listItem}>
                       Lista projektów jest pusta

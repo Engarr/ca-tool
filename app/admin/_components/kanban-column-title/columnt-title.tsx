@@ -1,21 +1,21 @@
 import { Text, Group } from '@mantine/core';
 
 import classes from './columnt-title.module.css';
-import ProjectColumnActions from '../../projekty/_components/project-column-actions/project-column-actions';
 import { Id } from '../../_types/member-type';
+import ProjectManagementMenu from '../../projekty/_components/project-management-menu/project-management-menu';
 
 type ColumntTitleType = {
   title: string;
   memberCount: number;
   isProjectColumn?: boolean;
-  columnId?: Id;
+  columnProjectId?: Id;
 };
 
 const ColumnTitle = ({
   title,
   memberCount,
   isProjectColumn,
-  columnId,
+  columnProjectId,
 }: ColumntTitleType) => {
   return (
     <>
@@ -25,7 +25,10 @@ const ColumnTitle = ({
             {title}
           </Text>
           {isProjectColumn && title !== 'Nie przypisani' && (
-            <ProjectColumnActions columnId={columnId} />
+            <ProjectManagementMenu
+              columnProjectId={columnProjectId}
+              memberCount={memberCount}
+            />
           )}
         </Group>
         <Text className={classes.memberCount} size='lg' fw={600}>

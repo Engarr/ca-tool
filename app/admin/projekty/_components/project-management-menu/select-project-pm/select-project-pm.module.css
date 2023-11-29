@@ -1,0 +1,27 @@
+.iconStyle {
+  width: rem(18px);
+  height: rem(18px);
+  color: var(--mantine-color-ndigo-7);
+  transition: transform 0.3s;
+}
+.listItem {
+  cursor: pointer;
+  p {
+    font-size: rem(14px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+.listItem:hover {
+  background-color: light-dark(
+    var(--mantine-color-gray-2),
+    var(--mantine-color-white-2)
+  );
+  transition: background-color 0.3s;
+}
+.listItem::before {
+  content: '\2022';
+  color: #007bff;
+  margin-right: 10px;
+}
