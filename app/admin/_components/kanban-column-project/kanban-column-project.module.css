@@ -10,3 +10,17 @@
   border-radius: 5px;
   font-size: 12px;
 }
+.pmBox {
+  position: relative;
+}
+.pm {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  position: absolute;
+  top: 6px;
+  span {
+    color: var(--mantine-color-blue-8);
+  }
+}

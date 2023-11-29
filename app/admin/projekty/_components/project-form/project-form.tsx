@@ -11,31 +11,31 @@ import {
   Text,
 } from '@mantine/core';
 import { useProjectListContext } from '@/context/project-list-context';
-import { ProjectType } from '@/app/admin/_types/project-type';
 import { Id } from '@/app/admin/_types/member-type';
 import { IconPlus, IconX } from '@tabler/icons-react';
 import classes from './project-form.module.css';
+import { updateProjectList } from '../../_lib/project-functions';
+import { technologies } from '../../_lib/constants';
 
 type ProjectFormType = {
   closeModal: () => void;
   opened: boolean;
-  close: () => void;
-  columnId?: Id;
+  columnProjectId?: Id;
 };
 
 const ProjectForm = ({
   closeModal,
-  columnId,
+  columnProjectId,
   opened,
-  close,
 }: ProjectFormType) => {
   const { newConfirmedProjectList, setNewConfirmedProjectList } =
     useProjectListContext();
-  const columnTitle = columnId
-    ? newConfirmedProjectList.find((project) => project.id === columnId)?.title
+  const columnTitle = columnProjectId
+    ? newConfirmedProjectList.find((project) => project.id === columnProjectId)
+        ?.title
     : '';
-  const projectTechnologies = columnId
-    ? newConfirmedProjectList.find((project) => project.id === columnId)
+  const projectTechnologies = columnProjectId
+    ? newConfirmedProjectList.find((project) => project.id === columnProjectId)
         ?.technologies
     : '';
   const [newProjectTitle, setNewProjectTitle] = useState(columnTitle || '');
@@ -43,7 +43,6 @@ const ProjectForm = ({
   const [newProjectTechnologies, setNewProjectTechnologies] = useState<
     string[]
   >(projectTechnologies || []);
-  const technologies = ['React', 'Next.js', '.Net', 'Node.js', 'React Native'];
 
   const handleNewProjectTitle = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -62,22 +61,12 @@ const ProjectForm = ({
 
   const handleAddProject = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const newProject: ProjectType = {
-      id: String(newConfirmedProjectList.length + 1),
-      title: newProjectTitle,
-      technologies: newProjectTechnologies,
-    };
-    const updatedProjectList = columnId
-      ? newConfirmedProjectList.map((project) =>
-          project.id === columnId
-            ? {
-                ...project,
-                title: newProjectTitle,
-                technologies: newProjectTechnologies,
-              }
-            : project
-        )
-      : [...newConfirmedProjectList, newProject];
+    const updatedProjectList = updateProjectList(
+      newConfirmedProjectList,
+      columnProjectId,
+      newProjectTitle,
+      newProjectTechnologies
+    );
     setNewConfirmedProjectList(updatedProjectList);
 
     closeModal();
@@ -91,12 +80,14 @@ const ProjectForm = ({
   }, [columnTitle, opened, projectTechnologies]);
 
   return (
-    <Modal opened={opened} onClose={close} centered>
+    <Modal opened={opened} onClose={closeModal} centered>
       <form onSubmit={handleAddProject}>
         <Paper py='xl' px='md'>
           <TextInput
             label={
-              columnId ? 'Edytuj tytuł projektu:' : 'Tytuł nowego projektu:'
+              columnProjectId
+                ? 'Edytuj tytuł projektu:'
+                : 'Tytuł nowego projektu:'
             }
             placeholder='Wprowadz tytuł dla projektu'
             variant='filled'
@@ -147,7 +138,7 @@ const ProjectForm = ({
           )}
           <Center>
             <Button variant='filled' size='xs' mt={10} type='submit' fullWidth>
-              {columnId ? 'Zapisz zmiany' : 'Dodaj projekt'}
+              {columnProjectId ? 'Zapisz zmiany' : 'Dodaj projekt'}
             </Button>
           </Center>
         </Paper>

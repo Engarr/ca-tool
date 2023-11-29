@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import KanbanColumn from '../kanban-column/kanban-column';
-import KanbanColumnProject from '../../projekty/_components/kanban-column-project/kanban-column-project';
+import KanbanColumnProject from '../kanban-column-project/kanban-column-project';
 import { Flex, ScrollArea } from '@mantine/core';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
