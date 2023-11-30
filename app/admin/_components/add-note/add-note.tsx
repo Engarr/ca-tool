@@ -70,9 +70,9 @@ const AddNoteModal = ({
   }, [note, opened]);
 
   return (
-    <Modal opened={opened} onClose={close} centered>
+    <Modal opened={opened} onClose={close} centered size={'lg'}>
       <form onSubmit={handleNoteAdd}>
-        <Paper py='xl' px='md'>
+        <Paper py='xl' px='md' shadow='xl' mx={50} mb={20}>
           <Textarea
             label={labelText}
             placeholder='Wprowadz informację'
@@ -85,7 +85,7 @@ const AddNoteModal = ({
             onChange={handleNoteChange}
           />
           <Center>
-            <Button variant='filled' size='xs' mt={10} type='submit' fullWidth>
+            <Button size='xs' mt={30} type='submit' style={{ width: '50%' }}>
               {note ? 'Edytuj' : 'Dodaj'} notatkę
             </Button>
           </Center>
