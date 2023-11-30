@@ -1,7 +1,7 @@
-import { Paper, Title, Text, Anchor } from "@mantine/core";
-import styles from "./root.module.css";
-import { AuthForm } from "./_components/auth-form";
-import Image from "next/image";
+import { Paper, Title, Text, Anchor } from "@mantine/core"
+import styles from "./root.module.css"
+import { AuthForm } from "./_components/auth-form"
+import Image from "next/image"
 
 export default function RootPage() {
   return (
@@ -12,13 +12,13 @@ export default function RootPage() {
         fill
         objectFit="cover"
       />
-      <Paper className={styles.form} radius={0} p={30}>
+      <Paper className={styles.form} radius={0} px={40} py={80}>
         <Title order={2} className={styles.title} ta="center" mt="md" mb={50}>
-          Welcome back to Mantine!
+          Zaloguj się do panelu administratora
         </Title>
 
         <AuthForm />
       </Paper>
     </div>
-  );
+  )
 }

@@ -1,19 +1,23 @@
 .wrapper {
-	min-height: 100vh;
-	position: relative;
+  min-height: 100vh;
+  position: relative;
 }
-  
-  .form {
-	border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
-	background-color: #fff;
-	position: absolute;
-	min-height: 100vh;
-	max-width: rem(450px);
-	width: 100%;
-	padding-top: rem(80px);
-  }
-  
-  .title {
-	color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-	font-family: Greycliff CF, var(--mantine-font-family);
-  }
+
+.wrapper * {
+  user-select: none;
+}
+
+.form {
+  border-right: rem(1px) solid
+    light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
+  background-color: #fff;
+  position: absolute;
+  min-height: 100vh;
+  max-width: rem(500px);
+  width: 100%;
+}
+
+.title {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  font-family: Greycliff CF, var(--mantine-font-family);
+}
