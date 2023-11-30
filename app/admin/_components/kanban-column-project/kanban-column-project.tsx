@@ -81,7 +81,7 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
         isProjectColumn={true}
         columnProjectId={column.id}
       />
-      {title !== 'Nie przypisani' && pm ? (
+      {((title !== 'Nie przypisani' && pm) || lider) && (
         <Box className={classes.managementBox}>
           <Group ml={10} className={classes.managers} fz={12} m={10} maw={200}>
             <Flex direction={'column'}>
@@ -100,8 +100,6 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
             </Flex>
           </Group>
         </Box>
-      ) : (
-        <></>
       )}
       <ColumnFilterMenu
         setSortFilterValue={setSortFilterValue}
