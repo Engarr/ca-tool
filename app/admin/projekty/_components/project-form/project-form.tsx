@@ -52,6 +52,14 @@ const ProjectForm = ({
 
   const newProjectTechnologiesHandler = (technologyName: string) => {
     if (technologyName === '') return;
+    if (
+      newProjectTechnologies.some(
+        (technologie) => technologie === technologyName
+      )
+    ) {
+      setNewTechnologyName('');
+      return;
+    }
     setNewProjectTechnologies((prev) => [...prev, technologyName]);
     setNewTechnologyName('');
   };
@@ -80,9 +88,9 @@ const ProjectForm = ({
   }, [columnTitle, opened, projectTechnologies]);
 
   return (
-    <Modal opened={opened} onClose={closeModal} centered>
+    <Modal opened={opened} onClose={closeModal} centered size={600}>
       <form onSubmit={handleAddProject}>
-        <Paper py='xl' px='md'>
+        <Paper py='xl' p={20} mx={10} my={30} shadow='xs'>
           <TextInput
             label={
               columnProjectId
@@ -103,6 +111,7 @@ const ProjectForm = ({
               variant='filled'
               value={newTechnologyName}
               data={technologies}
+              mt={20}
               onChange={(e) => setNewTechnologyName(e)}
               rightSection={
                 <Button
@@ -137,7 +146,7 @@ const ProjectForm = ({
             </Group>
           )}
           <Center>
-            <Button variant='filled' size='xs' mt={10} type='submit' fullWidth>
+            <Button variant='filled' size='xs' mt={50} type='submit' fullWidth>
               {columnProjectId ? 'Zapisz zmiany' : 'Dodaj projekt'}
             </Button>
           </Center>

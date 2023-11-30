@@ -13,7 +13,7 @@ import {
   IconUserCheck,
 } from '@tabler/icons-react';
 import AlertModal from '../alert-modal/alert-modal';
-import SelectProjectPm from './select-project-pm/select-project-pm';
+import SelectProjectManagement from './select-project-management/select-project-management';
 
 type ProjectTitleActionsType = {
   columnProjectId?: Id;
@@ -34,7 +34,10 @@ const ProjectManagementMenu = ({
   const [modalConfig, setModalConfig] = useState({ type: '', message: '' });
   const [isOpenedAlertModal, { open: openAlertModal, close: closeAlertModal }] =
     useDisclosure(false);
-  const [isMemebrsListOpened, { toggle }] = useDisclosure(false);
+  const [isMemebrsListOpenedPM, { toggle: togglePMList }] =
+    useDisclosure(false);
+  const [isMemebrsListOpenedLider, { toggle: toggleLiderList }] =
+    useDisclosure(false);
 
   const openAlertModalHandler = () => {
     if (memberCount > 0) {
@@ -87,20 +90,32 @@ const ProjectManagementMenu = ({
           <Menu.Item
             onClick={openProjectFormModal}
             leftSection={<IconPencil stroke={1.5} />}>
-            Edytuj kolumne
+            Edytuj projekt
           </Menu.Item>
           <Menu.Item leftSection={<IconNote stroke={1.5} />}>
             Dodaj notatkę
           </Menu.Item>
           <Menu.Item
             closeMenuOnClick={false}
-            onClick={toggle}
+            onClick={togglePMList}
             leftSection={<IconUserCheck stroke={1.5} />}>
             Wybierz PM
           </Menu.Item>
-          <SelectProjectPm
+          <SelectProjectManagement
             columnProjectId={columnProjectId}
-            isMemebrsListOpened={isMemebrsListOpened}
+            isMemebrsListOpened={isMemebrsListOpenedPM}
+            role='pm'
+          />
+          <Menu.Item
+            closeMenuOnClick={false}
+            onClick={toggleLiderList}
+            leftSection={<IconUserCheck stroke={1.5} />}>
+            Wybierz Lidera
+          </Menu.Item>
+          <SelectProjectManagement
+            columnProjectId={columnProjectId}
+            isMemebrsListOpened={isMemebrsListOpenedLider}
+            role='lider'
           />
           <Menu.Item
             leftSection={<IconTrash stroke={1.5} />}

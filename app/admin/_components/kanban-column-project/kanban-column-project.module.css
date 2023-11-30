@@ -10,17 +10,19 @@
   border-radius: 5px;
   font-size: 12px;
 }
-.pmBox {
+.managementBox {
   position: relative;
 }
-.pm {
+.managers {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
   position: absolute;
-  top: 6px;
+  top: -12px;
+  left: -10px;
+  padding: 2px 5px;
   span {
+    font-weight: 700;
     color: var(--mantine-color-blue-8);
   }
 }

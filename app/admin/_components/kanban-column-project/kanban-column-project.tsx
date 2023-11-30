@@ -1,5 +1,14 @@
 import React, { useMemo, useState } from 'react';
-import { Card, Divider, ScrollArea, Group, Text, Box } from '@mantine/core';
+import {
+  Card,
+  Divider,
+  ScrollArea,
+  Group,
+  Text,
+  Box,
+  Flex,
+  Paper,
+} from '@mantine/core';
 import classes from './kanban-column-project.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { Id, MemberType } from '../../_types/member-type';
@@ -40,6 +49,9 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
   }));
 
   const pm = newMemberList.find((member) => member.id == column.assignedPM);
+  const lider = newMemberList.find(
+    (member) => member.id == column.assignedLider
+  );
 
   const filteredAndSortedMembers = useMemo(() => {
     let newMembersList = members;
@@ -70,16 +82,26 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
         columnProjectId={column.id}
       />
       {title !== 'Nie przypisani' && pm ? (
-        <Box className={classes.pmBox}>
-          <Text ml={10} className={classes.pm} fz={12} maw={200}>
-            PM:{' '}
-            <Text component='span' fz={12}>
-              {pm?.fullName}
-            </Text>
-          </Text>
+        <Box className={classes.managementBox}>
+          <Group ml={10} className={classes.managers} fz={12} m={10} maw={200}>
+            <Flex direction={'column'}>
+              <Text fz={12} w={200}>
+                PM:{' '}
+                <Text component='span' fz={12}>
+                  {pm?.fullName}
+                </Text>
+              </Text>
+              <Text fz={12} w={200}>
+                Lider:{' '}
+                <Text component='span' fz={12}>
+                  {lider?.fullName}
+                </Text>
+              </Text>
+            </Flex>
+          </Group>
         </Box>
       ) : (
-        ''
+        <></>
       )}
       <ColumnFilterMenu
         setSortFilterValue={setSortFilterValue}

@@ -35,10 +35,13 @@ const AlertModal = ({
         ) : (
           <Flex
             direction={'row'}
-            justify={'space-between'}
+            justify={'center'}
             align={'center'}
-            style={{ width: '40%' }}>
+            style={{ width: '40%' }}
+            my={10}
+            p={10}>
             <Button
+              mr={20}
               onClick={() => {
                 onDelete(), closeModal();
               }}>
