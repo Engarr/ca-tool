@@ -6,4 +6,5 @@ export type ProjectType = {
   technologies?: string[];
   assignedPM?: Id;
   assignedLider?: Id;
+  note?: string;
 };

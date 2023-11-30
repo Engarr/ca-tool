@@ -14,7 +14,7 @@ import classes from './user-management-menu.module.css';
 import { useMemberListContext } from '@/context/member-list-context';
 import { Id } from '../../_types/member-type';
 import { useDisclosure } from '@mantine/hooks';
-import AddNoteToUserModal from './add-note-to-user/add-note-to-user';
+import AddNoteModal from '../add-note/add-note';
 
 type UserManagementMenuProps = {
   memberId: Id;
@@ -61,12 +61,13 @@ const UserManagementMenu = ({
   };
   return (
     <>
-      <AddNoteToUserModal
+      <AddNoteModal
         opened={isOpenedNoteModal}
         close={closeNoteModal}
-        memberId={memberId}
+        noteForId={memberId}
         note={note}
-        fullName={fullName}
+        noteFor={fullName}
+        type='user'
       />
       <Menu
         transitionProps={{ transition: 'pop' }}

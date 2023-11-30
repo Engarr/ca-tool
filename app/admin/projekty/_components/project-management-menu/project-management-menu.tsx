@@ -14,15 +14,18 @@ import {
 } from '@tabler/icons-react';
 import AlertModal from '../alert-modal/alert-modal';
 import SelectProjectManagement from './select-project-management/select-project-management';
+import AddNoteModal from '@/app/admin/_components/add-note/add-note';
 
 type ProjectTitleActionsType = {
-  columnProjectId?: Id;
+  columnProjectId: Id;
   memberCount: number;
+  projectTitle: string;
 };
 
 const ProjectManagementMenu = ({
   columnProjectId,
   memberCount,
+  projectTitle,
 }: ProjectTitleActionsType) => {
   const { newConfirmedProjectList, setNewConfirmedProjectList } =
     useProjectListContext();
@@ -38,6 +41,11 @@ const ProjectManagementMenu = ({
     useDisclosure(false);
   const [isMemebrsListOpenedLider, { toggle: toggleLiderList }] =
     useDisclosure(false);
+  const [isOpenedNoteModal, { open: openNoteModal, close: closeNoteModal }] =
+    useDisclosure(false);
+  const project = newConfirmedProjectList.find(
+    (project) => project.id === columnProjectId
+  );
 
   const openAlertModalHandler = () => {
     if (memberCount > 0) {
@@ -61,7 +69,6 @@ const ProjectManagementMenu = ({
     );
     setNewConfirmedProjectList(updatedProjectList);
   };
-
   return (
     <>
       <AlertModal
@@ -74,6 +81,14 @@ const ProjectManagementMenu = ({
         closeModal={closeProjectFormModal}
         columnProjectId={columnProjectId}
         opened={isOpenedProjectFormModal}
+      />
+      <AddNoteModal
+        opened={isOpenedNoteModal}
+        close={closeNoteModal}
+        noteForId={columnProjectId}
+        note={project?.note}
+        noteFor={projectTitle}
+        type='project'
       />
 
       <Menu
@@ -92,7 +107,9 @@ const ProjectManagementMenu = ({
             leftSection={<IconPencil stroke={1.5} />}>
             Edytuj projekt
           </Menu.Item>
-          <Menu.Item leftSection={<IconNote stroke={1.5} />}>
+          <Menu.Item
+            onClick={openNoteModal}
+            leftSection={<IconNote stroke={1.5} />}>
             Dodaj notatkę
           </Menu.Item>
           <Menu.Item
