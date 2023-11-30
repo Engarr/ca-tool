@@ -79,6 +79,7 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
         memberCount={members.length}
         title={column.title}
         isProjectColumn={true}
+        columnProjectId={column.id}
       />
       {title !== 'Nie przypisani' && pm ? (
         <Box className={classes.managementBox}>

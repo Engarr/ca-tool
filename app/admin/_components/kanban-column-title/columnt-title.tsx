@@ -8,12 +8,14 @@ type ColumntTitleType = {
   title: string;
   memberCount: number;
   isProjectColumn?: boolean;
+  columnProjectId?: Id;
 };
 
 const ColumnTitle = ({
   title,
   memberCount,
   isProjectColumn,
+  columnProjectId,
 }: ColumntTitleType) => {
   return (
     <>
@@ -26,6 +28,7 @@ const ColumnTitle = ({
             <ProjectManagementMenu
               memberCount={memberCount}
               projectTitle={title}
+              columnProjectId={columnProjectId}
             />
           )}
         </Group>

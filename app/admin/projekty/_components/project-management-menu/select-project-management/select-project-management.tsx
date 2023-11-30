@@ -23,6 +23,9 @@ const SelectProjectManagement = ({
   const projectMemebersList = newMemberList.filter(
     (memebr) => memebr.assignedToProjectId === columnProjectId
   );
+  const project = newConfirmedProjectList.find(
+    (project) => project.id === columnProjectId
+  );
 
   const assignPMtoProject = (memberId: Id) => {
     const updatedProjectList = newConfirmedProjectList.map((project) =>
@@ -45,15 +48,12 @@ const SelectProjectManagement = ({
     setNewConfirmedProjectList(updatedProjectList);
   };
 
-  const project = newConfirmedProjectList.find(
-    (project) => project.id === columnProjectId
-  );
   const isPMAssignedToProject = project ? project.assignedPM : null;
   const isLiderAssignedToProject = project ? project.assignedLider : null;
   const isMemberListEmpty =
     projectMemebersList.length === 0 && !isPMAssignedToProject;
   const isMemberListAvailable = projectMemebersList.length > 0;
-  
+  console.log(projectMemebersList);
   return (
     <Collapse pb={10} pl={10} mr={10} in={isMemebrsListOpened}>
       {isMemberListEmpty && (
