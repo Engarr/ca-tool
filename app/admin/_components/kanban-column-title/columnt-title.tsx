@@ -8,14 +8,12 @@ type ColumntTitleType = {
   title: string;
   memberCount: number;
   isProjectColumn?: boolean;
-  columnProjectId: Id;
 };
 
 const ColumnTitle = ({
   title,
   memberCount,
   isProjectColumn,
-  columnProjectId,
 }: ColumntTitleType) => {
   return (
     <>
@@ -26,7 +24,6 @@ const ColumnTitle = ({
           </Text>
           {isProjectColumn && title !== 'Nie przypisani' && (
             <ProjectManagementMenu
-              columnProjectId={columnProjectId}
               memberCount={memberCount}
               projectTitle={title}
             />

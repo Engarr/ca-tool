@@ -65,7 +65,6 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
       <ColumnTitle
         memberCount={members.length}
         title={column.title}
-        columnProjectId={column.id}
       />
       <ColumnFilterMenu
         setSortFilterValue={setSortFilterValue}

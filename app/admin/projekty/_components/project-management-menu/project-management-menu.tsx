@@ -15,9 +15,10 @@ import {
 import AlertModal from '../alert-modal/alert-modal';
 import SelectProjectManagement from './select-project-management/select-project-management';
 import AddNoteModal from '@/app/admin/_components/add-note/add-note';
+import { ProjectType } from '@/app/admin/_types/project-type';
 
 type ProjectTitleActionsType = {
-  columnProjectId: Id;
+  columnProjectId?: Id;
   memberCount: number;
   projectTitle: string;
 };
@@ -43,9 +44,10 @@ const ProjectManagementMenu = ({
     useDisclosure(false);
   const [isOpenedNoteModal, { open: openNoteModal, close: closeNoteModal }] =
     useDisclosure(false);
+
   const project = newConfirmedProjectList.find(
     (project) => project.id === columnProjectId
-  );
+  ) as ProjectType;
 
   const openAlertModalHandler = () => {
     if (memberCount > 0) {
@@ -69,7 +71,7 @@ const ProjectManagementMenu = ({
     );
     setNewConfirmedProjectList(updatedProjectList);
   };
-  
+
   return (
     <>
       <AlertModal
@@ -86,7 +88,7 @@ const ProjectManagementMenu = ({
       <AddNoteModal
         opened={isOpenedNoteModal}
         close={closeNoteModal}
-        noteForId={columnProjectId}
+        noteForId={project?.id}
         note={project?.note}
         noteFor={projectTitle}
         type='project'
