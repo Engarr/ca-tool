@@ -69,6 +69,7 @@ const ProjectManagementMenu = ({
     );
     setNewConfirmedProjectList(updatedProjectList);
   };
+  
   return (
     <>
       <AlertModal
@@ -110,7 +111,7 @@ const ProjectManagementMenu = ({
           <Menu.Item
             onClick={openNoteModal}
             leftSection={<IconNote stroke={1.5} />}>
-            Dodaj notatkę
+            {project?.note ? 'Edytuj' : 'Dodaj'} notatkę
           </Menu.Item>
           <Menu.Item
             closeMenuOnClick={false}

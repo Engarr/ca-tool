@@ -62,7 +62,11 @@ const KanbanColumn = ({ column, title, members }: KanbanColumnProps) => {
       padding='xs'
       className={`${isOver ? classes.overColumn : ''}`}
       w={title === 'Projekty' ? 500 : 400}>
-      <ColumnTitle memberCount={members.length} title={column.title} />
+      <ColumnTitle
+        memberCount={members.length}
+        title={column.title}
+        columnProjectId={column.id}
+      />
       <ColumnFilterMenu
         setSortFilterValue={setSortFilterValue}
         sortFilterValues={sortFilterValues}
