@@ -10,6 +10,11 @@ import { IconSun, IconMoonStars } from '@tabler/icons-react';
 
 const ColorSchemeToggle = () => {
   const { toggleColorScheme } = useMantineColorScheme();
+  const isDarkMode =
+    typeof window !== 'undefined'
+      ? localStorage.getItem('mantine-color-scheme-value') === 'dark'
+      : false;
+
   const theme = useMantineTheme();
 
   const sunIcon = (
@@ -32,6 +37,7 @@ const ColorSchemeToggle = () => {
     <Switch
       size='md'
       color='dark.2'
+      checked={isDarkMode}
       onLabel={sunIcon}
       offLabel={moonIcon}
       onChange={toggleColorScheme}

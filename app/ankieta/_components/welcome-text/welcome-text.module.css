@@ -1,12 +1,13 @@
 .discord-link {
-	color: #2d4b81;
-	transition: color 0.3s;
+  color: light-dark(var(--mantine-color-blue-8), var(--mantine-color-blue-3));
+
+  transition: color 0.3s;
 }
 .discord-link:hover {
-	color: #5474b4;
+  color: light-dark(var(--mantine-color-blue-4), var(--mantine-color-blue-6));
 }
 .logoContainer {
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
