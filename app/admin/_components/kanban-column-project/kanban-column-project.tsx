@@ -1,14 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import {
-  Card,
-  Divider,
-  ScrollArea,
-  Group,
-  Text,
-  Box,
-  Flex,
-  Paper,
-} from '@mantine/core';
+import { Card, Divider, ScrollArea, Group } from '@mantine/core';
 import classes from './kanban-column-project.module.css';
 import KanbanMemberCard from '../kanban-member-card/kanban-member-card';
 import { Id, MemberType } from '../../_types/member-type';
@@ -22,6 +13,7 @@ import ColumnTitle from '../kanban-column-title/columnt-title';
 import ColumnFilterMenu from '../column-filter-menu/column-filter-menu';
 import { addMemberToProject } from '../../_lib/dnd-functions';
 import { ProjectType } from '../../_types/project-type';
+import TeamManagementSection from '../../projekty/_components/team-management-section/team-management-section';
 
 type KanbanColumnProps = {
   title: string;
@@ -30,8 +22,7 @@ type KanbanColumnProps = {
 };
 
 const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
-  const { newMemberList, setNewMemberList } = useMemberListContext();
-
+  const { setNewMemberList } = useMemberListContext();
   const [sortFilterValues, setSortFilterValue] = useState<{
     sortValue: string | null;
     filterValue: string | null;
@@ -47,11 +38,6 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
       isOver: !!monitor.isOver(),
     }),
   }));
-
-  const pm = newMemberList.find((member) => member.id == column.assignedPM);
-  const lider = newMemberList.find(
-    (member) => member.id == column.assignedLider
-  );
 
   const filteredAndSortedMembers = useMemo(() => {
     let newMembersList = members;
@@ -81,26 +67,13 @@ const KanbanColumnProject = ({ column, title, members }: KanbanColumnProps) => {
         isProjectColumn={true}
         columnProjectId={column.id}
       />
-      {((title !== 'Nie przypisani' && pm) || lider) && (
-        <Box className={classes.managementBox}>
-          <Group ml={10} className={classes.managers} fz={12} m={10} maw={200}>
-            <Flex direction={'column'}>
-              <Text fz={12} w={200}>
-                PM:{' '}
-                <Text component='span' fz={12}>
-                  {pm?.fullName}
-                </Text>
-              </Text>
-              <Text fz={12} w={200}>
-                Lider:{' '}
-                <Text component='span' fz={12}>
-                  {lider?.fullName}
-                </Text>
-              </Text>
-            </Flex>
-          </Group>
-        </Box>
-      )}
+
+      <TeamManagementSection
+        assignedLider={column.assignedLider}
+        assignedPM={column.assignedPM}
+        title={title}
+      />
+
       <ColumnFilterMenu
         setSortFilterValue={setSortFilterValue}
         sortFilterValues={sortFilterValues}
