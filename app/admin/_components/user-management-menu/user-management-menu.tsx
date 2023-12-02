@@ -102,7 +102,10 @@ const UserManagementMenu = ({
                   }>
                   <Text>
                     Przenieś do{' '}
-                    <Text component='span' c={'indigo'} fw={500}>
+                    <Text
+                      component='span'
+                      fw={500}
+                      className={classes.columnName}>
                       {col.title}
                     </Text>
                   </Text>
@@ -144,7 +147,10 @@ const UserManagementMenu = ({
                   }>
                   <Text>
                     Przenieś do{' '}
-                    <Text component='span' c={'indigo'} fw={500}>
+                    <Text
+                      component='span'
+                      className={classes.columnName}
+                      fw={500}>
                       {col.title}
                     </Text>
                   </Text>

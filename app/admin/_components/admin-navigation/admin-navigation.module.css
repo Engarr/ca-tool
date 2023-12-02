@@ -20,13 +20,13 @@
   text-transform: uppercase;
 
   @mixin hover {
-    color: light-dark(var(--mantine-color-blue-7), var(--mantine-color-blue-3));
+    color: light-dark(var(--mantine-color-blue-7), var(--mantine-color-blue-5));
     transition: color 0.3s;
   }
 }
 .active {
   position: relative;
-  color: var(--mantine-color-blue-4);
+  color: light-dark(var(--mantine-color-blue-4), var(--mantine-color-blue-3));
 }
 
 .navlogoContainer {

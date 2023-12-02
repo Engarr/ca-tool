@@ -15,8 +15,8 @@
 }
 .listItem:hover {
   background-color: light-dark(
-    var(--mantine-color-gray-2),
-    var(--mantine-color-white-2)
+    var(--mantine-color-gray-1),
+    var(--mantine-color-dark-4)
   );
   transition: background-color 0.3s;
 }

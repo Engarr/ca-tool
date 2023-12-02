@@ -4,19 +4,22 @@
   color: var(--mantine-color-ndigo-7);
   transition: transform 0.3s;
 }
+.columnName {
+  color: light-dark(var(--mantine-color-blue-6), var(--mantine-color-blue-8));
+}
 .listItem {
   padding-left: 10px;
   cursor: pointer;
 }
 .listItem:hover {
   background-color: light-dark(
-    var(--mantine-color-gray-2),
-    var(--mantine-color-white-2)
+    var(--mantine-color-gray-1),
+    var(--mantine-color-dark-4)
   );
   transition: background-color 0.3s;
 }
 .listItem::before {
   content: '\2022';
-  color: #007bff;
+  color: light-dark(var(--mantine-color-blue-6), var(--mantine-color-blue-8));
   margin-right: 10px;
 }

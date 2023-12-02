@@ -1,6 +1,9 @@
-
 .overColumn {
-  border: 2px solid var(--mantine-color-blue-5);
-  background-color: var(--mantine-color-blue-1);
+  border: 2px solid
+    light-dark(var(--mantine-color-blue-5), var(--mantine-color-blue-3));
+  background-color: light-dark(
+    var(--mantine-color-blue-1),
+    var(--mantine-color-blue-9)
+  );
   transition: background-color 0.3s, border 0.3;
 }

@@ -46,11 +46,11 @@ const KanbanMemberCard = ({ member }: KanbanMemberCardType) => {
           />
         </Group>
         <Flex direction={'column'} w={200} className={classes.userInfoBox}>
-          <Text fw={500}>{fullName}</Text>
-          <Text c='gray' size='sm' fw={700}>
+          <Text fw={700}>{fullName}</Text>
+          <Text size='sm' fw={400}>
             {member.specialization.role}
           </Text>
-          <Text c='gray' size='sm' fw={700}>
+          <Text size='sm' fw={500}>
             {rangTitle}
           </Text>
         </Flex>

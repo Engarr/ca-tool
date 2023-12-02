@@ -3,6 +3,7 @@ import { Modal, Textarea, Paper, Button, Center } from '@mantine/core';
 import { Id } from '../../_types/member-type';
 import { useMemberListContext } from '@/context/member-list-context';
 import { useProjectListContext } from '@/context/project-list-context';
+import classes from './add-note.module.css'
 
 type AddNoteToUserModalType = {
   opened: boolean;
@@ -72,7 +73,7 @@ const AddNoteModal = ({
   return (
     <Modal opened={opened} onClose={close} centered size={'lg'}>
       <form onSubmit={handleNoteAdd}>
-        <Paper py='xl' px='md' shadow='xl' mx={50} mb={20}>
+        <Paper py='xl' px='md' shadow='xl' mx={50} mb={20} className={classes.noteContainer}>
           <Textarea
             label={labelText}
             placeholder='Wprowadz informację'

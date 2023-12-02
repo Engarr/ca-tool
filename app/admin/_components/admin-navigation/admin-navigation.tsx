@@ -15,6 +15,7 @@ import classes from './admin-navigation.module.css';
 import Logo from '@/components/logo/logo';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ColorSchemeToggle from '../color-schema-toggle/color-schema-toggle';
 const AdminNavigation = () => {
   const path = usePathname();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -49,6 +50,7 @@ const AdminNavigation = () => {
             </Link>
           </Group>
           <Group visibleFrom='sm'>
+            <ColorSchemeToggle />
             <Button>Log out</Button>
           </Group>
           <Burger

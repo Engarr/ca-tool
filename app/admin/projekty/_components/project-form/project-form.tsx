@@ -90,7 +90,7 @@ const ProjectForm = ({
   return (
     <Modal opened={opened} onClose={closeModal} centered size={600}>
       <form onSubmit={handleAddProject}>
-        <Paper py='xl' p={20} mx={10} my={30} shadow='xs'>
+        <Paper py='xl' p={20} mx={10} my={30} shadow='xs' className={classes.formConatiner}>
           <TextInput
             label={
               columnProjectId
